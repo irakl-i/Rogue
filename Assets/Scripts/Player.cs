@@ -8,16 +8,28 @@ using Utilities;
 
 public class Player : MonoBehaviour
 {
+	[Header("Stats")]
+	[SerializeField]
+	private int health;
+
 	[SerializeField]
 	[Range(0, 10)]
 	private int speed;
 
+	[Header("Warping")]
 	[SerializeField]
 	[Range(0, 10)]
-	private int warp;
+	private int distance;
+
+	[SerializeField]
+	private ParticleSystem particle;
+
+	[SerializeField]
+	private float delay;
 
 	private Rigidbody2D body;
 	private Vector2 direction;
+	private float lastWarp;
 
 	private void Start()
 	{
@@ -30,6 +42,9 @@ public class Player : MonoBehaviour
 		Warp();
 	}
 
+	/// <summary>
+	///     Moves player left, right, up and down.
+	/// </summary>
 	private void Move()
 	{
 		var horizontal = (int) Input.GetAxisRaw(Constants.Input.Horizontal);
@@ -41,13 +56,29 @@ public class Player : MonoBehaviour
 		body.velocity = movement * speed * Time.deltaTime * Constants.TimeMultiplier;
 	}
 
+	/// <summary>
+	///     Warps player in his facing direction.
+	/// </summary>
 	private void Warp()
 	{
-		if (Input.GetButtonDown(Constants.Input.Jump))
+		if (Time.time - lastWarp >= delay)
+			GetComponent<Renderer>().material.color = Color.cyan;
+
+		if (Input.GetButtonDown(Constants.Input.Jump) && Time.time - lastWarp >= delay)
 		{
-			RaycastHit2D hit = Physics2D.Raycast(body.position, direction, warp);
+			RaycastHit2D hit = Physics2D.Raycast(body.position, direction, distance);
 			if (hit.collider == null)
-				body.position += direction * warp;
+			{
+				// Warp forward.
+				body.position += direction * distance;
+
+				// Play particle effect.
+				particle.transform.up = -direction.normalized;
+				particle.Play();
+
+				lastWarp = Time.time;
+				GetComponent<Renderer>().material.color = Color.black;
+			}
 		}
 	}
 }

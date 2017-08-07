@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 {
 	[Header("Stats")]
 	[SerializeField]
-	private int health;
+	private uint health;
 
 	[SerializeField]
 	[Range(0, 10)]
@@ -31,6 +31,11 @@ public class Player : MonoBehaviour
 	private Vector2 direction;
 	private float lastWarp;
 
+	public uint Health
+	{
+		get { return health; }
+	}
+
 	private void Start()
 	{
 		body = GetComponent<Rigidbody2D>();
@@ -47,8 +52,8 @@ public class Player : MonoBehaviour
 	/// </summary>
 	private void Move()
 	{
-		var horizontal = (int) Input.GetAxisRaw(Constants.Input.Horizontal);
-		var vertical = (int) Input.GetAxisRaw(Constants.Input.Vertical);
+		var horizontal = Input.GetAxisRaw(Constants.Input.Horizontal);
+		var vertical = Input.GetAxisRaw(Constants.Input.Vertical);
 
 		var movement = new Vector2(horizontal, vertical);
 		direction = movement != Vector2.zero ? movement : direction;
@@ -62,10 +67,11 @@ public class Player : MonoBehaviour
 	private void Warp()
 	{
 		if (Time.time - lastWarp >= delay)
-			GetComponent<Renderer>().material.color = Color.cyan;
+			GetComponent<Renderer>().material.color = Color.white;
 
 		if (Input.GetButtonDown(Constants.Input.Jump) && Time.time - lastWarp >= delay)
 		{
+			// TODO: Cast rays from two or three points.
 			RaycastHit2D hit = Physics2D.Raycast(body.position, direction, distance);
 			if (hit.collider == null)
 			{
@@ -80,5 +86,12 @@ public class Player : MonoBehaviour
 				GetComponent<Renderer>().material.color = Color.black;
 			}
 		}
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		health -= 10;
+		if (health <= 0)
+			Destroy(gameObject);
 	}
 }

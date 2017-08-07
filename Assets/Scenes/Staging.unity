@@ -344,10 +344,11 @@ MonoBehaviour:
   speed: 8
   damage: 10
   reach: 2
+  collisionDamage: 10
   distance: 3
   particle: {fileID: 207317036}
   delay: 3
-  warpColor: {r: 0, g: 1, b: 1, a: 1}
+  warp: {r: 0, g: 0, b: 0, a: 0}
 --- !u!50 &831534333
 Rigidbody2D:
   serializedVersion: 4

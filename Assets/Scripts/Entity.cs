@@ -53,7 +53,6 @@ public abstract class Entity : MonoBehaviour
 		Color original = renderer.color;
 
 		renderer.color = Color.white;
-		Debug.Log("Flashing");
 		yield return new WaitForSeconds(FlashDelay);
 		renderer.color = original;
 		yield return new WaitForSeconds(FlashDelay);

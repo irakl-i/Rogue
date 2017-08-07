@@ -8,6 +8,9 @@ using Utilities;
 
 public class Player : Entity
 {
+	[SerializeField]
+	private int collisionDamage;
+
 	[Header("Warping")]
 	[SerializeField]
 	[Range(0, 10)]
@@ -20,11 +23,10 @@ public class Player : Entity
 	private float delay;
 
 	[SerializeField]
-	private Color warpColor;
+	private Color warp;
 
-	
+	private Color original;
 	private float lastWarp;
-	private Color originalColor;
 
 	private void Update()
 	{
@@ -34,8 +36,8 @@ public class Player : Entity
 	}
 
 	private void Start()
-	{ 
-		originalColor = renderer.color;
+	{
+		original = renderer.color;
 	}
 
 	/// <summary>
@@ -57,14 +59,11 @@ public class Player : Entity
 	/// </summary>
 	private void Warp()
 	{
-		var canWarp = lastWarp == 0 || Time.time - lastWarp >= delay ;
+		var canWarp = lastWarp == 0 || Time.time - lastWarp >= delay;
 
-		if (canWarp && renderer.color == originalColor)
-		{
-			renderer.color = warpColor;
-			Debug.Log("Updated coloring: " + warpColor);
-		}
-			
+		if (canWarp && renderer.color == original)
+			renderer.color = warp;
+
 
 		if (Input.GetButtonDown(Constants.Input.Jump) && canWarp)
 		{
@@ -79,7 +78,7 @@ public class Player : Entity
 				particle.Play();
 
 				lastWarp = Time.time;
-				GetComponent<SpriteRenderer>().color = originalColor;
+				GetComponent<SpriteRenderer>().color = original;
 			}
 		}
 	}
@@ -99,6 +98,6 @@ public class Player : Entity
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		TakeDamage(10);
+		TakeDamage(collisionDamage);
 	}
 }

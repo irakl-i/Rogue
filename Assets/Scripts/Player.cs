@@ -6,16 +6,8 @@
 using UnityEngine;
 using Utilities;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
-	[Header("Stats")]
-	[SerializeField]
-	private uint health;
-
-	[SerializeField]
-	[Range(0, 10)]
-	private int speed;
-
 	[Header("Warping")]
 	[SerializeField]
 	[Range(0, 10)]
@@ -27,24 +19,13 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private float delay;
 
-	private Rigidbody2D body;
-	private Vector2 direction;
 	private float lastWarp;
-
-	public uint Health
-	{
-		get { return health; }
-	}
-
-	private void Start()
-	{
-		body = GetComponent<Rigidbody2D>();
-	}
 
 	private void Update()
 	{
 		Move();
 		Warp();
+		Hit();
 	}
 
 	/// <summary>
@@ -67,7 +48,7 @@ public class Player : MonoBehaviour
 	private void Warp()
 	{
 		if (Time.time - lastWarp >= delay)
-			GetComponent<Renderer>().material.color = Color.white;
+			GetComponent<SpriteRenderer>().color = Color.cyan;
 
 		if (Input.GetButtonDown(Constants.Input.Jump) && Time.time - lastWarp >= delay)
 		{
@@ -83,9 +64,23 @@ public class Player : MonoBehaviour
 				particle.Play();
 
 				lastWarp = Time.time;
-				GetComponent<Renderer>().material.color = Color.black;
+				GetComponent<SpriteRenderer>().color = Color.black;
 			}
 		}
+	}
+
+	private void Hit()
+	{
+		if (Input.GetButtonDown(Constants.Input.Shoot))
+		{
+			RaycastHit2D hit = Physics2D.Raycast(body.position, direction, reach);
+			Debug.DrawRay(body.position, direction, Color.red);
+			if (hit.collider != null && hit.collider.CompareTag(Constants.Tag.Enemy))
+			{
+				hit.transform.gameObject.GetComponent<Enemy>().TakeDamage(10);
+			}
+		}
+
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)

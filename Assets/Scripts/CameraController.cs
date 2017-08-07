@@ -5,7 +5,7 @@
 
 using UnityEngine;
 
-public class Camera : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
 	[SerializeField]
 	private Transform target;

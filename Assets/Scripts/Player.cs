@@ -19,13 +19,23 @@ public class Player : Entity
 	[SerializeField]
 	private float delay;
 
+	[SerializeField]
+	private Color warpColor;
+
+	
 	private float lastWarp;
+	private Color originalColor;
 
 	private void Update()
 	{
 		Move();
 		Warp();
 		Hit();
+	}
+
+	private void Start()
+	{ 
+		originalColor = renderer.color;
 	}
 
 	/// <summary>
@@ -43,16 +53,21 @@ public class Player : Entity
 	}
 
 	/// <summary>
-	///     Warps player in his facing direction.
+	///     Warps player in its facing direction.
 	/// </summary>
 	private void Warp()
 	{
-		if (Time.time - lastWarp >= delay)
-			GetComponent<SpriteRenderer>().color = Color.cyan;
+		var canWarp = lastWarp == 0 || Time.time - lastWarp >= delay ;
 
-		if (Input.GetButtonDown(Constants.Input.Jump) && Time.time - lastWarp >= delay)
+		if (canWarp && renderer.color == originalColor)
 		{
-			// TODO: Cast rays from two or three points.
+			renderer.color = warpColor;
+			Debug.Log("Updated coloring: " + warpColor);
+		}
+			
+
+		if (Input.GetButtonDown(Constants.Input.Jump) && canWarp)
+		{
 			RaycastHit2D hit = Physics2D.Raycast(body.position, direction, distance);
 			if (hit.collider == null)
 			{
@@ -64,7 +79,7 @@ public class Player : Entity
 				particle.Play();
 
 				lastWarp = Time.time;
-				GetComponent<SpriteRenderer>().color = Color.black;
+				GetComponent<SpriteRenderer>().color = originalColor;
 			}
 		}
 	}
@@ -74,19 +89,16 @@ public class Player : Entity
 		if (Input.GetButtonDown(Constants.Input.Shoot))
 		{
 			RaycastHit2D hit = Physics2D.Raycast(body.position, direction, reach);
-			Debug.DrawRay(body.position, direction, Color.red);
-			if (hit.collider != null && hit.collider.CompareTag(Constants.Tag.Enemy))
-			{
-				hit.transform.gameObject.GetComponent<Enemy>().TakeDamage(10);
-			}
-		}
 
+			Debug.DrawRay(body.position, direction, Color.red);
+
+			if (hit.collider != null && hit.collider.CompareTag(Constants.Tag.Enemy))
+				hit.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+		}
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		health -= 10;
-		if (health <= 0)
-			Destroy(gameObject);
+		TakeDamage(10);
 	}
 }

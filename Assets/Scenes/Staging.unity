@@ -342,10 +342,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   speed: 8
+  damage: 10
   reach: 2
   distance: 3
   particle: {fileID: 207317036}
   delay: 3
+  warpColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!50 &831534333
 Rigidbody2D:
   serializedVersion: 4
@@ -609,6 +611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 500
   speed: 5
+  damage: 0
   reach: 3
 --- !u!1 &2002039823
 GameObject:

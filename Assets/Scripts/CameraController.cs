@@ -24,8 +24,16 @@ public class CameraController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		Vector3 position = Vector3.SmoothDamp(transform.position, target.position + offset, ref velocity,
-			time * Time.smoothDeltaTime);
-		transform.position = position;
+		Follow();
+	}
+
+	private void Follow()
+	{
+		if (target != null)
+		{
+			Vector3 position = Vector3.SmoothDamp(transform.position, target.position + offset, ref velocity,
+				time * Time.smoothDeltaTime);
+			transform.position = position;
+		}
 	}
 }

@@ -3,6 +3,8 @@
  *	Project Rogue by Irakli Chkuaseli
  */
 
+using System.Collections.Generic;
+using Items;
 using UnityEngine;
 using Utilities;
 
@@ -25,8 +27,9 @@ public class Player : Entity
 	[SerializeField]
 	private Color warp;
 
-	private Color original;
 	private float lastWarp;
+	private SpriteRenderer hatRenderer;
+	private List<Item> items;
 
 	private void Update()
 	{
@@ -37,7 +40,8 @@ public class Player : Entity
 
 	private void Start()
 	{
-		original = renderer.color;
+		hatRenderer = transform.Find("Hat").GetComponent<SpriteRenderer>();
+		original = hatRenderer.color;
 	}
 
 	/// <summary>
@@ -49,7 +53,7 @@ public class Player : Entity
 		var vertical = Input.GetAxisRaw(Constants.Input.Vertical);
 
 		var movement = new Vector2(horizontal, vertical);
-		direction = movement != Vector2.zero ? movement : direction;
+		facing = movement != Vector2.zero ? movement : facing;
 
 		body.velocity = movement * speed * Time.deltaTime * Constants.TimeMultiplier;
 	}
@@ -61,24 +65,24 @@ public class Player : Entity
 	{
 		var canWarp = lastWarp == 0 || Time.time - lastWarp >= delay;
 
-		if (canWarp && renderer.color == original)
-			renderer.color = warp;
+		if (canWarp && hatRenderer.color == original)
+			hatRenderer.color = warp;
 
 
 		if (Input.GetButtonDown(Constants.Input.Jump) && canWarp)
 		{
-			RaycastHit2D hit = Physics2D.Raycast(body.position, direction, distance);
+			RaycastHit2D hit = Physics2D.Raycast(body.position, facing, distance);
 			if (hit.collider == null)
 			{
 				// Warp forward.
-				body.position += direction * distance;
+				body.position += facing * distance;
 
 				// Play particle effect.
-				particle.transform.up = -direction.normalized;
+				particle.transform.up = -facing.normalized;
 				particle.Play();
 
 				lastWarp = Time.time;
-				GetComponent<SpriteRenderer>().color = original;
+				hatRenderer.color = original;
 			}
 		}
 	}
@@ -87,9 +91,9 @@ public class Player : Entity
 	{
 		if (Input.GetButtonDown(Constants.Input.Shoot))
 		{
-			RaycastHit2D hit = Physics2D.Raycast(body.position, direction, reach);
+			RaycastHit2D hit = Physics2D.Raycast(body.position, facing, reach);
 
-			Debug.DrawRay(body.position, direction, Color.red);
+			Debug.DrawRay(body.position, facing, Color.red);
 
 			if (hit.collider != null && hit.collider.CompareTag(Constants.Tag.Enemy))
 				hit.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage);

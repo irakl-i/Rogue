@@ -21,11 +21,10 @@ public abstract class Entity : MonoBehaviour
 	[SerializeField]
 	protected int reach;
 
-	// Direction the entity is facing.
-	protected Vector2 direction;
-
-	protected Rigidbody2D body;
 	protected new SpriteRenderer renderer;
+	protected Rigidbody2D body;
+	protected Vector2 facing;
+	protected Color original;
 
 	public int Health
 	{
@@ -36,6 +35,7 @@ public abstract class Entity : MonoBehaviour
 	{
 		body = GetComponent<Rigidbody2D>();
 		renderer = GetComponent<SpriteRenderer>();
+		original = renderer.color;
 	}
 
 	public void TakeDamage(int damage)
@@ -50,9 +50,7 @@ public abstract class Entity : MonoBehaviour
 
 	private IEnumerator Flash()
 	{
-		Color original = renderer.color;
-
-		renderer.color = Color.white;
+		renderer.color = Color.red;
 		yield return new WaitForSeconds(FlashDelay);
 		renderer.color = original;
 		yield return new WaitForSeconds(FlashDelay);

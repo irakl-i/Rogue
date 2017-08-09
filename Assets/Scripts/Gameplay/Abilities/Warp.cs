@@ -1,22 +1,17 @@
 ﻿using System;
+using Gameplay.Actors;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Utilities;
 
-namespace Abilities
+namespace Gameplay.Abilities
 {
 	[Serializable]
 	public class Warp : MonoBehaviour, IAbility
 	{
-		[SerializeField]
-		[Range(0, 10)]
 		private int distance;
-
-		[SerializeField]
-		private ParticleSystem particle;
-
-		[SerializeField]
 		private float delay;
+		private ParticleSystem particle;
 
 		private float lastWarp;
 		private Entity entity;
@@ -25,7 +20,6 @@ namespace Abilities
 		public int ID => 0;
 
 		public string Name => "Warp";
-
 
 		public void Use()
 		{
@@ -56,11 +50,15 @@ namespace Abilities
 			Assert.IsNotNull(particle);
 		}
 
-		public void Init(Entity entity, int distance, float delay)
+		public void Init(Entity entity, int distance, float delay, ParticleSystem particle)
 		{
 			this.entity = entity;
 			this.distance = distance;
 			this.delay = delay;
+			this.particle = particle;
+
+			// TODO: Fix particle attachment problem.
+			// Instantiate(particle, entity.transform.position, Quaternion.identity, entity.transform);
 		}
 	}
 }

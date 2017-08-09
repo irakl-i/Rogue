@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Items
+namespace Gameplay.Items
 {
 	public abstract class Item : MonoBehaviour
 	{

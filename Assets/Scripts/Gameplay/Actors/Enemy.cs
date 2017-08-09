@@ -3,6 +3,9 @@
  *	Project Rogue by Irakli Chkuaseli
  */
 
-public class Enemy : Entity
+namespace Gameplay.Actors
 {
+	public class Enemy : Entity
+	{
+	}
 }

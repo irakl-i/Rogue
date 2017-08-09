@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4662335357988824}
   - component: {fileID: 198946312752472992}
   - component: {fileID: 199261518422198994}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Warp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4088517911104738}
   - component: {fileID: 212547096112845424}
   - component: {fileID: 61991769208711214}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 114820338766343816}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Enemy
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

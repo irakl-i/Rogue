@@ -58,7 +58,7 @@ namespace Gameplay.Abilities
 			this.particle = particle;
 
 			// TODO: Fix particle attachment problem.
-			// Instantiate(particle, entity.transform.position, Quaternion.identity, entity.transform);
+//			Instantiate(particle, entity.transform.position, Quaternion.identity, entity.transform);
 		}
 	}
 }

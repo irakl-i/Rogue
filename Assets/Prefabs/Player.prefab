@@ -71,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1895881543613232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4378472371872254}
@@ -100,7 +100,7 @@ Transform:
   m_GameObject: {fileID: 1710461798965398}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 16, y: 16, z: 16}
   m_Children: []
   m_Father: {fileID: 4378472371872254}
   m_RootOrder: 1
@@ -141,14 +141,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.875}
+    oldSize: {x: 16, y: 14}
     newSize: {x: 1, y: 0.875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.875}
+  m_Size: {x: 16, y: 14}
   m_EdgeRadius: 0
 --- !u!61 &61991769208711214
 BoxCollider2D:
@@ -166,14 +166,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.25, y: 0.125}
+    oldSize: {x: 4, y: 2}
     newSize: {x: 0.25, y: 0.125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.125}
+  m_Size: {x: 4, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &114820338766343816
 MonoBehaviour:
@@ -187,14 +187,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  speed: 8
+  speed: 80
   damage: 10
-  reach: 2
-  collisionDamage: 10
-  distance: 3
-  particle: {fileID: 198946312752472992}
-  delay: 3
-  warp: {r: 0, g: 1, b: 1, a: 1}
+  reach: 15
+  particles: {fileID: 198946312752472992}
+  abilities: []
 --- !u!198 &198946312752472992
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -255,7 +252,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -600880738
+  randomSeed: -1808758170
   InitialModule:
     serializedVersion: 3
     enabled: 1

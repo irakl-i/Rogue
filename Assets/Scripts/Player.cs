@@ -4,44 +4,28 @@
  */
 
 using System.Collections.Generic;
-using Items;
+using System.Linq;
+using Abilities;
 using UnityEngine;
 using Utilities;
 
 public class Player : Entity
 {
-	[SerializeField]
-	private int collisionDamage;
+	private List<IAbility> abilities;
 
-	[Header("Warping")]
-	[SerializeField]
-	[Range(0, 10)]
-	private int distance;
+	public void Start()
+	{
+		var warp = gameObject.AddComponent<Warp>();
+		warp.Init(this, 10, 3);
 
-	[SerializeField]
-	private ParticleSystem particle;
-
-	[SerializeField]
-	private float delay;
-
-	[SerializeField]
-	private Color warp;
-
-	private float lastWarp;
-	private SpriteRenderer hatRenderer;
-	private List<Item> items;
+		abilities = new List<IAbility> {warp};
+	}
 
 	private void Update()
 	{
 		Move();
-		Warp();
 		Hit();
-	}
-
-	private void Start()
-	{
-		hatRenderer = transform.Find("Hat").GetComponent<SpriteRenderer>();
-		original = hatRenderer.color;
+		abilities.First().Use();
 	}
 
 	/// <summary>
@@ -61,32 +45,6 @@ public class Player : Entity
 	/// <summary>
 	///     Warps player in its facing direction.
 	/// </summary>
-	private void Warp()
-	{
-		var canWarp = lastWarp == 0 || Time.time - lastWarp >= delay;
-
-		if (canWarp && hatRenderer.color == original)
-			hatRenderer.color = warp;
-
-
-		if (Input.GetButtonDown(Constants.Input.Jump) && canWarp)
-		{
-			RaycastHit2D hit = Physics2D.Raycast(body.position, facing, distance);
-			if (hit.collider == null)
-			{
-				// Warp forward.
-				body.position += facing * distance;
-
-				// Play particle effect.
-				particle.transform.up = -facing.normalized;
-				particle.Play();
-
-				lastWarp = Time.time;
-				hatRenderer.color = original;
-			}
-		}
-	}
-
 	private void Hit()
 	{
 		if (Input.GetButtonDown(Constants.Input.Shoot))
@@ -102,6 +60,6 @@ public class Player : Entity
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		TakeDamage(collisionDamage);
+		TakeDamage(10);
 	}
 }

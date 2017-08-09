@@ -9,15 +9,13 @@ public abstract class Entity : MonoBehaviour
 	[SerializeField]
 	protected int health;
 
-	// Movement speed.
 	[SerializeField]
-	[Range(0, 10)]
+	[Range(0, 100)]
 	protected int speed;
 
 	[SerializeField]
 	protected int damage;
 
-	// How far can entity's hit reach.
 	[SerializeField]
 	protected int reach;
 
@@ -26,10 +24,9 @@ public abstract class Entity : MonoBehaviour
 	protected Vector2 facing;
 	protected Color original;
 
-	public int Health
-	{
-		get { return health; }
-	}
+	public int Health => health;
+
+	public Vector2 Facing => facing;
 
 	protected void Awake()
 	{
@@ -43,7 +40,7 @@ public abstract class Entity : MonoBehaviour
 		health -= damage;
 		Debug.LogFormat("Took {0} damage, {1} health remaining", damage, health);
 
-		StartCoroutine("Flash");
+		StartCoroutine(Flash());
 		if (health <= 0)
 			Destroy(gameObject);
 	}
@@ -52,6 +49,7 @@ public abstract class Entity : MonoBehaviour
 	{
 		renderer.color = Color.red;
 		yield return new WaitForSeconds(FlashDelay);
+
 		renderer.color = original;
 		yield return new WaitForSeconds(FlashDelay);
 	}

@@ -78,10 +78,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a42241e31f17145b736da477d2a890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 10
+  duration: 600
   distance: 50
   delay: 3
-  particle: {fileID: 0}
+  particle: {fileID: 198414422159815184, guid: 4d77c4932bd75cc4e9c23f4b81ffc981, type: 2}
 --- !u!212 &212583815932375188
 SpriteRenderer:
   m_ObjectHideFlags: 1

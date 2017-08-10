@@ -6,7 +6,7 @@ namespace Gameplay.Items
 	public abstract class Potion : Item
 	{
 		[SerializeField]
-		protected float length;
+		protected float duration;
 
 		protected Player player;
 

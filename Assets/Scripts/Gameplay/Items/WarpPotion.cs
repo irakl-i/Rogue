@@ -38,8 +38,8 @@ namespace Gameplay.Items
 				warp.Init(player, distance, delay, particle);
 				player.AddAbility(warp);
 
-				// Invoke delete action after length (s) amount of time.
-				this.Invoke(Delete, length);
+				// Invoke delete action after duration (s) amount of time.
+				this.Invoke(Delete, duration);
 			}
 		}
 

@@ -1,12 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
 
 namespace Gameplay.Items
 {
+	[Serializable]
 	public abstract class Weapon : Item
 	{
-		[SerializeField]
-		protected int damage;
-
-		public int Damage => damage;
+		protected int Damage { get; set; }
 	}
 }

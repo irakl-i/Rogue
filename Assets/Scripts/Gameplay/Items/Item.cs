@@ -1,10 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
 
 namespace Gameplay.Items
 {
-	public abstract class Item : MonoBehaviour
+	[Serializable]
+	public abstract class Item
 	{
-		public abstract int ID { get; }
-		public abstract string Name { get; }
+		protected int ID { get; set; }
+
+		protected string Name { get; set; }
+
+		protected string Description { get; set; }
+
+		protected int Value { get; set; }
 	}
 }

@@ -1,25 +1,20 @@
-using Gameplay.Actors;
+using System;
 using UnityEngine;
 
 namespace Gameplay.Items
 {
+	[Serializable]
 	public abstract class Potion : Item
 	{
-		[SerializeField]
-		protected float duration;
+		private float duration;
 
-		protected Player player;
-
-		private void OnTriggerEnter2D(Collider2D collider)
+		public float Duration
 		{
-			Use(collider);
-
-			// Disable renderer and collider for this object.
-			GetComponent<SpriteRenderer>().enabled = false;
-			GetComponent<BoxCollider2D>().enabled = false;
+			get { return duration; }
+			set { duration = value; }
 		}
 
-		public abstract void Use(Collider2D collider);
+		public abstract void Use(Collider2D collision);
 		public abstract void Delete();
 	}
 }

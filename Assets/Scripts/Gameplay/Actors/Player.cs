@@ -23,8 +23,8 @@ namespace Gameplay.Actors
 		{
 			Move();
 			Hit();
-			foreach (IAbility ability in abilities)
-				ability.Use();
+//			foreach (IAbility ability in abilities)
+//				ability.Use();
 		}
 
 		/// <summary>

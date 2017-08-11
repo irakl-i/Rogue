@@ -18,5 +18,21 @@ namespace Utilities
 			public const string Player = "Player";
 			public const string Enemy = "Enemy";
 		}
+
+		public static class Database
+		{
+			public const string Weapons = "weapons";
+			public const string Swords = "swords";
+
+			public const string ID = "id";
+			public const string Name = "name";
+			public const string Description = "description";
+			public const string Slug = "slug";
+			public const string Value = "value";
+
+			public const string Stats = "stats";
+			public const string Damage = "damage";
+			public const string Range = "range";
+		}
 	}
 }

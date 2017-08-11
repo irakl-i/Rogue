@@ -5,12 +5,13 @@ namespace Gameplay.Items
 	[Serializable]
 	public class Sword : Weapon
 	{
-		public Sword(int id, int value, string name, string description, int damage, int range)
+		public Sword(int id, string name, string description, string slug, int value, int damage, int range)
 		{
 			ID = id;
 			Value = value;
 			Name = name;
 			Description = description;
+			Slug = slug;
 			Damage = damage;
 			Range = range;
 		}
@@ -21,9 +22,10 @@ namespace Gameplay.Items
 
 		public int Range { get; set; }
 
+		/// <inheritdoc />
 		public override string ToString()
 		{
-			return "What up piiiiiiiiiiiiiiiiiiiiimps";
+			return base.ToString() + $", {nameof(Range)}: {Range}";
 		}
 	}
 }

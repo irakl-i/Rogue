@@ -1,0 +1,39 @@
+{
+	"weapons": {
+		"swords": [
+			{
+				"id": 0,
+				"name": "Wooden Sword",
+				"description": "Sword made out of wood",
+				"slug": "wooden_sword",
+				"value": 5,
+				"stats": {
+					"damage": 10,
+					"range": 10
+				}
+			},
+			{
+				"id": 1,
+				"name": "Stone Sword",
+				"description": "Sword made out of stone",
+				"slug": "stone_sword",
+				"value": 10,
+				"stats": {
+					"damage": 15,
+					"range": 10
+				}
+			},
+			{
+				"id": 2,
+				"name": "Silver Sword",
+				"description": "Sword made out of silver",
+				"slug": "silver_sword",
+				"value": 20,
+				"stats": {
+					"damage": 25,
+					"range": 10
+				}
+			}
+		]
+	}
+}

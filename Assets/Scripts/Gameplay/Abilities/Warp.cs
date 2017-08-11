@@ -17,7 +17,7 @@ namespace Gameplay.Abilities
 		private Entity entity;
 		private Rigidbody2D body;
 
-		public int ID => 0;
+		public int ID => 1;
 
 		public string Name => "Warp";
 

@@ -26,9 +26,15 @@ namespace Gameplay.Actors
 		protected Vector2 facing;
 		protected Color original;
 
-		public int Health => health;
+		public int Health
+		{
+			get { return health; }
+		}
 
-		public Vector2 Facing => facing;
+		public Vector2 Facing
+		{
+			get { return facing; }
+		}
 
 		protected void Awake()
 		{

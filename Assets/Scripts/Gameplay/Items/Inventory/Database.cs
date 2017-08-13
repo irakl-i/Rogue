@@ -1,10 +1,16 @@
+/*
+ *	Created on 8/11/2017 11:27:47 PM
+ *	Project Rogue by Irakli Chkuaseli
+ */
+
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using LitJson;
 using UnityEngine;
 using Utilities;
 
-namespace Gameplay.Items
+namespace Gameplay.Items.Inventory
 {
 	public class Database : MonoBehaviour
 	{
@@ -15,25 +21,36 @@ namespace Gameplay.Items
 
 		private void Start()
 		{
-			var json = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Items.json"));
+			var json = File.ReadAllText(Path.Combine(Application.streamingAssetsPath, Constants.Database.Items));
 			data = JsonMapper.ToObject(json);
 
-//			Debug.Log(data[Constants.Database.Weapons][Constants.Database.Swords][2]["id"]);
-
-			AddSwords();
-
-			foreach (Sword sword in Swords)
-				Debug.Log(sword.ToString());
-
-			AddPotions();
+			// Load all the database items.
+			LoadItems();
 		}
 
-		private void AddPotions()
+		/// <summary>
+		///     Loads items from the database.
+		/// </summary>
+		private void LoadItems()
+		{
+			LoadSwords();
+			LoadPotions();
+			// ...
+		}
+
+		/// <summary>
+		///     Loads potions from the database.
+		/// </summary>
+		private void LoadPotions()
 		{
 			// TODO
 		}
 
-		private void AddSwords()
+
+		/// <summary>
+		///     Loads swords from the database.
+		/// </summary>
+		private void LoadSwords()
 		{
 			Swords = new List<Sword>();
 			JsonData swords = data[Constants.Database.Weapons][Constants.Database.Swords];
@@ -50,6 +67,16 @@ namespace Gameplay.Items
 
 				Swords.Add(new Sword(id, name, description, slug, value, damage, range));
 			}
+		}
+
+		/// <summary>
+		///     Gets the item with given ID from the database.
+		/// </summary>
+		/// <param name="id">Item ID</param>
+		/// <returns>Item</returns>
+		public Item GetItem(int id)
+		{
+			return Swords.FirstOrDefault(sword => sword.ID == id);
 		}
 	}
 }

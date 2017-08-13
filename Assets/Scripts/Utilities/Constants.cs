@@ -21,6 +21,8 @@ namespace Utilities
 
 		public static class Database
 		{
+			public const string Items = "Items.json";
+
 			public const string Weapons = "weapons";
 			public const string Swords = "swords";
 

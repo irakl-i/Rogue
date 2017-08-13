@@ -1,3 +1,8 @@
+/*
+ *	Created on 8/9/2017 3:21:54 AM
+ *	Project Rogue by Irakli Chkuaseli
+ */
+
 using System;
 using UnityEngine;
 

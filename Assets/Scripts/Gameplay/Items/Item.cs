@@ -12,10 +12,11 @@ namespace Gameplay.Items
 	public abstract class Item
 	{
 		public int ID { get; set; }
+		public int Value { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public string Slug { get; set; }
-		public int Value { get; set; }
+		public bool Stackable { get; set; }
 		public Sprite Sprite { get; set; }
 
 		/// <inheritdoc />

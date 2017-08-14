@@ -7,6 +7,7 @@
 				"description": "Sword made out of bronze",
 				"slug": "bronze_sword",
 				"value": 5,
+				"stackable": false,
 				"stats": {
 					"damage": 10,
 					"range": 10
@@ -18,6 +19,7 @@
 				"description": "Sword made out of silver",
 				"slug": "silver_sword",
 				"value": 10,
+				"stackable": false,
 				"stats": {
 					"damage": 15,
 					"range": 10
@@ -29,6 +31,7 @@
 				"description": "Sword made out of gold",
 				"slug": "gold_sword",
 				"value": 20,
+				"stackable": true,
 				"stats": {
 					"damage": 25,
 					"range": 10

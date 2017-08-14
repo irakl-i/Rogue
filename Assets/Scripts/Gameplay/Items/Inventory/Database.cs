@@ -62,10 +62,11 @@ namespace Gameplay.Items.Inventory
 				var description = swords[i][Constants.Database.Description].ToString();
 				var slug = swords[i][Constants.Database.Slug].ToString();
 				var value = (int) swords[i][Constants.Database.Value];
+				var stackable = (bool) swords[i][Constants.Database.Stackable];
 				var damage = (int) swords[i][Constants.Database.Stats][Constants.Database.Damage];
 				var range = (int) swords[i][Constants.Database.Stats][Constants.Database.Range];
 
-				Swords.Add(new Sword(id, name, description, slug, value, damage, range));
+				Swords.Add(new Sword(id, name, description, slug, value, stackable, damage, range));
 			}
 		}
 

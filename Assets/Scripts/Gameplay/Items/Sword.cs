@@ -11,7 +11,7 @@ namespace Gameplay.Items
 	[Serializable]
 	public class Sword : Weapon
 	{
-		public Sword(int id, string name, string description, string slug, int value, int damage, int range)
+		public Sword(int id, string name, string description, string slug, int value, bool stackable, int damage, int range)
 		{
 			ID = id;
 			Value = value;
@@ -20,8 +20,9 @@ namespace Gameplay.Items
 			Slug = slug;
 			Damage = damage;
 			Range = range;
+			Stackable = stackable;
+
 			Sprite = Resources.Load<Sprite>("Sprites/Items/" + Slug);
-			Debug.Log(Sprite);
 		}
 
 		public Sword()

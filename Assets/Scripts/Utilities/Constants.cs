@@ -31,6 +31,7 @@ namespace Utilities
 			public const string Description = "description";
 			public const string Slug = "slug";
 			public const string Value = "value";
+			public const string Stackable = "stackable";
 
 			public const string Stats = "stats";
 			public const string Damage = "damage";

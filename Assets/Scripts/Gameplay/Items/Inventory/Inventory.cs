@@ -27,16 +27,13 @@ namespace Gameplay.Items.Inventory
 
 
 		// Collections
-		[SerializeField]
-		private List<Item> items;
-
-		[SerializeField]
-		private List<GameObject> slots;
+		public List<Item> Items { get; set; }
+		public List<GameObject> Slots { get; set;}
 
 		public Inventory()
 		{
-			items = new List<Item>();
-			slots = new List<GameObject>();
+			Items = new List<Item>();
+			Slots = new List<GameObject>();
 		}
 
 		private void Start()
@@ -49,18 +46,18 @@ namespace Gameplay.Items.Inventory
 			for (var i = 0; i < size; i++)
 			{
 				// Add empty items to the list.
-				items.Add(null);
+				Items.Add(null);
 
-				// Instantiate slots.
-				slots.Add(Instantiate(slot));
-				slots[i].transform.SetParent(slotPanel.transform);
-				slots[i].name = "Empty";
+				// Instantiate Slots.
+				Slots.Add(Instantiate(slot));
+				Slots[i].transform.SetParent(slotPanel.transform);
+				Slots[i].name = "Slot " + i;
+				Slots[i].GetComponent<Slot>().Index = i;
 			}
 
 			AddItem(0);
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < 3; i++)
 			{
-				AddItem(2);
 				AddItem(2);
 				AddItem(2);
 				AddItem(2);
@@ -79,10 +76,10 @@ namespace Gameplay.Items.Inventory
 			Item toAdd = database.GetItem(id);
 
 			// Check if the item is stackable and present in the inventory.
-			if (toAdd.Stackable && items.Contains(toAdd))
+			if (toAdd.Stackable && Items.Contains(toAdd))
 			{
 				// Get its associated data.
-				var data = slots[items.IndexOf(toAdd)].transform.GetComponentInChildren<ItemData>();
+				var data = Slots[Items.IndexOf(toAdd)].transform.GetComponentInChildren<ItemData>();
 
 				// Increase the amount.
 				data.Amount++;
@@ -92,25 +89,27 @@ namespace Gameplay.Items.Inventory
 				return;
 			}
 
-			for (var i = 0; i < items.Count; i++)
-				if (items[i] == null)
+			for (var i = 0; i < Items.Count; i++)
+				if (Items[i] == null)
 				{
 					// Get the item from the database and save it in the inventory.
-					items[i] = toAdd;
+					Items[i] = toAdd;
 
 					// Instantiate the item in inventory panel.
 					GameObject item = Instantiate(this.item);
+					var data = item.GetComponent<ItemData>();
 
 					// Set correct values.
-					item.transform.SetParent(slots[i].transform);
+					item.transform.SetParent(Slots[i].transform);
 					item.GetComponent<Image>().sprite = toAdd.Sprite;
 
-					// Set item and slot names.
-					slots[i].name = "Slot " + i;
+					// Set item name.
 					item.name = toAdd.Name;
 
-					// Update the amount.
-					slots[i].transform.GetComponentInChildren<ItemData>().Amount = 1;
+					// Update the data values.
+					data.Amount = 1;
+					data.Item = toAdd;
+					data.Index = i;
 
 					break;
 				}

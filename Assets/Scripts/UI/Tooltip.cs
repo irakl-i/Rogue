@@ -3,10 +3,10 @@
  *	Project Rogue by Irakli Chkuaseli
  */
 
-using System.Text;
 using Gameplay.Items;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities;
 
 namespace UI
 {
@@ -14,6 +14,9 @@ namespace UI
 	{
 		private Item item;
 		private GameObject tooltip;
+
+		[SerializeField]
+		private Color nameColor;
 
 		private string data;
 
@@ -43,8 +46,8 @@ namespace UI
 
 		public void ConstructString()
 		{
-			// TODO: Make use of ITooltipSerializable, use StringBuilder class.
-			data = "<color=#0473f0><b>" + item.Name + "</b></color>\n\n" + item.Description + "\nValue: " + item.Value;
+			// TODO: Make use of ITooltipSerializable, use StringBuilder.
+			data = $"<color=#{nameColor.ToHex()}><b>" + item.Name + "</b></color>\n\n" + item.Description + "\nValue: " + item.Value;
 			tooltip.GetComponentInChildren<Text>().text = data;
 		}
 	}

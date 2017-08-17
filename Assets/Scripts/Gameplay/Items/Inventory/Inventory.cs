@@ -50,7 +50,7 @@ namespace Gameplay.Items.Inventory
 
 				// Instantiate Slots.
 				Slots.Add(Instantiate(slot));
-				Slots[i].transform.SetParent(slotPanel.transform);
+				Slots[i].transform.SetParent(slotPanel.transform, false);
 				Slots[i].name = "Slot " + i;
 				Slots[i].GetComponent<Slot>().Index = i;
 			}
@@ -100,7 +100,7 @@ namespace Gameplay.Items.Inventory
 					var data = item.GetComponent<ItemData>();
 
 					// Set correct values.
-					item.transform.SetParent(Slots[i].transform);
+					item.transform.SetParent(Slots[i].transform, false);
 					item.GetComponent<Image>().sprite = toAdd.Sprite;
 
 					// Set item name.

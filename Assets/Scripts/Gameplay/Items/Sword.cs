@@ -36,5 +36,11 @@ namespace Gameplay.Items
 		{
 			return base.ToString() + $", {nameof(Range)}: {Range}";
 		}
+
+		/// <inheritdoc />
+		public override string ToTooltip()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

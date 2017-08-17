@@ -4,12 +4,13 @@
  */
 
 using System;
+using UI;
 using UnityEngine;
 
 namespace Gameplay.Items
 {
 	[Serializable]
-	public abstract class Item
+	public abstract class Item : ITooltipSerializable
 	{
 		public int ID { get; set; }
 		public int Value { get; set; }
@@ -24,5 +25,8 @@ namespace Gameplay.Items
 		{
 			return $"{nameof(ID)}: {ID}, {nameof(Name)}: {Name}, {nameof(Description)}: {Description}, {nameof(Slug)}: {Slug}, {nameof(Value)}: {Value}";
 		}
+
+		/// <inheritdoc />
+		public abstract string ToTooltip();
 	}
 }

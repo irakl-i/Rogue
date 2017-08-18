@@ -3,7 +3,6 @@
  *	Project Rogue by Irakli Chkuaseli
  */
 
-using System;
 using Gameplay.Items;
 using Gameplay.Items.Inventory;
 using UnityEngine;

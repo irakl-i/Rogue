@@ -6,7 +6,6 @@
 using Gameplay.Items;
 using UnityEngine;
 using UnityEngine.UI;
-using Utilities;
 
 namespace UI
 {
@@ -17,6 +16,12 @@ namespace UI
 
 		[SerializeField]
 		private Color nameColor;
+
+		[SerializeField]
+		private Color descriptionColor;
+
+		[SerializeField]
+		private Color valueColor;
 
 		private string data;
 
@@ -46,9 +51,8 @@ namespace UI
 
 		public void ConstructString()
 		{
-			// TODO: Make use of ITooltipSerializable, use StringBuilder.
-			data = $"<color=#{nameColor.ToHex()}><b>" + item.Name + "</b></color>\n\n" + item.Description + "\nValue: " + item.Value;
-			tooltip.GetComponentInChildren<Text>().text = data;
+			// TODO: Make use of IHTMLSerializable, use StringBuilder.
+			tooltip.GetComponentInChildren<Text>().text = item.ToHTML(nameColor, descriptionColor, valueColor);
 		}
 	}
 }

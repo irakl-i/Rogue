@@ -5,6 +5,7 @@
 
 using System;
 using UnityEngine;
+using Utilities;
 
 namespace Gameplay.Items
 {
@@ -38,9 +39,23 @@ namespace Gameplay.Items
 		}
 
 		/// <inheritdoc />
-		public override string ToTooltip()
+		public override void Drop()
 		{
 			throw new NotImplementedException();
+		}
+
+		/// <inheritdoc />
+		public override void PickUp()
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <inheritdoc />
+		public override string ToHTML(Color nameColor, Color descriptionColor, Color valueColor)
+		{
+			return $"<color=#{nameColor.ToHex()}><b>" + Name + "</b></color>\n\n" + $"<color=#{descriptionColor.ToHex()}>" +
+			       Description + "</color>\n" + $"<color=#{valueColor.ToHex()}>" + "Value: " +
+			       Value + "</color>";
 		}
 	}
 }

@@ -10,7 +10,7 @@ using UnityEngine;
 namespace Gameplay.Items
 {
 	[Serializable]
-	public abstract class Item : ITooltipSerializable
+	public abstract class Item : IHTMLSerializable, IDroppable
 	{
 		public int ID { get; set; }
 		public int Value { get; set; }
@@ -21,12 +21,20 @@ namespace Gameplay.Items
 		public Sprite Sprite { get; set; }
 
 		/// <inheritdoc />
-		public override string ToString()
-		{
-			return $"{nameof(ID)}: {ID}, {nameof(Name)}: {Name}, {nameof(Description)}: {Description}, {nameof(Slug)}: {Slug}, {nameof(Value)}: {Value}";
-		}
+		public abstract void Drop();
 
 		/// <inheritdoc />
-		public abstract string ToTooltip();
+		public abstract void PickUp();
+
+		/// <inheritdoc />
+		public abstract string ToHTML(Color nameColor, Color descriptionColor, Color valueColor);
+
+
+		/// <inheritdoc />
+		public override string ToString()
+		{
+			return
+				$"{nameof(ID)}: {ID}, {nameof(Name)}: {Name}, {nameof(Description)}: {Description}, {nameof(Slug)}: {Slug}, {nameof(Value)}: {Value}";
+		}
 	}
 }

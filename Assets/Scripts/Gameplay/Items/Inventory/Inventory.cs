@@ -25,16 +25,17 @@ namespace Gameplay.Items.Inventory
 		[SerializeField]
 		private GameObject item;
 
-
-		// Collections
-		public List<Item> Items { get; set; }
-		public List<GameObject> Slots { get; set;}
-
 		public Inventory()
 		{
 			Items = new List<Item>();
 			Slots = new List<GameObject>();
 		}
+
+
+		// Collections
+		public List<Item> Items { get; set; }
+
+		public List<GameObject> Slots { get; set; }
 
 		private void Start()
 		{
@@ -56,14 +57,13 @@ namespace Gameplay.Items.Inventory
 			}
 
 			AddItem(0);
-			for (int i = 0; i < 3; i++)
+			for (var i = 0; i < 3; i++)
 			{
 				AddItem(2);
 				AddItem(2);
 				AddItem(2);
 				AddItem(1);
 			}
-
 		}
 
 		/// <summary>
@@ -83,7 +83,7 @@ namespace Gameplay.Items.Inventory
 
 				// Increase the amount.
 				data.Amount++;
-				
+
 				// Update the amount text.
 				data.transform.GetComponentInChildren<Text>().text = data.Amount.ToString();
 				return;

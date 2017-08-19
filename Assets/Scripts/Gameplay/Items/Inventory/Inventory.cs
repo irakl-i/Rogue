@@ -4,6 +4,7 @@
  */
 
 using System.Collections.Generic;
+using Gamelogic.Extensions;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,9 @@ namespace Gameplay.Items.Inventory
 	{
 		[SerializeField]
 		private int size;
+
+		[SerializeField]
+		private ItemList items;
 
 		private GameObject inventoryPanel;
 		private GameObject slotPanel;
@@ -27,23 +31,28 @@ namespace Gameplay.Items.Inventory
 
 		public Inventory()
 		{
-			Items = new List<Item>();
 			Slots = new List<GameObject>();
 		}
 
-
 		// Collections
-		public List<Item> Items { get; set; }
+		public ItemList Items => items;
 
 		public List<GameObject> Slots { get; set; }
 
 		private void Start()
 		{
-			database = GetComponent<Database>();
-
+			// Find the inventory panel.
 			inventoryPanel = GameObject.Find("Inventory Panel");
+
+			// Find the slot panel.
 			slotPanel = inventoryPanel.transform.Find("Slot Panel").gameObject;
 
+			// Find the sibling database script.
+			foreach (Transform child in transform.parent)
+				if (child.name == "Database")
+					database = child.GetComponent<Database>();
+
+			// Instantiate the empty slots.
 			for (var i = 0; i < size; i++)
 			{
 				// Add empty items to the list.
@@ -56,6 +65,7 @@ namespace Gameplay.Items.Inventory
 				Slots[i].GetComponent<Slot>().Index = i;
 			}
 
+			// Add items (temp).
 			AddItem(0);
 			for (var i = 0; i < 3; i++)
 			{

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Gamelogic.Extensions.Internal;
+using Gameplay.Items;
 using UnityEngine;
 
 namespace Gamelogic.Extensions
@@ -179,4 +180,10 @@ namespace Gamelogic.Extensions
 	[Serializable]
 	public class Vector4List : InspectorList<Vector4> { }
 
+	/// <summary>
+	/// An <c>InspectorList</c> of type <c>Item</c>.
+	/// </summary>
+	[Version(2, 5)]
+	[Serializable]
+	public class ItemList : InspectorList<Item> { }
 }

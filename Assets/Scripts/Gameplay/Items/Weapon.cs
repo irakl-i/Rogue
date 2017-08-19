@@ -4,13 +4,21 @@
  */
 
 using System;
+using UnityEngine;
 
 namespace Gameplay.Items
 {
 	[Serializable]
 	public abstract class Weapon : Item
 	{
-		public int Damage { get; set; }
+		[SerializeField]
+		private int damage;
+
+		public int Damage
+		{
+			get { return damage; }
+			set { damage = value; }
+		}
 
 		/// <inheritdoc />
 		public override string ToString()

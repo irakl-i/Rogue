@@ -3,9 +3,9 @@
  *	Project Rogue by Irakli Chkuaseli
  */
 
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Gamelogic.Extensions;
 using LitJson;
 using UnityEngine;
 using Utilities;
@@ -16,8 +16,13 @@ namespace Gameplay.Items.Inventory
 	{
 		private JsonData data;
 
-		public List<Sword> Swords { get; private set; }
-		public List<Potion> Potions { get; private set; }
+		[SerializeField]
+		private GameObject sword;
+
+		[SerializeField]
+		private ItemList items;
+
+		public ItemList Items => items;
 
 		private void Start()
 		{
@@ -52,7 +57,6 @@ namespace Gameplay.Items.Inventory
 		/// </summary>
 		private void LoadSwords()
 		{
-			Swords = new List<Sword>();
 			JsonData swords = data[Constants.Database.Weapons][Constants.Database.Swords];
 
 			for (var i = 0; i < swords.Count; i++)
@@ -66,7 +70,14 @@ namespace Gameplay.Items.Inventory
 				var damage = (int) swords[i][Constants.Database.Stats][Constants.Database.Damage];
 				var range = (int) swords[i][Constants.Database.Stats][Constants.Database.Range];
 
-				Swords.Add(new Sword(id, name, description, slug, value, stackable, damage, range));
+				GameObject swordObject = Instantiate(sword, Vector3.zero, Quaternion.identity);
+				var swordScript = swordObject.GetComponent<Sword>();
+				swordScript.Initialize(id, name, description, slug, value, stackable, damage, range);
+
+				swordObject.name = swordScript.Name;
+				swordObject.transform.SetParent(transform);
+
+				items.Add(swordScript);
 			}
 		}
 
@@ -77,7 +88,7 @@ namespace Gameplay.Items.Inventory
 		/// <returns>Item</returns>
 		public Item GetItem(int id)
 		{
-			return Swords.FirstOrDefault(sword => sword.ID == id);
+			return Items.FirstOrDefault(sword => sword.ID == id);
 		}
 	}
 }

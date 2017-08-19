@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4726117162883628}
-  - component: {fileID: 114437290151379942}
   - component: {fileID: 114648749650094402}
   - component: {fileID: 114539200727556746}
   m_Layer: 0
@@ -42,17 +41,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114437290151379942
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1190402266951340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8dafcff33f03744a8047b527d6eb2cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114539200727556746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -64,8 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa76b3e73ca51bd4f93d8bd0965f4784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameColor: {r: 0.7352941, g: 0.7352941, b: 0.7352941, a: 0}
-  descriptionColor: {r: 0.2205882, g: 0.2205882, b: 0.2205882, a: 0}
+  nameColor: {r: 0, g: 0, b: 0, a: 0}
+  descriptionColor: {r: 0.47794116, g: 0.13705665, b: 0.13705665, a: 0}
   valueColor: {r: 0.13893025, g: 0.5955882, b: 0.12262111, a: 0}
 --- !u!114 &114648749650094402
 MonoBehaviour:

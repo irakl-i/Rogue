@@ -12,7 +12,16 @@ namespace Gameplay.Items
 	[Serializable]
 	public class Sword : Weapon
 	{
-		public Sword(int id, string name, string description, string slug, int value, bool stackable, int damage, int range)
+		[SerializeField]
+		private int range;
+
+		public int Range
+		{
+			get { return range; }
+			set { range = value; }
+		}
+
+		public void Initialize(int id, string name, string description, string slug, int value, bool stackable, int damage, int range)
 		{
 			ID = id;
 			Value = value;
@@ -25,12 +34,6 @@ namespace Gameplay.Items
 
 			Sprite = Resources.Load<Sprite>("Sprites/Items/" + Slug);
 		}
-
-		public Sword()
-		{
-		}
-
-		public int Range { get; set; }
 
 		/// <inheritdoc />
 		public override string ToString()

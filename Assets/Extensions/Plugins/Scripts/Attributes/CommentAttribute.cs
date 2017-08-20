@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Gamelogic.Extensions
 {
 	/// <summary>
-	/// Used to mark a field to add a comment above the field in the inspector.
+	///     Used to mark a field to add a comment above the field in the inspector.
 	/// </summary>
 	/// <seealso cref="UnityEngine.PropertyAttribute" />
 	[AttributeUsage(AttributeTargets.Field)]

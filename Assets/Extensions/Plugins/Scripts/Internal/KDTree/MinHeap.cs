@@ -1,31 +1,34 @@
-﻿﻿using System;
+﻿using System;
 
 namespace Gamelogic.Extensions.Internal.KDTree
 {
 	/// <summary>
-	/// A MinHeap is a smallest-first queue based around a binary heap so it is quick to insert / remove items.
+	///     A MinHeap is a smallest-first queue based around a binary heap so it is quick to insert / remove items.
 	/// </summary>
 	/// <typeparam name="T">The type of data this MinHeap stores.</typeparam>
-	/// <remarks>This is based on this: https://bitbucket.org/rednaxela/knn-benchmark/src/tip/ags/utils/dataStructures/trees/thirdGenKD/ </remarks>
+	/// <remarks>
+	///     This is based on this:
+	///     https://bitbucket.org/rednaxela/knn-benchmark/src/tip/ags/utils/dataStructures/trees/thirdGenKD/
+	/// </remarks>
 	public class MinHeap<T>
 	{
-	    /// <summary>
-	    /// The default size for a min heap.
-	    /// </summary>
-	    private const int DEFAULT_SIZE = 64;
+		/// <summary>
+		///     The default size for a min heap.
+		/// </summary>
+		private const int DEFAULT_SIZE = 64;
 
-	    /// <summary>
-		/// The data array.  This stores the data items in the heap.
+		/// <summary>
+		///     The data array.  This stores the data items in the heap.
 		/// </summary>
 		private T[] tData;
 
 		/// <summary>
-		/// The key array.  This determines how items are ordered. Smallest first.
+		///     The key array.  This determines how items are ordered. Smallest first.
 		/// </summary>
 		private float[] tKeys;
 
 		/// <summary>
-		/// Create a new min heap with the default capacity.
+		///     Create a new min heap with the default capacity.
 		/// </summary>
 		public MinHeap()
 			: this(DEFAULT_SIZE)
@@ -33,7 +36,7 @@ namespace Gamelogic.Extensions.Internal.KDTree
 		}
 
 		/// <summary>
-		/// Create a new min heap with a given capacity.
+		///     Create a new min heap with a given capacity.
 		/// </summary>
 		/// <param name="iCapacity"></param>
 		public MinHeap(int iCapacity)
@@ -45,17 +48,27 @@ namespace Gamelogic.Extensions.Internal.KDTree
 		}
 
 		/// <summary>
-		/// The number of items in this queue.
+		///     The number of items in this queue.
 		/// </summary>
 		public int Size { get; private set; }
 
 		/// <summary>
-		/// The amount of space in this queue.
+		///     The amount of space in this queue.
 		/// </summary>
 		public int Capacity { get; private set; }
 
 		/// <summary>
-		/// Insert a new element.
+		///     Get the data stored at the minimum element.
+		/// </summary>
+		public T Min => tData[0];
+
+		/// <summary>
+		///     Get the key which represents the minimum element.
+		/// </summary>
+		public float MinKey => tKeys[0];
+
+		/// <summary>
+		///     Insert a new element.
 		/// </summary>
 		/// <param name="key">The key which represents its position in the priority queue (ie. distance).</param>
 		/// <param name="value">The value to be stored at the key.</param>
@@ -86,7 +99,7 @@ namespace Gamelogic.Extensions.Internal.KDTree
 		}
 
 		/// <summary>
-		/// Remove the smallest element.
+		///     Remove the smallest element.
 		/// </summary>
 		public void RemoveMin()
 		{
@@ -101,40 +114,18 @@ namespace Gamelogic.Extensions.Internal.KDTree
 		}
 
 		/// <summary>
-		/// Get the data stored at the minimum element.
-		/// </summary>
-		public T Min
-		{
-			get
-			{
-				return tData[0];
-			}
-		}
-
-		/// <summary>
-		/// Get the key which represents the minimum element.
-		/// </summary>
-		public float MinKey
-		{
-			get
-			{
-				return tKeys[0];
-			}
-		}
-
-		/// <summary>
-		/// Bubble a child item up the tree.
+		///     Bubble a child item up the tree.
 		/// </summary>
 		/// <param name="iChild"></param>
 		private void SiftUp(int iChild)
 		{
 			// For each parent above the child, if the parent is smaller then bubble it up.
-			for (int iParent = (iChild - 1) / 2;
+			for (var iParent = (iChild - 1) / 2;
 				iChild != 0 && tKeys[iChild] < tKeys[iParent];
 				iChild = iParent, iParent = (iChild - 1) / 2)
 			{
 				T kData = tData[iParent];
-				float dDist = tKeys[iParent];
+				var dDist = tKeys[iParent];
 
 				tData[iParent] = tData[iChild];
 				tKeys[iParent] = tKeys[iChild];
@@ -145,13 +136,13 @@ namespace Gamelogic.Extensions.Internal.KDTree
 		}
 
 		/// <summary>
-		/// Bubble a parent down through the children so it goes in the right place.
+		///     Bubble a parent down through the children so it goes in the right place.
 		/// </summary>
 		/// <param name="iParent">The index of the parent.</param>
 		private void SiftDown(int iParent)
 		{
 			// For each child.
-			for (int iChild = iParent * 2 + 1; iChild < Size; iParent = iChild, iChild = iParent * 2 + 1)
+			for (var iChild = iParent * 2 + 1; iChild < Size; iParent = iChild, iChild = iParent * 2 + 1)
 			{
 				// If the child is larger, select the next child.
 				if (iChild + 1 < Size && tKeys[iChild] > tKeys[iChild + 1])
@@ -162,7 +153,7 @@ namespace Gamelogic.Extensions.Internal.KDTree
 				{
 					// Swap the points
 					T pData = tData[iParent];
-					float pDist = tKeys[iParent];
+					var pDist = tKeys[iParent];
 
 					tData[iParent] = tData[iChild];
 					tKeys[iParent] = tKeys[iChild];
@@ -170,8 +161,6 @@ namespace Gamelogic.Extensions.Internal.KDTree
 					tData[iChild] = pData;
 					tKeys[iChild] = pDist;
 				}
-
-				// TODO: REMOVE THE BREAK
 				else
 				{
 					break;

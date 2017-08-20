@@ -3,20 +3,20 @@
 namespace Gamelogic.Extensions.Internal.KDTree
 {
 	/// <summary>
-	/// An interface which enables flexible distance functions.
+	///     An interface which enables flexible distance functions.
 	/// </summary>
 	public interface IDistanceFunction
 	{
 		/// <summary>
-		/// Compute a distance between two n-dimensional points.
+		///     Compute a distance between two n-dimensional points.
 		/// </summary>
 		/// <param name="p1">The first point.</param>
 		/// <param name="p2">The second point.</param>
 		/// <returns>The n-dimensional distance.</returns>
-		float  Distance(Vector2 p1, Vector2 p2);
+		float Distance(Vector2 p1, Vector2 p2);
 
 		/// <summary>
-		/// Find the shortest distance from a point to an axis aligned rectangle in n-dimensional space.
+		///     Find the shortest distance from a point to an axis aligned rectangle in n-dimensional space.
 		/// </summary>
 		/// <param name="point">The point of interest.</param>
 		/// <param name="min">The minimum coordinate of the rectangle.</param>
@@ -26,13 +26,13 @@ namespace Gamelogic.Extensions.Internal.KDTree
 	}
 
 	/// <summary>
-	/// A distance function for our KD-Tree which returns manhattan distances.
+	///     A distance function for our KD-Tree which returns manhattan distances.
 	/// </summary>
 	public class ManhattanDistanceFunction : IDistanceFunction
 	{
 		public float Distance(Vector2 p1, Vector2 p2)
 		{
-			var difference = p1 - p2;
+			Vector2 difference = p1 - p2;
 			return Mathf.Abs(difference.x) + Mathf.Abs(difference.y);
 		}
 
@@ -40,34 +40,30 @@ namespace Gamelogic.Extensions.Internal.KDTree
 		{
 			float sum = 0;
 
-			for (int i = 0; i < 2; ++i)
+			for (var i = 0; i < 2; ++i)
 			{
 				float difference = 0;
 
 				if (point[i] > max[i])
-				{
-					difference = (point[i] - max[i]);
-				}
+					difference = point[i] - max[i];
 				else if (point[i] < min[i])
-				{
-					difference = (point[i] - min[i]);
-				}
-				
+					difference = point[i] - min[i];
+
 				sum += difference;
 			}
-			
+
 			return sum;
 		}
 	}
 
 	/// <summary>
-	/// A distance function for our KD-Tree which returns manhattan distances.
+	///     A distance function for our KD-Tree which returns manhattan distances.
 	/// </summary>
 	public class ChebychevDistanceFunction : IDistanceFunction
 	{
 		public float Distance(Vector2 p1, Vector2 p2)
 		{
-			var difference = p1 - p2;
+			Vector2 difference = p1 - p2;
 			return Mathf.Max(Mathf.Abs(difference.x), Mathf.Abs(difference.y));
 		}
 
@@ -75,18 +71,14 @@ namespace Gamelogic.Extensions.Internal.KDTree
 		{
 			float sum = 0;
 
-			for (int i = 0; i < 2; ++i)
+			for (var i = 0; i < 2; ++i)
 			{
 				float difference = 0;
 
 				if (point[i] > max[i])
-				{
-					difference = (point[i] - max[i]);
-				}
+					difference = point[i] - max[i];
 				else if (point[i] < min[i])
-				{
-					difference = (point[i] - min[i]);
-				}
+					difference = point[i] - min[i];
 
 				sum = Mathf.Max(sum, difference);
 			}
@@ -96,12 +88,12 @@ namespace Gamelogic.Extensions.Internal.KDTree
 	}
 
 	/// <summary>
-	/// A distance function for our KD-Tree which returns squared euclidean distances.
+	///     A distance function for our KD-Tree which returns squared euclidean distances.
 	/// </summary>
 	public class SquareEuclideanDistanceFunction : IDistanceFunction
 	{
 		/// <summary>
-		/// Find the squared distance between two n-dimensional points.
+		///     Find the squared distance between two n-dimensional points.
 		/// </summary>
 		/// <param name="p1">The first point.</param>
 		/// <param name="p2">The second point.</param>
@@ -112,7 +104,7 @@ namespace Gamelogic.Extensions.Internal.KDTree
 		}
 
 		/// <summary>
-		/// Find the shortest distance from a point to an axis aligned rectangle in n-dimensional space.
+		///     Find the shortest distance from a point to an axis aligned rectangle in n-dimensional space.
 		/// </summary>
 		/// <param name="point">The point of interest.</param>
 		/// <param name="min">The minimum coordinate of the rectangle.</param>
@@ -122,18 +114,14 @@ namespace Gamelogic.Extensions.Internal.KDTree
 		{
 			float sum = 0;
 
-			for (int i = 0; i < 2; ++i)
+			for (var i = 0; i < 2; ++i)
 			{
 				float difference = 0;
 
 				if (point[i] > max[i])
-				{
-					difference = (point[i] - max[i]);
-				}
+					difference = point[i] - max[i];
 				else if (point[i] < min[i])
-				{
-					difference = (point[i] - min[i]);
-				}
+					difference = point[i] - min[i];
 
 				sum += difference * difference;
 			}

@@ -17,11 +17,11 @@ namespace UI
 		private Inventory inventory;
 		private Tooltip tooltip;
 
-		public Item Item { get; set; }
+
 		public int Amount { get; set; }
+		public Item Item { get; set; }
 		public int Index { get; set; }
 
-		/// <inheritdoc />
 		public void OnBeginDrag(PointerEventData eventData)
 		{
 			if (Item != null)
@@ -35,14 +35,12 @@ namespace UI
 			}
 		}
 
-		/// <inheritdoc />
 		public void OnDrag(PointerEventData eventData)
 		{
 			if (Item != null)
 				transform.position = eventData.position - offset;
 		}
 
-		/// <inheritdoc />
 		public void OnEndDrag(PointerEventData eventData)
 		{
 			transform.SetParent(inventory.Slots[Index].transform);
@@ -51,19 +49,16 @@ namespace UI
 			GetComponent<CanvasGroup>().blocksRaycasts = true;
 		}
 
-		/// <inheritdoc />
 		public void OnPointerEnter(PointerEventData eventData)
 		{
 			tooltip.Activate(Item);
 		}
 
-		/// <inheritdoc />
 		public void OnPointerExit(PointerEventData eventData)
 		{
 			tooltip.Deactivate();
 		}
 
-		/// <inheritdoc />
 		public void Start()
 		{
 			inventory = GameObject.Find("Inventory").GetComponent<Inventory>();

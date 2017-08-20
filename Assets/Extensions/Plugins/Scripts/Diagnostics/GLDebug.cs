@@ -2,30 +2,28 @@
 
 using System.Diagnostics;
 using Gamelogic.Extensions.Internal;
+using UnityEngine;
 using Debug = UnityEngine.Debug;
-using Object = UnityEngine.Object;
 
 namespace Gamelogic.Extensions
 {
 	/// <summary>
-	/// Class that contains methods useful for debugging.
-	/// All methods are only compiled if the DEBUG symbol is defined.
+	///     Class that contains methods useful for debugging.
+	///     All methods are only compiled if the DEBUG symbol is defined.
 	/// </summary>
 	public static class GLDebug
 	{
 		#region Static Methods
 
 		/// <summary>
-		/// Check whether the condition is true, and print an error message if it is not.
+		///     Check whether the condition is true, and print an error message if it is not.
 		/// </summary>
 		[Version(1, 2)]
 		[Conditional("DEBUG")]
-		public static void Assert(bool condition, string message, Object context=null)
+		public static void Assert(bool condition, string message, Object context = null)
 		{
 			if (!condition)
-			{
 				LogError("Assert failed", message, context);
-			}
 		}
 
 		[Conditional("DEBUG")]

@@ -56,8 +56,6 @@ namespace Gameplay.Abilities
 			this.distance = distance;
 			this.delay = delay;
 			this.particle = particle;
-
-			// TODO: Fix particle attachment problem.
 //			Instantiate(particle, entity.transform.position, Quaternion.identity, entity.transform);
 		}
 	}

@@ -6,8 +6,10 @@ using UnityEngine;
 namespace Gamelogic.Extensions
 {
 	/// <summary>
-	/// Mark numeric values that should always be non-negative.
+	///     Mark numeric values that should always be non-negative.
 	/// </summary>
 	[Version(1, 2)]
-	public class NonNegativeAttribute : PropertyAttribute{}
+	public class NonNegativeAttribute : PropertyAttribute
+	{
+	}
 }

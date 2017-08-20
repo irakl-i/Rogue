@@ -12,41 +12,41 @@ using Object = UnityEngine.Object;
 namespace Gamelogic.Extensions
 {
 	/// <summary>
-	/// Provides some additional functions for MonoBehaviour.
+	///     Provides some additional functions for MonoBehaviour.
 	/// </summary>
 	[Version(1)]
-	[Internal.HelpURL("http://gamelogic.co.za/documentation/extensions/?topic=html/T-Gamelogic.Extensions.GLMonoBehaviour.htm")]
+	[Internal.HelpURL(
+		"http://gamelogic.co.za/documentation/extensions/?topic=html/T-Gamelogic.Extensions.GLMonoBehaviour.htm")]
 	[AddComponentMenu("Gamelogic/Extensions/GLMonoBehaviour")]
 	public class GLMonoBehaviour : MonoBehaviour
 	{
 		[HideInInspector]
-		public string __messageText; //TODO Remove?
+		public string __messageText;
 
 		#region Static Methods
 
 #if !UNITY_5
 		/// <summary>
-		/// Instantiates the specified prefab.
+		///     Instantiates the specified prefab.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="prefab">The object.</param>
 		/// <returns>T.</returns>
 		public new static T Instantiate<T>(T prefab) where T : Component
 		{
-			return (T) Object.Instantiate(prefab);
+			return Object.Instantiate(prefab);
 		}
 #endif
 
-#if !UNITY_5_5_OR_NEWER
-		/// <summary>
-		/// Instantiates an object at the 
-		/// given position in the given orientation.
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="prefab">The prefab to instantiate.</param>
-		/// <param name="position">The position.</param>
-		/// <param name="rotation">The rotation.</param>
-		/// <returns>T.</returns>
+#if !UNITY_5_5_OR_NEWER /// <summary>
+/// Instantiates an object at the 
+/// given position in the given orientation.
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <param name="prefab">The prefab to instantiate.</param>
+/// <param name="position">The position.</param>
+/// <param name="rotation">The rotation.</param>
+/// <returns>T.</returns>
 		public static T Instantiate<T>(T prefab, Vector3 position, Quaternion rotation) where T : Component
 		{
 			var newObject = Instantiate<T>(prefab);
@@ -59,11 +59,11 @@ namespace Gamelogic.Extensions
 #endif
 
 		/// <summary>
-		/// Instantiates a prefab and attaches it to the given root. 
+		///     Instantiates a prefab and attaches it to the given root.
 		/// </summary>
 		public static T Instantiate<T>(T prefab, GameObject root) where T : Component
 		{
-			var newObject = Instantiate(prefab);
+			T newObject = Instantiate(prefab);
 
 			newObject.transform.SetParent(root.transform, false);
 			newObject.transform.ResetLocal();
@@ -72,12 +72,13 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Instantiates a prefab, attaches it to the given root, and
-		/// sets the local position and rotation.
+		///     Instantiates a prefab, attaches it to the given root, and
+		///     sets the local position and rotation.
 		/// </summary>
-		public static T Instantiate<T>(T prefab, GameObject root, Vector3 localPosition, Quaternion localRotation) where T : Component
+		public static T Instantiate<T>(T prefab, GameObject root, Vector3 localPosition, Quaternion localRotation)
+			where T : Component
 		{
-			var newObject = Instantiate<T>(prefab);
+			T newObject = Instantiate(prefab);
 
 			newObject.transform.parent = root.transform;
 
@@ -89,7 +90,7 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Instantiates a prefab.
+		///     Instantiates a prefab.
 		/// </summary>
 		/// <param name="prefab">The object.</param>
 		/// <returns>GameObject.</returns>
@@ -99,17 +100,17 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Instantiates the specified prefab.
+		///     Instantiates the specified prefab.
 		/// </summary>
 		public static GameObject Instantiate(GameObject prefab, Vector3 position, Quaternion rotation)
 		{
-			var newObject = Object.Instantiate(prefab, position, rotation);
+			GameObject newObject = Object.Instantiate(prefab, position, rotation);
 
 			return newObject;
 		}
 
 		/// <summary>
-		/// Instantiates a prefab and parents it to the root.
+		///     Instantiates a prefab and parents it to the root.
 		/// </summary>
 		/// <param name="prefab">The prefab.</param>
 		/// <param name="root">The root.</param>
@@ -117,7 +118,7 @@ namespace Gamelogic.Extensions
 		/// <returns>GameObject.</returns>
 		public static GameObject Instantiate(GameObject prefab, GameObject root)
 		{
-			var newObject = (GameObject)Object.Instantiate(prefab);
+			GameObject newObject = Object.Instantiate(prefab);
 
 			newObject.transform.parent = root.transform;
 
@@ -127,17 +128,18 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Instantiates a prefab, attaches it to the given root, and
-		/// sets the local position and rotation.
+		///     Instantiates a prefab, attaches it to the given root, and
+		///     sets the local position and rotation.
 		/// </summary>
 		/// <param name="prefab">The prefab.</param>
 		/// <param name="root">The root.</param>
 		/// <param name="localPosition">The local position.</param>
 		/// <param name="localRotation">The local rotation.</param>
 		/// <returns>GameObject.</returns>
-		public static GameObject Instantiate(GameObject prefab, GameObject root, Vector3 localPosition, Quaternion localRotation)
+		public static GameObject Instantiate(GameObject prefab, GameObject root, Vector3 localPosition,
+			Quaternion localRotation)
 		{
-			var newObject = (GameObject)Object.Instantiate(prefab);
+			GameObject newObject = Object.Instantiate(prefab);
 
 			newObject.transform.parent = newObject.transform;
 			newObject.transform.localPosition = localPosition;
@@ -150,14 +152,14 @@ namespace Gamelogic.Extensions
 		#region Find
 
 		/// <summary>
-		/// Similar to FindObjectsOfType, except that it looks for components
-		/// that implement a specific interface.
+		///     Similar to FindObjectsOfType, except that it looks for components
+		///     that implement a specific interface.
 		/// </summary>
 		public static List<I> FindObjectsOfInterface<I>() where I : class
 		{
 			var monoBehaviours = FindObjectsOfType<MonoBehaviour>();
 
-			return monoBehaviours.Select(behaviour => behaviour.GetComponent(typeof (I))).OfType<I>().ToList();
+			return monoBehaviours.Select(behaviour => behaviour.GetComponent(typeof(I))).OfType<I>().ToList();
 		}
 
 		#endregion
@@ -208,14 +210,16 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Gets a component of the given type, or fail if no such component 
-		/// is attached to the given component.
+		///     Gets a component of the given type, or fail if no such component
+		///     is attached to the given component.
 		/// </summary>
 		/// <typeparam name="T">The type of component to get.</typeparam>
-		/// <returns>A component of type T attached to the given component if it exists.
+		/// <returns>
+		///     A component of type T attached to the given component if it exists.
 		/// </returns>
-		/// <exception cref="InvalidOperationException">When the no component of the 
-		/// required type exist on the given component.
+		/// <exception cref="InvalidOperationException">
+		///     When the no component of the
+		///     required type exist on the given component.
 		/// </exception>
 		public T GetRequiredComponent<T>() where T : Component
 		{
@@ -223,14 +227,16 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Gets a component of the given type in one of the children, or fail if no such component 
-		/// is attached to the given component.
+		///     Gets a component of the given type in one of the children, or fail if no such component
+		///     is attached to the given component.
 		/// </summary>
 		/// <typeparam name="T">The type of component to get.</typeparam>
-		/// <returns>A component of type T attached to the given component if it exists.
+		/// <returns>
+		///     A component of type T attached to the given component if it exists.
 		/// </returns>
-		/// <exception cref="InvalidOperationException">When the no component of the 
-		/// required type exist on any of the given components children.
+		/// <exception cref="InvalidOperationException">
+		///     When the no component of the
+		///     required type exist on any of the given components children.
 		/// </exception>
 		public T GetRequiredComponentInChildren<T>() where T : Component
 		{
@@ -238,29 +244,25 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Destroys given object using either Object.Destroy, or Object.DestroyImmediate,
-		/// depending on whether Application.isPlaying is true or not. This is useful when 
-		/// writing methods that is used by both editor tools and the game itself.
+		///     Destroys given object using either Object.Destroy, or Object.DestroyImmediate,
+		///     depending on whether Application.isPlaying is true or not. This is useful when
+		///     writing methods that is used by both editor tools and the game itself.
 		/// </summary>
 		/// <param name="obj">The object to destroy.</param>
 		[Version(2, 5)]
 		public static void DestroyUniversal(Object obj)
 		{
 			if (Application.isPlaying)
-			{
 				Destroy(obj);
-			}
 			else
-			{
-				DestroyImmediate(obj); 
-			}
+				DestroyImmediate(obj);
 		}
 
 		#endregion
 	}
 
-	///<summary>
-	/// Provides useful extension methods for MonoBehaviours.
+	/// <summary>
+	///     Provides useful extension methods for MonoBehaviours.
 	/// </summary>
 	[Version(1)]
 	public static class MonoBehaviourExtensions
@@ -268,18 +270,18 @@ namespace Gamelogic.Extensions
 		#region Cloning
 
 		/// <summary>
-		/// Clones an object.
+		///     Clones an object.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="obj"></param>
 		/// <returns></returns>
-		public static T Clone<T>(this T obj) where T:MonoBehaviour
+		public static T Clone<T>(this T obj) where T : MonoBehaviour
 		{
-			return GLMonoBehaviour.Instantiate<T>(obj);
+			return GLMonoBehaviour.Instantiate(obj);
 		}
 
 		/// <summary>
-		/// Clones an object.
+		///     Clones an object.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="obj"></param>
@@ -289,10 +291,8 @@ namespace Gamelogic.Extensions
 		{
 			var list = new List<T>();
 
-			for (int i = 0; i < count; i++)
-			{
-				list.Add(obj.Clone<T>());
-			}
+			for (var i = 0; i < count; i++)
+				list.Add(obj.Clone());
 
 			return list;
 		}
@@ -302,7 +302,7 @@ namespace Gamelogic.Extensions
 		#region Typesafe methods for scheduling
 
 		/// <summary>
-		/// Invokes the given action after the given amount of time.
+		///     Invokes the given action after the given amount of time.
 		/// </summary>
 		public static Coroutine Invoke(this MonoBehaviour monoBehaviour, Action action, float time)
 		{
@@ -317,8 +317,8 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Invokes the given action after the given amount of time, and repeats the 
-		/// action after every repeatTime seconds.
+		///     Invokes the given action after the given amount of time, and repeats the
+		///     action after every repeatTime seconds.
 		/// </summary>
 		public static Coroutine InvokeRepeating(this MonoBehaviour monoBehaviour, Action action, float time, float repeatTime)
 		{
@@ -326,8 +326,8 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Invokes the given action after the given amount of time, and repeats the 
-		/// action after every repeatTime seconds.
+		///     Invokes the given action after the given amount of time, and repeats the
+		///     action after every repeatTime seconds.
 		/// </summary>
 		public static Coroutine InvokeRepeating(this MonoBehaviour monoBehaviour, Action action, IGenerator<float> repeatTime)
 		{
@@ -356,20 +356,20 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Cancels the action if it was scheduled.
+		///     Cancels the action if it was scheduled.
 		/// </summary>
 		[Obsolete("The new Invoke is implemented as a coroutine. Store and cancel the coroutine instead.")]
-		public static void CancelInvoke(this MonoBehaviour component, System.Action action)
+		public static void CancelInvoke(this MonoBehaviour component, Action action)
 		{
 			throw new NotSupportedException();
 		}
 
 
 		/// <summary>
-		/// Returns whether an invoke is pending on an action.
+		///     Returns whether an invoke is pending on an action.
 		/// </summary>
 		[Obsolete("The new Invoke is implemented as a coroutine. Store and cancel the coroutine instead.")]
-		public static bool IsInvoking(this MonoBehaviour component, System.Action action)
+		public static bool IsInvoking(this MonoBehaviour component, Action action)
 		{
 			throw new NotSupportedException();
 		}
@@ -377,18 +377,20 @@ namespace Gamelogic.Extensions
 		#endregion
 
 		#region Tweening
-		public static Coroutine Tween<T>(this MonoBehaviour monoBehaviour, T start, T finish, float totalTime, Func<T, T, float, T> lerp, Action<T> action)
+
+		public static Coroutine Tween<T>(this MonoBehaviour monoBehaviour, T start, T finish, float totalTime,
+			Func<T, T, float, T> lerp, Action<T> action)
 		{
 			return Tween(monoBehaviour, start, finish, totalTime, lerp, action, () => Time.deltaTime);
 		}
 
 		public static Coroutine Tween<T>(
-			this MonoBehaviour monoBehaviour, 
-			T start, 
-			T finish, 
-			float totalTime, 
-			Func<T, T, float, T> lerp, 
-			Action<T> action, 
+			this MonoBehaviour monoBehaviour,
+			T start,
+			T finish,
+			float totalTime,
+			Func<T, T, float, T> lerp,
+			Action<T> action,
 			Func<float> deltaTime)
 		{
 			return monoBehaviour.StartCoroutine(TweenImpl(start, finish, totalTime, lerp, action, deltaTime));
@@ -407,7 +409,7 @@ namespace Gamelogic.Extensions
 
 			while (t < 1)
 			{
-				var current = lerp(start, finish, t);
+				T current = lerp(start, finish, t);
 				action(current);
 
 				time += deltaTime();
@@ -441,7 +443,7 @@ namespace Gamelogic.Extensions
 
 			for (var i = 0; i < target.childCount; ++i)
 			{
-				var result = FindChildRecursively(target.GetChild(i), childName);
+				GameObject result = FindChildRecursively(target.GetChild(i), childName);
 
 				if (result != null) return result;
 			}
@@ -450,42 +452,38 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Finds a component of the type T in on the same object, or on a child down the hierarchy. This method also works
-		/// in the editor and when the game object is inactive.
+		///     Finds a component of the type T in on the same object, or on a child down the hierarchy. This method also works
+		///     in the editor and when the game object is inactive.
 		/// </summary>
 		[Version(1, 1)]
 		public static T GetComponentInChildrenAlways<T>(this Component component) where T : Component
 		{
-			foreach (var child in component.transform.SelfAndAllChildren())
+			foreach (Transform child in component.transform.SelfAndAllChildren())
 			{
 				var componentInChild = child.GetComponent<T>();
 
 				if (componentInChild != null)
-				{
 					return componentInChild;
-				}
 			}
 
 			return null;
 		}
 
 		/// <summary>
-		/// Finds all components of the type T on the same object and on a children down the hierarchy. This method also works
-		///	in the editor and when the game object is inactive.
+		///     Finds all components of the type T on the same object and on a children down the hierarchy. This method also works
+		///     in the editor and when the game object is inactive.
 		/// </summary>
-		[Version(1,1)]
+		[Version(1, 1)]
 		public static T[] GetComponentsInChildrenAlways<T>(this Component component) where T : Component
 		{
 			var components = new List<T>();
 
-			foreach (var child in component.transform.SelfAndAllChildren())
+			foreach (Transform child in component.transform.SelfAndAllChildren())
 			{
 				var componentsInChild = child.GetComponents<T>();
 
 				if (componentsInChild != null)
-				{
 					components.AddRange(componentsInChild);
-				}
 			}
 
 			return components.ToArray();
@@ -496,53 +494,56 @@ namespace Gamelogic.Extensions
 		#region Components
 
 		/// <summary>
-		/// Gets a component of the given type, or fail if no such component 
-		/// is attached to the given component.
+		///     Gets a component of the given type, or fail if no such component
+		///     is attached to the given component.
 		/// </summary>
 		/// <typeparam name="T">The type of component to get.</typeparam>
 		/// <param name="thisComponent">The component to check.</param>
-		/// <returns>A component of type T attached to the given component if it exists.
+		/// <returns>
+		///     A component of type T attached to the given component if it exists.
 		/// </returns>
-		/// <exception cref="InvalidOperationException">When the no component of the 
-		/// required type exist on the given component.
+		/// <exception cref="InvalidOperationException">
+		///     When the no component of the
+		///     required type exist on the given component.
 		/// </exception>
 		public static T GetRequiredComponent<T>(this Component thisComponent) where T : Component
 		{
 			var retrievedComponent = thisComponent.GetComponent<T>();
 
 			if (retrievedComponent == null)
-			{
-				throw new InvalidOperationException(string.Format("GameObject \"{0}\" ({1}) does not have a component of type {2}", thisComponent.name, thisComponent.GetType(), typeof(T)));
-			}
+				throw new InvalidOperationException(string.Format("GameObject \"{0}\" ({1}) does not have a component of type {2}",
+					thisComponent.name, thisComponent.GetType(), typeof(T)));
 
 			return retrievedComponent;
 		}
 
 		/// <summary>
-		/// Gets a component of the given type in one of the children, or fail if no such component 
-		/// is attached to the given component.
+		///     Gets a component of the given type in one of the children, or fail if no such component
+		///     is attached to the given component.
 		/// </summary>
 		/// <typeparam name="T">The type of component to get.</typeparam>
 		/// <param name="thisComponent">The component to check.</param>
-		/// <returns>A component of type T attached to the given component if it exists.
+		/// <returns>
+		///     A component of type T attached to the given component if it exists.
 		/// </returns>
-		/// <exception cref="InvalidOperationException">When the no component of the 
-		/// required type exist on any of the given components children.
+		/// <exception cref="InvalidOperationException">
+		///     When the no component of the
+		///     required type exist on any of the given components children.
 		/// </exception>
 		public static T GetRequiredComponentInChildren<T>(this Component thisComponent) where T : Component
 		{
 			var retrievedComponent = thisComponent.GetComponentInChildren<T>();
 
 			if (retrievedComponent == null)
-			{
-				throw new InvalidOperationException(string.Format("GameObject \"{0}\" ({1}) does not have a child with component of type {2}", thisComponent.name, thisComponent.GetType(), typeof(T)));
-			}
+				throw new InvalidOperationException(string.Format(
+					"GameObject \"{0}\" ({1}) does not have a child with component of type {2}", thisComponent.name,
+					thisComponent.GetType(), typeof(T)));
 
 			return retrievedComponent;
 		}
 
 		/// <summary>
-		/// Gets an attached component that implements the interface of the type parameter.
+		///     Gets an attached component that implements the interface of the type parameter.
 		/// </summary>
 		/// <typeparam name="TInterface">The type of the t interface.</typeparam>
 		/// <param name="thisComponent">The this component.</param>

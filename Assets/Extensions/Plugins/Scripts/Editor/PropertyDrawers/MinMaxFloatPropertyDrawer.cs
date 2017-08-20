@@ -22,7 +22,6 @@ namespace Gamelogic.Extensions.Editor
 			var minValue = minProp.floatValue;
 			var maxValue = maxProp.floatValue;
 
-			//TODO: find a way to support other extremes than 0 and 1.
 			EditorGUI.MinMaxSlider(position, ref minValue, ref maxValue, 0, 1);
 
 			if (GUI.changed)

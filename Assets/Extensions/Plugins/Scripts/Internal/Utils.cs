@@ -5,19 +5,11 @@ using UnityEngine;
 namespace Gamelogic.Extensions.Internal
 {
 	/// <summary>
-	/// Contains some utility methods used to implement some of the Gamelogic tool features.
+	///     Contains some utility methods used to implement some of the Gamelogic tool features.
 	/// </summary>
 	public static class Utils
 	{
-		/// <summary>
-		/// A palette of default colors.
-		/// </summary>
-		public static Color[] DefaultColors
-		{
-			get { return DefaultColorList.Clone() as Color[]; }
-		}
-
-		private static readonly Color[] DefaultColorList = new Color[]
+		private static readonly Color[] DefaultColorList =
 		{
 			ColorFromInt(133, 219, 233),
 			ColorFromInt(198, 224, 34),
@@ -46,6 +38,11 @@ namespace Gamelogic.Extensions.Internal
 		public static readonly Color Yellow = DefaultColors[6];
 		public static readonly Color Green = DefaultColors[5];
 		public static readonly Color Blue = DefaultColors[4];
+
+		/// <summary>
+		///     A palette of default colors.
+		/// </summary>
+		public static Color[] DefaultColors => DefaultColorList.Clone() as Color[];
 
 		private static Color ColorFromInt(int r, int g, int b)
 		{

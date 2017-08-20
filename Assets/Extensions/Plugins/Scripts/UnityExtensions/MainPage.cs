@@ -46,26 +46,35 @@ namespace Gamelogic
 	/// <summary>
 	/// Contains classes useful for debugging.
 	/// </summary>
-	namespace Diagnostics { }
+	namespace Diagnostics
+	{
+	}
 
 	/// <summary>
 	/// Contains classes for Colors that run in the Unity editor.
 	/// </summary>
-	namespace Extensions.Editor { }
+	namespace Extensions.Editor
+	{
+	}
 
 	/// <summary>
 	/// Internal API.
 	/// </summary>
-	namespace Extensions.Editor.Internal { }
+	namespace Extensions.Editor.Internal
+	{
+	}
 
 	/// <summary>
 	/// Internal API.
 	/// </summary>
-	namespace Internal.BinaryHeap { }
+	namespace Internal.BinaryHeap
+	{
+	}
 
 	/// <summary>
 	/// Internal API.
 	/// </summary>
-	namespace Extensions.Internal.KDTree { }
-
+	namespace Extensions.Internal.KDTree
+	{
+	}
 }

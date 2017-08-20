@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Gamelogic.Extensions.Editor
 {
-	//TODO: Refactor with NonNegative property drawer.
 	/// <summary>
 	/// A property drawer for fields marked with the Positive Attribute.
 	/// </summary>

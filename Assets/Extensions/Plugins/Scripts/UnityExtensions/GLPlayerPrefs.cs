@@ -5,10 +5,9 @@ using UnityEngine;
 
 namespace Gamelogic.Extensions
 {
-
 	/// <summary>
-	/// An alternative to PlayerPrefs that provides methods 
-	/// for setting bool and array preferences.
+	///     An alternative to PlayerPrefs that provides methods
+	///     for setting bool and array preferences.
 	/// </summary>
 	[Version(1)]
 	public class GLPlayerPrefs
@@ -40,7 +39,7 @@ namespace Gamelogic.Extensions
 
 		public static bool GetBool(string scope, string key, bool defaultValue = false)
 		{
-			return PlayerPrefs.GetInt(GetKey(scope, key), (defaultValue ? 1 : 0)) == 1;
+			return PlayerPrefs.GetInt(GetKey(scope, key), defaultValue ? 1 : 0) == 1;
 		}
 
 		public static void SetFloat(string scope, string key, float val)
@@ -81,9 +80,7 @@ namespace Gamelogic.Extensions
 			PlayerPrefs.SetInt(GetArrayCountKey(scope, key), values.Length);
 
 			for (var i = 0; i < values.Length; i++)
-			{
 				PlayerPrefs.SetInt(GetArrayIndexKey(scope, key, i), values[i]);
-			}
 		}
 
 		public static int[] GetIntArray(string scope, string key)
@@ -92,9 +89,7 @@ namespace Gamelogic.Extensions
 			var values = new int[count];
 
 			for (var i = 0; i < count; i++)
-			{
 				values[i] = PlayerPrefs.GetInt(GetArrayIndexKey(scope, key, i));
-			}
 
 			return values;
 		}
@@ -107,9 +102,7 @@ namespace Gamelogic.Extensions
 			PlayerPrefs.SetInt(GetArrayCountKey(scope, key), values.Length);
 
 			for (var i = 0; i < values.Length; i++)
-			{
 				PlayerPrefs.SetFloat(GetArrayIndexKey(scope, key, i), values[i]);
-			}
 		}
 
 		public static float[] GetFloatArray(string scope, string key)
@@ -118,9 +111,7 @@ namespace Gamelogic.Extensions
 			var values = new float[count];
 
 			for (var i = 0; i < count; i++)
-			{
 				values[i] = PlayerPrefs.GetFloat(GetArrayIndexKey(scope, key, i));
-			}
 
 			return values;
 		}
@@ -133,9 +124,7 @@ namespace Gamelogic.Extensions
 			PlayerPrefs.SetInt(GetArrayCountKey(scope, key), values.Length);
 
 			for (var i = 0; i < values.Length; i++)
-			{
 				PlayerPrefs.SetInt(GetArrayIndexKey(scope, key, i), values[i] ? 1 : 0);
-			}
 		}
 
 		public static bool[] GetBoolArray(string scope, string key)
@@ -145,9 +134,7 @@ namespace Gamelogic.Extensions
 			var values = new bool[count];
 
 			for (var i = 0; i < count; i++)
-			{
 				values[i] = PlayerPrefs.GetInt(GetArrayIndexKey(scope, key, i)) != 0;
-			}
 
 			return values;
 		}
@@ -160,9 +147,7 @@ namespace Gamelogic.Extensions
 			PlayerPrefs.SetInt(GetArrayCountKey(scope, key), values.Length);
 
 			for (var i = 0; i < values.Length; i++)
-			{
 				PlayerPrefs.SetString(GetArrayIndexKey(scope, key, i), values[i]);
-			}
 		}
 
 		public static string[] GetStringArray(string scope, string key)
@@ -172,9 +157,7 @@ namespace Gamelogic.Extensions
 			var values = new string[count];
 
 			for (var i = 0; i < count; i++)
-			{
 				values[i] = PlayerPrefs.GetString(GetArrayIndexKey(scope, key, i));
-			}
 
 			return values;
 		}
@@ -193,10 +176,8 @@ namespace Gamelogic.Extensions
 		{
 			var count = PlayerPrefs.GetInt(GetArrayCountKey(scope, key));
 
-			for (int i = 0; i < count; i++)
-			{
+			for (var i = 0; i < count; i++)
 				PlayerPrefs.DeleteKey(GetArrayIndexKey(scope, key, i));
-			}
 		}
 
 		public static void DeleteKey(string scope, string key)
@@ -216,5 +197,4 @@ namespace Gamelogic.Extensions
 
 		#endregion
 	}
-
 }

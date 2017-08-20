@@ -21,7 +21,8 @@ namespace Gameplay.Items
 			set { range = value; }
 		}
 
-		public void Initialize(int id, string name, string description, string slug, int value, bool stackable, int damage, int range)
+		public void Initialize(int id, string name, string description, string slug, int value, bool stackable, int damage,
+			int range)
 		{
 			ID = id;
 			Value = value;

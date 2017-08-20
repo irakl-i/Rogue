@@ -7,14 +7,15 @@ using UnityEngine;
 namespace Gamelogic.Extensions.Algorithms
 {
 	/// <summary>
-	/// A response curve with outputs of Vector3.
+	///     A response curve with outputs of Vector3.
 	/// </summary>
 	[Version(1, 2)]
-	public class ResponseCurveVector3:ResponseCurveBase<Vector3>
+	public class ResponseCurveVector3 : ResponseCurveBase<Vector3>
 	{
 		#region Constructors
 
-		public ResponseCurveVector3(IEnumerable<float> inputSamples, IEnumerable<Vector3> outputSamples) : base(inputSamples, outputSamples)
+		public ResponseCurveVector3(IEnumerable<float> inputSamples, IEnumerable<Vector3> outputSamples) : base(inputSamples,
+			outputSamples)
 		{
 		}
 

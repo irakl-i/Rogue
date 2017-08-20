@@ -7,10 +7,10 @@ using UnityEngine;
 namespace Gamelogic.Extensions
 {
 	/// <summary>
-	/// Methods for additional math functions.
+	///     Methods for additional math functions.
 	/// </summary>
 	[Version(1, 4)]
-	public static class GLMathf 
+	public static class GLMathf
 	{
 		#region Constants
 
@@ -21,11 +21,11 @@ namespace Gamelogic.Extensions
 		#region Static Methods
 
 		/// <summary>
-		/// Linearly interpolates between two values between 0 and 1 if values wrap around from 1 back to 0.
+		///     Linearly interpolates between two values between 0 and 1 if values wrap around from 1 back to 0.
 		/// </summary>
 		/// <remarks>This is useful, for example, in lerping between angles.</remarks>
 		/// <example>
-		/// <code>float angleInRad1 = 1;
+		///     <code>float angleInRad1 = 1;
 		/// float angleInRad2 = 5;
 		/// float revolution = Mathf.PI * 2;
 		/// float interpolation = WLerp(angleInRad1 / revolution, angleInRad2 / revolution, 0.5f);
@@ -39,21 +39,14 @@ namespace Gamelogic.Extensions
 			GLDebug.Assert(InRange(v2, 0, 1), "v2 is not in [0, 1)");
 
 			if (Mathf.Abs(v1 - v2) <= 0.5f)
-			{
 				return Mathf.Lerp(v1, v2, t);
-			}
-			else if (v1 <= v2)
-			{
+			if (v1 <= v2)
 				return Frac(Mathf.Lerp(v1 + 1, v2, t));
-			}
-			else
-			{
-				return Frac(Mathf.Lerp(v1, v2 + 1, t));
-			}
+			return Frac(Mathf.Lerp(v1, v2 + 1, t));
 		}
 
 		/// <summary>
-		/// Tests whether the given value lies in the range [0, 1).
+		///     Tests whether the given value lies in the range [0, 1).
 		/// </summary>
 		/// <param name="value">The value to check.</param>
 		/// <returns><c>true</c> if the given value is equal or greater than 0 and smaller than 1, <c>false</c> otherwise.</returns>
@@ -63,20 +56,23 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Tests whether the given value lies in the half-open interval specified by its endpoints, that is, whether the value
-		/// lies in the interval <c>[closedLeft, openRight)</c>.
+		///     Tests whether the given value lies in the half-open interval specified by its endpoints, that is, whether the value
+		///     lies in the interval <c>[closedLeft, openRight)</c>.
 		/// </summary>
 		/// <param name="value">The value to check.</param>
 		/// <param name="closedLeft">The left end of the interval.</param>
 		/// <param name="openRight">The right end of the interval.</param>
-		/// <returns><c>true</c> if the given value is equal or greater than <c>closedLeft</c> and smaller than <c>openRight</c>, <c>false</c> otherwise.</returns>
+		/// <returns>
+		///     <c>true</c> if the given value is equal or greater than <c>closedLeft</c> and smaller than <c>openRight</c>,
+		///     <c>false</c> otherwise.
+		/// </returns>
 		public static bool InRange(float value, float closedLeft, float openRight)
 		{
 			return value >= closedLeft && value < openRight;
 		}
 
 		/// <summary>
-		/// Mod operator that also works for negative m.
+		///     Mod operator that also works for negative m.
 		/// </summary>
 		/// <param name="m">The m.</param>
 		/// <param name="n">The n.</param>
@@ -85,15 +81,13 @@ namespace Gamelogic.Extensions
 		public static int FloorMod(int m, int n)
 		{
 			if (m >= 0)
-			{
 				return m % n;
-			}
 
 			return (m - 2 * m * n) % n;
 		}
 
 		/// <summary>
-		/// Mod operator that also works for negative m.
+		///     Mod operator that also works for negative m.
 		/// </summary>
 		/// <param name="m">The m.</param>
 		/// <param name="n">The n.</param>
@@ -102,15 +96,13 @@ namespace Gamelogic.Extensions
 		public static float FloorMod(float m, float n)
 		{
 			if (m >= 0)
-			{
 				return m % n;
-			}
 
-			return (m % n) + n;
+			return m % n + n;
 		}
 
 		/// <summary>
-		/// Floor division that also work for negative m.
+		///     Floor division that also work for negative m.
 		/// </summary>
 		/// <param name="m">The m.</param>
 		/// <param name="n">The n.</param>
@@ -119,22 +111,18 @@ namespace Gamelogic.Extensions
 		public static int FloorDiv(int m, int n)
 		{
 			if (m >= 0)
-			{
 				return m / n;
-			}
 
-			int t = m / n;
+			var t = m / n;
 
 			if (t * n == m)
-			{
 				return t;
-			}
 
 			return t - 1;
 		}
 
 		/// <summary>
-		/// Returns the fractional part of a floating point number.
+		///     Returns the fractional part of a floating point number.
 		/// </summary>
 		/// <param name="x">The number to get the fractional part of.</param>
 		/// <returns>The fractional part of the given number.</returns>
@@ -145,7 +133,7 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Returns the sign function evaluated at the given value.
+		///     Returns the sign function evaluated at the given value.
 		/// </summary>
 		/// <returns>1 if the given value is positive, -1 if it is negative, and 0 if it is 0.</returns>
 		public static int Sign(float x)
@@ -157,7 +145,7 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Returns the sign function evaluated at the given value.
+		///     Returns the sign function evaluated at the given value.
 		/// </summary>
 		/// <returns>1 if the given value is positive, -1 if it is negative, and 0 if it is 0.</returns>
 		public static int Sign(int p)
@@ -167,9 +155,11 @@ namespace Gamelogic.Extensions
 
 			return 0;
 		}
+
 		#endregion
 
 		#region Obsolete
+
 		[Obsolete("Use FloorDiv instead")]
 		public static int Div(int m, int n)
 		{
@@ -189,7 +179,7 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Returns the highest integer equal to the given float.
+		///     Returns the highest integer equal to the given float.
 		/// </summary>
 		[Obsolete("Use Mathf.FloorToInt")]
 		public static int FloorToInt(float x)
@@ -200,11 +190,12 @@ namespace Gamelogic.Extensions
 		[Obsolete("Use Frac instead.")]
 		public static float Wrap01(float value)
 		{
-			int n = Mathf.FloorToInt(value);
-			float result = value - n;
+			var n = Mathf.FloorToInt(value);
+			var result = value - n;
 
 			return result;
 		}
+
 		#endregion
 	}
 }

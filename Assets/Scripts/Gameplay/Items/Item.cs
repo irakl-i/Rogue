@@ -10,18 +10,17 @@ using UnityEngine;
 namespace Gameplay.Items
 {
 	[Serializable]
-	public abstract class Item : MonoBehaviour, IHTMLSerializable
+	public abstract class Item : ScriptableObject, IHTMLSerializable
 	{
+		[Header("Properties")]
 		[SerializeField]
 		[InspectorName("ID")]
 		private int id;
 
 		[SerializeField]
-		private int value;
-
-		[SerializeField]
 		private new string name;
 
+		[TextArea]
 		[SerializeField]
 		private string description;
 
@@ -33,6 +32,9 @@ namespace Gameplay.Items
 
 		[SerializeField]
 		private Sprite sprite;
+
+		[SerializeField]
+		private int value;
 
 		public int ID
 		{

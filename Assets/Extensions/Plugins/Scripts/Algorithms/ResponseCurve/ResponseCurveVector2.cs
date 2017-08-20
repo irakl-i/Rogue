@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Gamelogic.Extensions.Algorithms
 {
 	/// <summary>
-	/// A response curve with outputs of Vector2.
+	///     A response curve with outputs of Vector2.
 	/// </summary>
 	[Version(1, 2)]
 	public class ResponseCurveVector2 : ResponseCurveBase<Vector2>

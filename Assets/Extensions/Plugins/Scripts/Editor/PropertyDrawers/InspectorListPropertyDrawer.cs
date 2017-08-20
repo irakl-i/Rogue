@@ -86,8 +86,6 @@ namespace Gamelogic.Extensions.Editor
 								if (labelProperty.propertyType == SerializedPropertyType.String)
 								{
 
-									//TODO: @omar this is always true
-
 									if (labelProperty.name == "name" || potentialProperty == null)
 									{
 										potentialProperty = labelProperty;

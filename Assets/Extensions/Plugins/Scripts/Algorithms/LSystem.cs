@@ -7,12 +7,14 @@ using Gamelogic.Extensions.Internal;
 namespace Gamelogic.Extensions.Algorithms
 {
 	/// <summary>
-	/// A lightweight implementation of an L-system.
+	///     A lightweight implementation of an L-system.
 	/// </summary>
-	/// <typeparam name="TSymbol">This type must be 
-	/// comparable using ==, or you should feed an IEqualityComparer.</typeparam>
+	/// <typeparam name="TSymbol">
+	///     This type must be
+	///     comparable using ==, or you should feed an IEqualityComparer.
+	/// </typeparam>
 	[Version(1, 4, 1)]
-	public class LSystem <TSymbol>
+	public class LSystem<TSymbol>
 	{
 		#region Private Fields
 
@@ -20,10 +22,22 @@ namespace Gamelogic.Extensions.Algorithms
 
 		#endregion
 
+		#region Private Methods
+
+		private IEnumerable<TSymbol> Rewrite(TSymbol symbol)
+		{
+			if (rewriteRules.ContainsKey(symbol))
+				foreach (TSymbol newSymbol in rewriteRules[symbol])
+					yield return newSymbol;
+			else yield return symbol;
+		}
+
+		#endregion
+
 		#region Constructors
 
 		/// <summary>
-		/// Creates a new empty LSystem.
+		///     Creates a new empty LSystem.
 		/// </summary>
 		public LSystem()
 		{
@@ -31,7 +45,7 @@ namespace Gamelogic.Extensions.Algorithms
 		}
 
 		/// <summary>
-		/// Constructs a new empty L-System that will use the given comparer to compare symbols.
+		///     Constructs a new empty L-System that will use the given comparer to compare symbols.
 		/// </summary>
 		/// <param name="comparer">The comprarer to use to compare symbols.</param>
 		public LSystem(IEqualityComparer<TSymbol> comparer)
@@ -44,7 +58,7 @@ namespace Gamelogic.Extensions.Algorithms
 		#region Public Methods
 
 		/// <summary>
-		/// Adds a new rewrite rule to the system.
+		///     Adds a new rewrite rule to the system.
 		/// </summary>
 		/// <param name="symbol"></param>
 		/// <param name="replacement"></param>
@@ -56,7 +70,7 @@ namespace Gamelogic.Extensions.Algorithms
 		}
 
 		/// <summary>
-		/// Rewrites a string using the rewrite rules.
+		///     Rewrites a string using the rewrite rules.
 		/// </summary>
 		/// <param name="str">The string to rewrite.</param>
 		/// <returns>The rewritten string.</returns>
@@ -64,11 +78,11 @@ namespace Gamelogic.Extensions.Algorithms
 		{
 			str.ThrowIfNull("str");
 
-			return str.SelectMany<TSymbol, TSymbol>(Rewrite);
+			return str.SelectMany(Rewrite);
 		}
 
 		/// <summary>
-		/// Performs a rewrite on a string using the rewrite rules n times.
+		///     Performs a rewrite on a string using the rewrite rules n times.
 		/// </summary>
 		/// <param name="str">The string to rewrite.</param>
 		/// <param name="n">The number of times to rewrite it.</param>
@@ -78,23 +92,7 @@ namespace Gamelogic.Extensions.Algorithms
 			str.ThrowIfNull("str");
 			n.ThrowIfNegative("n");
 
-			return n == 0 ? str.ToList() : Rewrite(str, n - 1).SelectMany<TSymbol, TSymbol>(Rewrite);
-		}
-
-		#endregion
-
-		#region Private Methods
-
-		private IEnumerable<TSymbol> Rewrite(TSymbol symbol)
-		{
-			if (rewriteRules.ContainsKey(symbol))
-			{
-				foreach (var newSymbol in rewriteRules[symbol])
-				{
-					yield return newSymbol;
-				}
-			}
-			else yield return symbol;
+			return n == 0 ? str.ToList() : Rewrite(str, n - 1).SelectMany(Rewrite);
 		}
 
 		#endregion

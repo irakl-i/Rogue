@@ -13,31 +13,10 @@ namespace Gameplay.Items.Inventory
 {
 	public class Inventory : MonoBehaviour
 	{
-		[SerializeField]
-		private int size;
-
-		[SerializeField]
-		private ItemList items;
-
-		private GameObject inventoryPanel;
-		private GameObject slotPanel;
-		private Database database;
-
-		[SerializeField]
-		private GameObject slot;
-
-		[SerializeField]
-		private GameObject item;
-
 		public Inventory()
 		{
 			Slots = new List<GameObject>();
 		}
-
-		// Collections
-		public ItemList Items => items;
-
-		public List<GameObject> Slots { get; set; }
 
 		private void Start()
 		{
@@ -48,9 +27,7 @@ namespace Gameplay.Items.Inventory
 			slotPanel = inventoryPanel.transform.Find("Slot Panel").gameObject;
 
 			// Find the sibling database script.
-			foreach (Transform child in transform.parent)
-				if (child.name == "Database")
-					database = child.GetComponent<Database>();
+			database = Database.Instance;
 
 			// Instantiate the empty slots.
 			for (var i = 0; i < size; i++)
@@ -65,8 +42,6 @@ namespace Gameplay.Items.Inventory
 				Slots[i].GetComponent<Slot>().Index = i;
 			}
 
-			// Add items (temp).
-			AddItem(0);
 			for (var i = 0; i < 3; i++)
 			{
 				AddItem(2);
@@ -93,6 +68,7 @@ namespace Gameplay.Items.Inventory
 
 				// Increase the amount.
 				data.Amount++;
+				Items[Items.IndexOf(toAdd)].name = toAdd.Name + $" ({data.Amount})";
 
 				// Update the amount text.
 				data.transform.GetComponentInChildren<Text>().text = data.Amount.ToString();
@@ -124,5 +100,39 @@ namespace Gameplay.Items.Inventory
 					break;
 				}
 		}
+
+		// Collections
+
+		#region Public properties
+
+		public ItemList Items => items;
+
+		public List<GameObject> Slots { get; set; }
+
+		#endregion
+
+		#region Instance variables
+
+		private GameObject inventoryPanel;
+		private GameObject slotPanel;
+		private Database database;
+
+		#endregion
+
+		#region Inspector variables
+
+		[SerializeField]
+		private int size;
+
+		[SerializeField]
+		private ItemList items;
+
+		[SerializeField]
+		private GameObject slot;
+
+		[SerializeField]
+		private GameObject item;
+
+		#endregion
 	}
 }

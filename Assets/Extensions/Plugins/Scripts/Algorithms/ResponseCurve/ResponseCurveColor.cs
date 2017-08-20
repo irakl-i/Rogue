@@ -7,11 +7,20 @@ using UnityEngine;
 namespace Gamelogic.Extensions.Algorithms
 {
 	/// <summary>
-	/// A response curve with outputs of Color.
+	///     A response curve with outputs of Color.
 	/// </summary>
 	[Version(1, 2)]
 	public class ResponseCurveColor : ResponseCurveBase<Color>
 	{
+		#region Constructors
+
+		public ResponseCurveColor(IEnumerable<float> inputSamples, IEnumerable<Color> outputSamples)
+			: base(inputSamples, outputSamples)
+		{
+		}
+
+		#endregion
+
 		#region Static Methods
 
 		public static ResponseCurveColor GetLerp(float x0, float x1, Color y0, Color y1)
@@ -29,14 +38,6 @@ namespace Gamelogic.Extensions.Algorithms
 
 			return responseCurve;
 		}
-
-		#endregion
-
-		#region Constructors
-
-		public ResponseCurveColor(IEnumerable<float> inputSamples, IEnumerable<Color> outputSamples)
-			: base(inputSamples, outputSamples)
-		{}
 
 		#endregion
 

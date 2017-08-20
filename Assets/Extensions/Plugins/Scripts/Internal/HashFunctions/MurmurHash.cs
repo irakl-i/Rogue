@@ -44,16 +44,15 @@
 namespace Gamelogic.Extensions.Internal.HashFunctions
 {
 	/// <summary>
-	/// An implementation of HashFunction using MurmurHash3. 
-	/// See https://en.wikipedia.org/wiki/MurmurHash .
+	///     An implementation of HashFunction using MurmurHash3.
+	///     See https://en.wikipedia.org/wiki/MurmurHash .
 	/// </summary>
 	/// <seealso cref="Gamelogic.Extensions.Internal.HashFunctions.HashFunction" />
 	public sealed class MurmurHash : HashFunction
 	{
-		private readonly uint seed; /* Define your own seed here */
-
 		private const uint c1 = 0xcc9e2d51;
 		private const uint c2 = 0x1b873593;
+		private readonly uint seed; /* Define your own seed here */
 
 		public MurmurHash(int seed)
 		{
@@ -62,20 +61,20 @@ namespace Gamelogic.Extensions.Internal.HashFunctions
 
 		public uint GetHash(byte[] data)
 		{
-			int curLength = data.Length; // Current position in byte array
-			int length = curLength; // The const length we need to fix tail
-			uint h1 = seed;
+			var curLength = data.Length; // Current position in byte array
+			var length = curLength; // The const length we need to fix tail
+			var h1 = seed;
 			uint k1 = 0;
 
 			// Body, eat stream a 32-bit int at a time
-			int currentIndex = 0;
+			var currentIndex = 0;
 			while (curLength >= 4)
 			{
 				// Get four bytes from the input into an uint
 				k1 = (uint) (data[currentIndex++]
-				             | data[currentIndex++] << 8
-				             | data[currentIndex++] << 16
-				             | data[currentIndex++] << 24);
+				             | (data[currentIndex++] << 8)
+				             | (data[currentIndex++] << 16)
+				             | (data[currentIndex++] << 24));
 
 				// Bitmagic hash
 				k1 *= c1;
@@ -84,7 +83,7 @@ namespace Gamelogic.Extensions.Internal.HashFunctions
 
 				h1 ^= k1;
 				h1 = rotl32(h1, 13);
-				h1 = h1*5 + 0xe6546b64;
+				h1 = h1 * 5 + 0xe6546b64;
 				curLength -= 4;
 			}
 
@@ -95,8 +94,8 @@ namespace Gamelogic.Extensions.Internal.HashFunctions
 			{
 				case 3:
 					k1 = (uint) (data[currentIndex++]
-					             | data[currentIndex++] << 8
-					             | data[currentIndex++] << 16);
+					             | (data[currentIndex++] << 8)
+					             | (data[currentIndex++] << 16));
 					k1 *= c1;
 					k1 = rotl32(k1, 15);
 					k1 *= c2;
@@ -104,14 +103,14 @@ namespace Gamelogic.Extensions.Internal.HashFunctions
 					break;
 				case 2:
 					k1 = (uint) (data[currentIndex++]
-					             | data[currentIndex++] << 8);
+					             | (data[currentIndex++] << 8));
 					k1 *= c1;
 					k1 = rotl32(k1, 15);
 					k1 *= c2;
 					h1 ^= k1;
 					break;
 				case 1:
-					k1 = (uint) (data[currentIndex++]);
+					k1 = data[currentIndex++];
 					k1 *= c1;
 					k1 = rotl32(k1, 15);
 					k1 *= c2;
@@ -130,12 +129,12 @@ namespace Gamelogic.Extensions.Internal.HashFunctions
 		// Overload optimized for int input.
 		public override uint GetHash(params int[] data)
 		{
-			uint h1 = seed;
+			var h1 = seed;
 			uint k1 = 0;
 
 			// Body, eat stream a 32-bit int at a time
-			int length = data.Length;
-			for (int i = 0; i < length; i++)
+			var length = data.Length;
+			for (var i = 0; i < length; i++)
 			{
 				unchecked
 				{
@@ -149,11 +148,11 @@ namespace Gamelogic.Extensions.Internal.HashFunctions
 
 				h1 ^= k1;
 				h1 = rotl32(h1, 13);
-				h1 = h1*5 + 0xe6546b64;
+				h1 = h1 * 5 + 0xe6546b64;
 			}
 
 			// Finalization, magic chants to wrap it all up
-			h1 ^= (uint) (length*4);
+			h1 ^= (uint) (length * 4);
 			h1 = fmix(h1);
 
 			return h1;
@@ -162,7 +161,7 @@ namespace Gamelogic.Extensions.Internal.HashFunctions
 		// Overload optimized for single int input.
 		public override uint GetHash(int data)
 		{
-			uint h1 = seed;
+			var h1 = seed;
 			uint k1 = 0;
 
 			unchecked
@@ -177,7 +176,7 @@ namespace Gamelogic.Extensions.Internal.HashFunctions
 
 			h1 ^= k1;
 			h1 = rotl32(h1, 13);
-			h1 = h1*5 + 0xe6546b64;
+			h1 = h1 * 5 + 0xe6546b64;
 
 			// Finalization, magic chants to wrap it all up
 			h1 ^= 4U;
@@ -200,5 +199,5 @@ namespace Gamelogic.Extensions.Internal.HashFunctions
 			h ^= h >> 16;
 			return h;
 		}
-	};
+	}
 }

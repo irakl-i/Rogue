@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Gamelogic.Extensions
 {
 	/// <summary>
-	/// Provides some utility functions for Colors.
+	///     Provides some utility functions for Colors.
 	/// </summary>
 	[Version(1)]
 	public static class ColorExtensions
@@ -21,7 +21,7 @@ namespace Gamelogic.Extensions
 		#region Static Methods
 
 		/// <summary>
-		/// Returns a color lighter than the given color.
+		///     Returns a color lighter than the given color.
 		/// </summary>
 		/// <param name="color"></param>
 		/// <returns></returns>
@@ -35,7 +35,7 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Returns a color darker than the given color.
+		///     Returns a color darker than the given color.
 		/// </summary>
 		/// <param name="color"></param>
 		/// <returns></returns>
@@ -49,46 +49,44 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Returns the brightness of the color, 
-		/// defined as the average off the three color channels.
+		///     Returns the brightness of the color,
+		///     defined as the average off the three color channels.
 		/// </summary>
 		/// <param name="color"></param>
 		/// <returns></returns>
 		public static float Brightness(this Color color)
 		{
-			return (color.r + color.g + color.b)/3;
+			return (color.r + color.g + color.b) / 3;
 		}
 
 		/// <summary>
-		/// Returns a new color with the RGB values scaled so that the color has the given
-		/// brightness.
+		///     Returns a new color with the RGB values scaled so that the color has the given
+		///     brightness.
 		/// </summary>
 		/// <remarks>
-		/// If the color is too dark, a grey is returned with the right brightness. The alpha
-		/// is left unchanged.
+		///     If the color is too dark, a grey is returned with the right brightness. The alpha
+		///     is left unchanged.
 		/// </remarks>
 		/// <param name="color"></param>
 		/// <param name="brightness"></param>
 		public static Color WithBrightness(this Color color, float brightness)
 		{
 			if (color.IsApproximatelyBlack())
-			{
 				return new Color(brightness, brightness, brightness, color.a);
-			}
-			
-			float factor = brightness/color.Brightness();
 
-			float r = color.r*factor;
-			float g = color.g*factor;
-			float b = color.b*factor;
+			var factor = brightness / color.Brightness();
 
-			float a = color.a;
+			var r = color.r * factor;
+			var g = color.g * factor;
+			var b = color.b * factor;
+
+			var a = color.a;
 
 			return new Color(r, g, b, a);
 		}
 
 		/// <summary>
-		/// Returns whether the color is black or almost black.
+		///     Returns whether the color is black or almost black.
 		/// </summary>
 		/// <param name="color"></param>
 		/// <returns></returns>
@@ -98,7 +96,7 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Returns whether the color is white or almost white.
+		///     Returns whether the color is white or almost white.
 		/// </summary>
 		/// <param name="color"></param>
 		/// <returns></returns>
@@ -108,7 +106,7 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Returns an opaque version of the given color.
+		///     Returns an opaque version of the given color.
 		/// </summary>
 		/// <param name="color"></param>
 		/// <returns></returns>
@@ -118,7 +116,7 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Returns a new color that is this color inverted.
+		///     Returns a new color that is this color inverted.
 		/// </summary>
 		/// <param name="color">The color to invert.</param>
 		/// <returns></returns>
@@ -128,7 +126,7 @@ namespace Gamelogic.Extensions
 		}
 
 		/// <summary>
-		/// Returns the same color, but with the specified alpha.
+		///     Returns the same color, but with the specified alpha.
 		/// </summary>
 		/// <param name="color">The color.</param>
 		/// <param name="alpha">The alpha.</param>

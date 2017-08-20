@@ -33,7 +33,7 @@ public class ScriptableObjectWindow : EditorWindow
 		set
 		{
 			types = value;
-			names = types.Select(t => t.FullName).ToArray();
+			names = types.Select(t => t.Name).ToArray();
 		}
 	}
 

@@ -6,19 +6,12 @@ using Gamelogic.Extensions.Internal;
 namespace Gamelogic.Extensions
 {
 	/// <summary>
-	/// Class for representing a bounded range.
+	///     Class for representing a bounded range.
 	/// </summary>
 	[Version(1, 2)]
 	[Serializable]
 	public class MinMaxFloat
 	{
-		#region Public Fields
-
-		public float min = 0.0f;
-		public float max = 1.0f;
-
-		#endregion
-
 		public MinMaxFloat()
 		{
 			min = 0.0f;
@@ -30,5 +23,12 @@ namespace Gamelogic.Extensions
 			this.min = min;
 			this.max = max;
 		}
+
+		#region Public Fields
+
+		public float min;
+		public float max = 1.0f;
+
+		#endregion
 	}
 }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: e716cbb54f71997458ca2acbd9ab6cb8
-timeCreated: 1502323849
+guid: bb2971b9dc414a64bac10c680908e641
+timeCreated: 1503271640
 licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
@@ -10,9 +10,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: KenVector Future
+  fontName: m5x7
   fontNames:
-  - 4b656e566563746f7220467574757265
+  - m5x7
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

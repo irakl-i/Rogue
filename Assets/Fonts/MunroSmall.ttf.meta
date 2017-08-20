@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 632099ec39965db4cb1ca436b0938f8e
-timeCreated: 1502323849
+guid: 2d0e60522b4ded24a882d1eabeac407e
+timeCreated: 1503268996
 licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
@@ -10,9 +10,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: KenPixel Mini
+  fontName: Munro Small
   fontNames:
-  - 4b656e506978656c204d696e69
+  - Munro Small
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

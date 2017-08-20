@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8789a12f83955ef4c80262f5d576a64f
-timeCreated: 1502323849
+guid: 234cfec8c007e094fb020c2995284761
+timeCreated: 1503268996
 licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
@@ -10,9 +10,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: KenPixel High Square
+  fontName: Munro
   fontNames:
-  - 4b656e506978656c204869676820537175617265
+  - Munro
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

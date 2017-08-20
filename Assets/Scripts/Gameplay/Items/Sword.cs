@@ -57,9 +57,9 @@ namespace Gameplay.Items
 		/// <inheritdoc />
 		public override string ToHTML(Color nameColor, Color descriptionColor, Color valueColor)
 		{
-			return $"<color=#{nameColor.ToHex()}><b>" + Name + "</b></color>\n\n" + $"<color=#{descriptionColor.ToHex()}>" +
-			       Description + "</color>\n" + $"<color=#{valueColor.ToHex()}>" + "Value: " +
-			       Value + "</color>";
+			return $"<color=#{nameColor.ToHex()}>{Name}</color>\n\n"
+			       + $"<color=#{descriptionColor.ToHex()}>{Description}</color>\n"
+			       + $"<color=#{valueColor.ToHex()}>Value: {Value}</color>";
 		}
 	}
 }

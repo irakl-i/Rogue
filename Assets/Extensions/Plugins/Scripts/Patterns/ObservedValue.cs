@@ -61,7 +61,8 @@ namespace Gamelogic.Extensions
 		/// <summary>
 		///     Subscribe to this event to get notified when the value changes.
 		/// </summary>
-#pragma warning disable 0067 public event Action OnValueChange;
+#pragma warning disable 0067
+		public event Action OnValueChange;
 #pragma warning restore 0067
 
 		/// <summary>

@@ -55,7 +55,8 @@ public class InventoryWindow : EditorWindow
 			item.transform.position = new Vector3(0, 0, 0);
 
 			item.AddComponent<SpriteRenderer>().sprite = items[index].Sprite;
-			item.AddComponent<BoxCollider2D>().autoTiling = true;
+			item.AddComponent<BoxCollider2D>().isTrigger = true;
+			item.AddComponent<Droppable>().Data = items[index];
 
 			Close();
 		}

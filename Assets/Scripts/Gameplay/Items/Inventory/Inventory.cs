@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace Gameplay.Items.Inventory
 {
-	public class Inventory : MonoBehaviour
+	public class Inventory : Singleton<Inventory>
 	{
 		public Inventory()
 		{
@@ -58,13 +58,20 @@ namespace Gameplay.Items.Inventory
 		public void AddItem(int id)
 		{
 			// Get the item from the database.
-			Item toAdd = database.GetItem(id);
+			AddItem(database.GetItem(id));
+		}
 
+		/// <summary>
+		///     Add the item to the player inventory.
+		/// </summary>
+		/// <param name="item">Item to add</param>
+		public void AddItem(Item item)
+		{
 			// Check if the item is stackable and present in the inventory.
-			if (toAdd.Stackable && Items.Contains(toAdd))
+			if (item.Stackable && Items.Contains(item))
 			{
 				// Get its associated data.
-				var data = Slots[Items.IndexOf(toAdd)].transform.GetComponentInChildren<ItemData>();
+				var data = Slots[Items.IndexOf(item)].transform.GetComponentInChildren<ItemData>();
 
 				// Increase the amount.
 				data.Amount++;
@@ -78,22 +85,22 @@ namespace Gameplay.Items.Inventory
 				if (Items[i] == null)
 				{
 					// Get the item from the database and save it in the inventory.
-					Items[i] = toAdd;
+					Items[i] = item;
 
 					// Instantiate the item in inventory panel.
-					GameObject item = Instantiate(this.item);
-					var data = item.GetComponent<ItemData>();
+					GameObject itemObject = Instantiate(this.item);
+					var data = itemObject.GetComponent<ItemData>();
 
 					// Set correct values.
-					item.transform.SetParent(Slots[i].transform, false);
-					item.GetComponent<Image>().sprite = toAdd.Sprite;
+					itemObject.transform.SetParent(Slots[i].transform, false);
+					itemObject.GetComponent<Image>().sprite = item.Sprite;
 
 					// Set item name.
-					item.name = toAdd.Name;
+					itemObject.name = item.Name;
 
 					// Update the data values.
 					data.Amount = 1;
-					data.Item = toAdd;
+					data.Item = item;
 					data.Index = i;
 
 					break;

@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System.Collections;
+﻿using UnityEditor;
+using UnityEngine;
 
 // Tell the RangeDrawer that it is a drawer for properties with the RangeAttribute.
 
@@ -11,7 +10,7 @@ public class InspectorNameDrawer : PropertyDrawer
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 	{
 		// First get the attribute since it contains the range for the slider
-		InspectorNameAttribute propertyRename = attribute as InspectorNameAttribute;
+		var propertyRename = attribute as InspectorNameAttribute;
 		EditorGUI.PropertyField(position, property, new GUIContent(propertyRename.name));
 	}
 }

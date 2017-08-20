@@ -68,7 +68,6 @@ namespace Gameplay.Items.Inventory
 
 				// Increase the amount.
 				data.Amount++;
-				Items[Items.IndexOf(toAdd)].name = toAdd.Name + $" ({data.Amount})";
 
 				// Update the amount text.
 				data.transform.GetComponentInChildren<Text>().text = data.Amount.ToString();

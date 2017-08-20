@@ -8,7 +8,6 @@ using UnityEngine;
 /// </summary>
 public class ScriptableObjectFactory
 {
-	[MenuItem("Project/Create/Item")]
 	[MenuItem("Assets/Create/Item")]
 	public static void Create()
 	{

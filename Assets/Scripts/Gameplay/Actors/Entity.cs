@@ -12,7 +12,7 @@ namespace Gameplay.Actors
 		protected int health;
 
 		[SerializeField]
-		[Range(0, 100)]
+		[Range(0, 10)]
 		protected int speed;
 
 		[SerializeField]

@@ -38,7 +38,7 @@ namespace Gameplay.Actors
 			var movement = new Vector2(horizontal, vertical);
 			facing = movement != Vector2.zero ? movement : facing;
 
-			body.velocity = movement * speed * Time.deltaTime * Constants.TimeMultiplier;
+			body.velocity = movement.normalized * speed * Time.deltaTime * Constants.TimeMultiplier;
 		}
 
 		/// <summary>
@@ -65,11 +65,6 @@ namespace Gameplay.Actors
 		public void RemoveAbility(IAbility ability)
 		{
 			abilities.Remove(ability);
-		}
-
-		private void OnCollisionEnter2D(Collision2D collision)
-		{
-			TakeDamage(10);
 		}
 	}
 }

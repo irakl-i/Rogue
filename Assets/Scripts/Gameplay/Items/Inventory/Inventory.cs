@@ -8,6 +8,7 @@ using Gamelogic.Extensions;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities;
 
 namespace Gameplay.Items.Inventory
 {
@@ -18,11 +19,29 @@ namespace Gameplay.Items.Inventory
 			Slots = new List<GameObject>();
 		}
 
-		private void Start()
+		private void Update()
 		{
-			// Find the inventory panel.
-			inventoryPanel = GameObject.Find("Inventory Panel");
+			Toggle();
+		}
 
+		private void Toggle()
+		{
+			if (Input.GetButtonDown(Constants.Input.Tab))
+				if (inventoryPanel.activeSelf)
+				{
+					inventoryPanel.SetActive(false);
+					IsActive = false;
+				}
+				else
+				{
+					inventoryPanel.SetActive(true);
+					IsActive = true;
+					Initialize();
+				}
+		}
+
+		private void Initialize()
+		{
 			// Find the slot panel.
 			slotPanel = inventoryPanel.transform.Find("Slot Panel").gameObject;
 
@@ -115,11 +134,12 @@ namespace Gameplay.Items.Inventory
 
 		public List<GameObject> Slots { get; set; }
 
+		public bool IsActive { get; set; }
+
 		#endregion
 
 		#region Instance variables
 
-		private GameObject inventoryPanel;
 		private GameObject slotPanel;
 		private Database database;
 
@@ -138,6 +158,9 @@ namespace Gameplay.Items.Inventory
 
 		[SerializeField]
 		private GameObject item;
+
+		[SerializeField]
+		private GameObject inventoryPanel;
 
 		#endregion
 	}

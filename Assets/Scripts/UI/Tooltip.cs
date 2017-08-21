@@ -4,6 +4,7 @@
  */
 
 using Gameplay.Items;
+using Gameplay.Items.Inventory;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ namespace UI
 	public class Tooltip : MonoBehaviour
 	{
 		private Item item;
+		
+		[SerializeField]
 		private GameObject tooltip;
 
 		[SerializeField]
@@ -27,13 +30,15 @@ namespace UI
 
 		private void Start()
 		{
-			tooltip = GameObject.Find("Tooltip");
-			tooltip.SetActive(false);
+			if (Inventory.Instance.IsActive)
+			{
+				tooltip.SetActive(false);
+			}
 		}
 
 		private void Update()
 		{
-			if (tooltip.activeSelf)
+			if (Inventory.Instance.IsActive && tooltip.activeSelf)
 				tooltip.transform.position = Input.mousePosition;
 		}
 
@@ -51,7 +56,6 @@ namespace UI
 
 		public void ConstructString()
 		{
-			// TODO: Make use of IHTMLSerializable, use StringBuilder.
 			tooltip.GetComponentInChildren<Text>().text = item.ToHTML(nameColor, descriptionColor, valueColor);
 		}
 	}

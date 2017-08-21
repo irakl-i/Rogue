@@ -12,7 +12,7 @@ namespace Gameplay.Actors
 		protected int health;
 
 		[SerializeField]
-		[Range(0, 10)]
+		[Range(0, 100)]
 		protected int speed;
 
 		[SerializeField]
@@ -26,15 +26,9 @@ namespace Gameplay.Actors
 		protected Vector2 facing;
 		protected Color original;
 
-		public int Health
-		{
-			get { return health; }
-		}
+		public int Health => health;
 
-		public Vector2 Facing
-		{
-			get { return facing; }
-		}
+		public Vector2 Facing => facing;
 
 		protected void Awake()
 		{

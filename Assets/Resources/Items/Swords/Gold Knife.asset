@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09cd4170ac301a49bd4cb963d95aada, type: 3}
+  m_Name: Gold Knife
+  m_EditorClassIdentifier: 
+  description: Knife made out of gold
+  id: 2
+  name: Gold Knife
+  slug: gold_knife
+  sprite: {fileID: 21300578, guid: 67532e1ca2853ac46b605efa853399e4, type: 3}
+  stackable: 1
+  value: 100
+  damage: 20
+  range: 0

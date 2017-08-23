@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 67532e1ca2853ac46b605efa853399e4
-timeCreated: 1503494016
+timeCreated: 1503527783
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -296,7 +296,7 @@ TextureImporter:
     21300578: gold_knife
     21300580: steel_knife
     21300582: cobalt_katana_short
-    21300584: kobalt_hammer_short
+    21300584: cobalt_hammer_short
     21300586: floor_longleak_green_02
     21300588: floor_longleak_blue_01
     21300590: floor_longleak_blue_02
@@ -3196,8 +3196,8 @@ TextureImporter:
         y: 145
         width: 6
         height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3210,8 +3210,8 @@ TextureImporter:
         y: 145
         width: 6
         height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3238,8 +3238,8 @@ TextureImporter:
         y: 145
         width: 6
         height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3252,22 +3252,22 @@ TextureImporter:
         y: 129
         width: 7
         height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: kobalt_hammer_short
+      name: cobalt_hammer_short
       rect:
         serializedVersion: 2
         x: 120
         y: 129
         width: 8
         height: 18
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

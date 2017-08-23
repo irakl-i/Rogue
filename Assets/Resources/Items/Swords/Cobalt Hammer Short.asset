@@ -9,14 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e09cd4170ac301a49bd4cb963d95aada, type: 3}
-  m_Name: Steel Sword
+  m_Name: Cobalt Hammer Short
   m_EditorClassIdentifier: 
-  id: 1
-  name: Steel Sword
-  description: Sword made out of steel
-  slug: steel_sword
+  id: 4
+  name: Cobalt Hammer Short
+  description: Short hammer made out of cobalt
+  slug: cobalt_hammer_short
   stackable: 0
-  sprite: {fileID: 21300022, guid: 67532e1ca2853ac46b605efa853399e4, type: 3}
-  value: 5
-  damage: 10
+  sprite: {fileID: 21300584, guid: 67532e1ca2853ac46b605efa853399e4, type: 3}
+  value: 0
+  damage: 0
   range: 0

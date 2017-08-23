@@ -3,8 +3,7 @@
  *	Project Rogue by Irakli Chkuaseli
  */
 
-using System.Collections.Generic;
-using Gameplay.Abilities;
+using System.Collections;
 using UnityEngine;
 using Utilities;
 
@@ -12,19 +11,26 @@ namespace Gameplay.Actors
 {
 	public class Player : Entity
 	{
-		private List<IAbility> abilities;
+		private Animator animator;
+
+		private bool attacking;
+
+		[SerializeField]
+		private float attackTime;
+
+		private float attackTimeCounter;
+		private GameObject weapon;
 
 		public void Start()
 		{
-			abilities = new List<IAbility>();
+			weapon = GameObject.Find("Weapon");
+			animator = weapon.GetComponent<Animator>();
 		}
 
 		private void Update()
 		{
 			Move();
 			Hit();
-//			foreach (IAbility ability in abilities)
-//				ability.Use();
 		}
 
 		/// <summary>
@@ -38,38 +44,42 @@ namespace Gameplay.Actors
 			var movement = new Vector2(horizontal, vertical);
 			facing = movement != Vector2.zero ? movement : facing;
 
-			if (facing == Vector2.left)
+			if (facing == Vector2.left && !attacking)
+			{
 				renderer.flipX = true;
-			else if (facing == Vector2.right)
+				weapon.GetComponentInChildren<SpriteRenderer>().flipX = true;
+//				weapon.transform.localPosition = Vector2.Reflect(weapon.transform.localPosition, Vector2.right);
+			}
+			else if (facing == Vector2.right && !attacking)
+			{
 				renderer.flipX = false;
+				weapon.GetComponentInChildren<SpriteRenderer>().flipX = false;
+//				weapon.transform.localPosition = Vector2.Reflect(weapon.transform.localPosition, Vector2.left);
+			}
 
 			body.velocity = movement.normalized * speed * Time.deltaTime * Constants.TimeMultiplier;
 		}
 
 		/// <summary>
-		///     Warps player in its facing direction.
+		///     Initiates hit animation.
 		/// </summary>
 		private void Hit()
 		{
-			if (Input.GetButtonDown(Constants.Input.Shoot))
+			if (Input.GetButtonDown(Constants.Input.Shoot) && !attacking)
 			{
-				RaycastHit2D hit = Physics2D.Raycast(body.position, facing, reach);
-
-				Debug.DrawRay(body.position, facing, Color.red);
-
-				if (hit.collider != null && hit.collider.CompareTag(Constants.Tag.Enemy))
-					hit.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+				attackTimeCounter = attackTime;
+				attacking = true;
+				animator.SetBool("Attacking", true);
 			}
-		}
 
-		public void AddAbility(IAbility ability)
-		{
-			abilities.Add(ability);
-		}
+			if (attackTimeCounter > 0)
+				attackTimeCounter -= Time.deltaTime;
 
-		public void RemoveAbility(IAbility ability)
-		{
-			abilities.Remove(ability);
+			if (attackTimeCounter <= 0 && attacking)
+			{
+				attacking = false;
+				animator.SetBool("Attacking", false);
+			}
 		}
 	}
 }

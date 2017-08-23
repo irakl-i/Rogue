@@ -194,7 +194,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 108111130}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1209.5, y: 464, z: 0}
+  m_LocalPosition: {x: 1209.5, y: 487, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 2002039824}
@@ -1392,6 +1392,7 @@ MonoBehaviour:
   speed: 80
   damage: 10
   reach: 15
+  attackTime: 0.3
 --- !u!4 &831534336
 Transform:
   m_ObjectHideFlags: 0
@@ -1432,7 +1433,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 845399010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: -3, z: 0}
+  m_LocalPosition: {x: 7, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1913105561}
@@ -10415,11 +10416,6 @@ Prefab:
     - target: {fileID: 4549173646374552, guid: cc1f9fdcdf0626e49aba63e0891e3e68, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20570346761499768, guid: cc1f9fdcdf0626e49aba63e0891e3e68,
-        type: 2}
-      propertyPath: orthographic size
-      value: 116
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc1f9fdcdf0626e49aba63e0891e3e68, type: 2}

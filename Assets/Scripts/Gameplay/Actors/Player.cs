@@ -38,6 +38,11 @@ namespace Gameplay.Actors
 			var movement = new Vector2(horizontal, vertical);
 			facing = movement != Vector2.zero ? movement : facing;
 
+			if (facing == Vector2.left)
+				renderer.flipX = true;
+			else if (facing == Vector2.right)
+				renderer.flipX = false;
+
 			body.velocity = movement.normalized * speed * Time.deltaTime * Constants.TimeMultiplier;
 		}
 

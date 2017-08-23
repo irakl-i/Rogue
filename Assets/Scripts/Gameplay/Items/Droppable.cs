@@ -4,6 +4,7 @@
  */
 
 using UnityEngine;
+using Utilities;
 
 namespace Gameplay.Items
 {
@@ -20,8 +21,11 @@ namespace Gameplay.Items
 
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
-			PickUp();
-			Destroy(gameObject);
+			if (collision.CompareTag(Constants.Tag.Player))
+			{
+				PickUp();
+				Destroy(gameObject);
+			}
 		}
 
 		private void PickUp()

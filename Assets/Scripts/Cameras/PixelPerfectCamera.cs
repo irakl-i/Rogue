@@ -10,7 +10,7 @@ namespace Cameras
 {
 	public class PixelPerfectCamera : MonoBehaviour
 	{
-		private Camera camera;
+		private new Camera camera;
 
 		[SerializeField]
 		private int pixelsPerUnit = 16;

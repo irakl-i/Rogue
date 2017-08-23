@@ -3,7 +3,6 @@
  *	Project Rogue by Irakli Chkuaseli
  */
 
-using System.Collections;
 using UnityEngine;
 using Utilities;
 
@@ -25,6 +24,7 @@ namespace Gameplay.Actors
 		{
 			weapon = GameObject.Find("Weapon");
 			animator = weapon.GetComponent<Animator>();
+			Debug.Log(weapon.transform.localPosition);
 		}
 
 		private void Update()
@@ -48,13 +48,13 @@ namespace Gameplay.Actors
 			{
 				renderer.flipX = true;
 				weapon.GetComponentInChildren<SpriteRenderer>().flipX = true;
-//				weapon.transform.localPosition = Vector2.Reflect(weapon.transform.localPosition, Vector2.right);
+				animator.SetBool(Constants.Animation.Left, true);
 			}
 			else if (facing == Vector2.right && !attacking)
 			{
 				renderer.flipX = false;
 				weapon.GetComponentInChildren<SpriteRenderer>().flipX = false;
-//				weapon.transform.localPosition = Vector2.Reflect(weapon.transform.localPosition, Vector2.left);
+				animator.SetBool(Constants.Animation.Left, false);
 			}
 
 			body.velocity = movement.normalized * speed * Time.deltaTime * Constants.TimeMultiplier;
@@ -69,7 +69,7 @@ namespace Gameplay.Actors
 			{
 				attackTimeCounter = attackTime;
 				attacking = true;
-				animator.SetBool("Attacking", true);
+				animator.SetBool(Constants.Animation.Attacking, true);
 			}
 
 			if (attackTimeCounter > 0)
@@ -78,7 +78,7 @@ namespace Gameplay.Actors
 			if (attackTimeCounter <= 0 && attacking)
 			{
 				attacking = false;
-				animator.SetBool("Attacking", false);
+				animator.SetBool(Constants.Animation.Attacking, false);
 			}
 		}
 	}

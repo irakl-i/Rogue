@@ -19,5 +19,11 @@ namespace Utilities
 			public const string Enemy = "Enemy";
 		}
 
+		public static class Animation
+		{
+			public const string Attacking = "Attacking";
+			public const string Left = "Left";
+		}
+
 	}
 }

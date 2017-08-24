@@ -14,6 +14,8 @@ namespace Gameplay.Items.Inventory
 {
 	public class Inventory : Singleton<Inventory>
 	{
+		// TODO: Fix items getting stuck inbetween the slots.
+
 		public Inventory()
 		{
 			Slots = new List<GameObject>();
@@ -29,6 +31,7 @@ namespace Gameplay.Items.Inventory
 			if (Input.GetButtonDown(Constants.Input.Tab))
 				if (inventoryPanel.activeSelf)
 				{
+					CheckSlots();
 					Extensions.Unpause();
 					inventoryPanel.SetActive(false);
 					IsActive = false;
@@ -40,6 +43,20 @@ namespace Gameplay.Items.Inventory
 					tooltip.SetActive(false);
 					IsActive = true;
 					if (!isSetup) Initialize();
+				}
+		}
+
+		/// <summary>
+		///     Checks slot panel and detects items left out of their slots, puts them back.
+		/// </summary>
+		private void CheckSlots()
+		{
+			foreach (Transform child in slotPanel.transform.GetChildren())
+				if (!child.name.Contains("Slot"))
+				{
+					child.SetParent(Slots[child.GetComponent<ItemData>().Index].transform);
+					child.GetComponent<CanvasGroup>().blocksRaycasts = true;
+					child.ResetLocal();
 				}
 		}
 

@@ -28,6 +28,7 @@ namespace UI
 			{
 				offset = eventData.position - (Vector2) transform.position;
 
+				transform.hasChanged = true;
 				transform.SetParent(transform.parent.parent);
 				transform.position = eventData.position;
 

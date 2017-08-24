@@ -28,15 +28,17 @@ namespace Gameplay.Actors
 
 		private void Update()
 		{
-			Move();
 			Hit();
+		}
+
+		private void FixedUpdate()
+		{
+			Move();
 		}
 
 		private void LateUpdate()
 		{
-			// Snap the player to the grid for pixel perfect movement.
-			transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y),
-				transform.position.z);
+			SnapToGrid();
 		}
 
 		private void OnTriggerEnter2D(Collider2D collision)
@@ -55,6 +57,16 @@ namespace Gameplay.Actors
 			var movement = new Vector2(horizontal, vertical);
 			facing = movement != Vector2.zero ? movement : facing;
 
+			ChangeDirection();
+
+			body.velocity = movement.normalized * speed * Time.fixedDeltaTime * Constants.TimeMultiplier;
+		}
+
+		/// <summary>
+		///     Changes player's and weapon's direction.
+		/// </summary>
+		private void ChangeDirection()
+		{
 			if (facing == Vector2.left && !attacking)
 			{
 				renderer.flipX = true;
@@ -67,8 +79,15 @@ namespace Gameplay.Actors
 				weapon.GetComponentInChildren<SpriteRenderer>().flipX = false;
 				animator.SetBool(Constants.Animation.Left, false);
 			}
+		}
 
-			body.velocity = movement.normalized * speed * Time.deltaTime * Constants.TimeMultiplier;
+		/// <summary>
+		///     Snaps the player to the grid for pixel perfect movement.
+		/// </summary>
+		private void SnapToGrid()
+		{
+			transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y),
+				transform.position.z);
 		}
 
 		/// <summary>

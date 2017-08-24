@@ -22,15 +22,26 @@ namespace Gameplay.Actors
 
 		public void Start()
 		{
-			weapon = GameObject.Find("Weapon");
+			weapon = transform.GetChild(0).gameObject;
 			animator = weapon.GetComponent<Animator>();
-			Debug.Log(weapon.transform.localPosition);
 		}
 
 		private void Update()
 		{
 			Move();
 			Hit();
+		}
+
+		private void LateUpdate()
+		{
+			// Snap the player to the grid for pixel perfect movement.
+			transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y),
+				transform.position.z);
+		}
+
+		private void OnTriggerEnter2D(Collider2D collision)
+		{
+			Debug.Log("what up piiiiiiiiiiiiiiiiiiiiimps");
 		}
 
 		/// <summary>

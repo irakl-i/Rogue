@@ -10,5 +10,15 @@ namespace Utilities
 			var hex = color32.r.ToString("X2") + color32.g.ToString("X2") + color32.b.ToString("X2");
 			return hex;
 		}
+
+		public static Vector2 Clamp(this Vector2 vector)
+		{
+			return new Vector2((int) vector.x, (int) vector.y);
+		}
+
+		public static Vector3 Clamp(this Vector3 vector)
+		{
+			return new Vector3((int) vector.x, (int) vector.y, (int) vector.z);
+		}
 	}
 }

@@ -18,9 +18,6 @@ namespace Gameplay.Actors
 		[SerializeField]
 		protected int damage;
 
-		[SerializeField]
-		protected int reach;
-
 		protected new SpriteRenderer renderer;
 		protected Rigidbody2D body;
 		protected Vector2 facing;

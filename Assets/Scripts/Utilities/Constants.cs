@@ -24,6 +24,5 @@ namespace Utilities
 			public const string Attacking = "Attacking";
 			public const string Left = "Left";
 		}
-
 	}
 }

@@ -10,14 +10,13 @@ namespace Gameplay.Actors
 {
 	public class Player : Entity
 	{
-		private Animator animator;
-
-		private bool attacking;
-
 		[SerializeField]
 		private float attackTime;
 
+		private bool attacking;
 		private float attackTimeCounter;
+
+		private Animator animator;
 		private GameObject weapon;
 
 		public void Start()

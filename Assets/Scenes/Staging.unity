@@ -294,16 +294,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114539200727556746, guid: 836675761f9212642a8cd2fc8b3ec7cf,
-        type: 2}
-      propertyPath: tooltip
-      value: 
-      objectReference: {fileID: 1173717500}
     - target: {fileID: 114648749650094402, guid: 836675761f9212642a8cd2fc8b3ec7cf,
         type: 2}
       propertyPath: inventoryPanel
       value: 
       objectReference: {fileID: 1710206707}
+    - target: {fileID: 114539200727556746, guid: 836675761f9212642a8cd2fc8b3ec7cf,
+        type: 2}
+      propertyPath: tooltip
+      value: 
+      objectReference: {fileID: 1173717500}
+    - target: {fileID: 114539200727556746, guid: 836675761f9212642a8cd2fc8b3ec7cf,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114648749650094402, guid: 836675761f9212642a8cd2fc8b3ec7cf,
+        type: 2}
+      propertyPath: tooltip
+      value: 
+      objectReference: {fileID: 1173717500}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 836675761f9212642a8cd2fc8b3ec7cf, type: 2}
   m_IsPrefabParent: 0
@@ -1333,7 +1343,6 @@ MonoBehaviour:
   health: 100
   speed: 80
   damage: 10
-  reach: 15
   attackTime: 0.3
 --- !u!4 &831534336
 Transform:
@@ -10112,7 +10121,7 @@ Prefab:
     - target: {fileID: 224163517564456726, guid: 8367c5157c9d9b24788429e8e6cf99cc,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -222
+      value: -350
       objectReference: {fileID: 0}
     - target: {fileID: 224163517564456726, guid: 8367c5157c9d9b24788429e8e6cf99cc,
         type: 2}
@@ -10152,7 +10161,7 @@ Prefab:
     - target: {fileID: 224163517564456726, guid: 8367c5157c9d9b24788429e8e6cf99cc,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -350
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 224163517564456726, guid: 8367c5157c9d9b24788429e8e6cf99cc,
         type: 2}
@@ -10207,6 +10216,11 @@ Prefab:
         type: 2}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224311874623719034, guid: 8367c5157c9d9b24788429e8e6cf99cc,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8367c5157c9d9b24788429e8e6cf99cc, type: 2}

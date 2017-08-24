@@ -29,14 +29,17 @@ namespace Gameplay.Items.Inventory
 			if (Input.GetButtonDown(Constants.Input.Tab))
 				if (inventoryPanel.activeSelf)
 				{
+					Extensions.Unpause();
 					inventoryPanel.SetActive(false);
 					IsActive = false;
 				}
 				else
 				{
+					Extensions.Pause();
 					inventoryPanel.SetActive(true);
+					tooltip.SetActive(false);
 					IsActive = true;
-					Initialize();
+					if (!isSetup) Initialize();
 				}
 		}
 
@@ -68,6 +71,8 @@ namespace Gameplay.Items.Inventory
 				AddItem(2);
 				AddItem(1);
 			}
+
+			isSetup = true;
 		}
 
 		/// <summary>
@@ -142,6 +147,7 @@ namespace Gameplay.Items.Inventory
 
 		private GameObject slotPanel;
 		private Database database;
+		private bool isSetup;
 
 		#endregion
 
@@ -161,6 +167,9 @@ namespace Gameplay.Items.Inventory
 
 		[SerializeField]
 		private GameObject inventoryPanel;
+
+		[SerializeField]
+		private GameObject tooltip;
 
 		#endregion
 	}

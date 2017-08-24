@@ -13,7 +13,7 @@ namespace UI
 	public class Tooltip : MonoBehaviour
 	{
 		private Item item;
-		
+
 		[SerializeField]
 		private GameObject tooltip;
 
@@ -31,9 +31,7 @@ namespace UI
 		private void Start()
 		{
 			if (Inventory.Instance.IsActive)
-			{
 				tooltip.SetActive(false);
-			}
 		}
 
 		private void Update()

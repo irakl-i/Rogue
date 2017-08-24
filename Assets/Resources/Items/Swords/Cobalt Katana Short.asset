@@ -9,14 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e09cd4170ac301a49bd4cb963d95aada, type: 3}
-  m_Name: Cobalt Knife
+  m_Name: Cobalt Katana Short
   m_EditorClassIdentifier: 
-  id: 5
-  name: Cobalt Knife
-  description: Knife made out of cobalt
-  slug: cobalt_knife
+  id: 6
+  name: Cobalt Katana Short
+  description: Short katana made out of cobalt
+  slug: cobalt_katana_short
   stackable: 0
-  sprite: {fileID: 21300576, guid: 67532e1ca2853ac46b605efa853399e4, type: 3}
-  value: 10
-  damage: 10
-  range: 3
+  sprite: {fileID: 21300582, guid: 67532e1ca2853ac46b605efa853399e4, type: 3}
+  value: 15
+  damage: 30
+  range: 0

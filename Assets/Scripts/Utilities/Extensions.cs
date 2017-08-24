@@ -20,5 +20,15 @@ namespace Utilities
 		{
 			return new Vector3((int) vector.x, (int) vector.y, (int) vector.z);
 		}
+
+		public static void Pause()
+		{
+			Time.timeScale = 0;
+		}
+
+		public static void Unpause()
+		{
+			Time.timeScale = 1;
+		}
 	}
 }

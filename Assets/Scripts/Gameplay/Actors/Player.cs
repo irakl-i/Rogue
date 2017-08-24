@@ -10,7 +10,7 @@ namespace Gameplay.Actors
 {
 	public class Player : Entity
 	{
-		[SerializeField]
+		[SerializeField, Range(0, 1)]
 		private float attackTime;
 
 		private bool attacking;
@@ -42,7 +42,8 @@ namespace Gameplay.Actors
 
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
-			Debug.Log("what up piiiiiiiiiiiiiiiiiiiiimps");
+			if (collision.CompareTag(Constants.Tag.Enemy))
+				Debug.Log("What's up my dudes.");
 		}
 
 		/// <summary>
@@ -85,8 +86,10 @@ namespace Gameplay.Actors
 		/// </summary>
 		private void SnapToGrid()
 		{
-			transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y),
-				transform.position.z);
+			// if (!colliding)
+			if (body.velocity == Vector2.zero)
+				transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y),
+					transform.position.z);
 		}
 
 		/// <summary>

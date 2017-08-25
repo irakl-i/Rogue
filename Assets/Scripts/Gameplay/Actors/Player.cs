@@ -106,8 +106,8 @@ namespace Gameplay.Actors
 		{
 			if (Input.GetButtonDown(Constants.Input.Shoot) && !attacking)
 			{
-				attackTimeCounter = attackTime;
 				attacking = true;
+				attackTimeCounter = attackTime;
 				animator.SetBool(Constants.Animation.Attacking, true);
 			}
 

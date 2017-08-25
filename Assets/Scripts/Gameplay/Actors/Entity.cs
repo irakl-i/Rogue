@@ -34,11 +34,6 @@ namespace Gameplay.Actors
 			original = renderer.color;
 		}
 
-		private void Update()
-		{
-			Debug.Log(body.velocity);
-		}
-
 		public void TakeDamage(int damage)
 		{
 			health -= damage;

@@ -14,7 +14,7 @@ namespace Gameplay.Items.Inventory
 {
 	public class Inventory : Singleton<Inventory>
 	{
-		// TODO: Fix items getting stuck inbetween the slots.
+		// TODO: Fix items getting stuck in-between the slots.
 
 		public Inventory()
 		{
@@ -31,17 +31,31 @@ namespace Gameplay.Items.Inventory
 			if (Input.GetButtonDown(Constants.Input.Tab))
 				if (inventoryPanel.activeSelf)
 				{
+					// Check the slots for correctness.
 					CheckSlots();
+
+					// Unpause the game.
 					Extensions.Unpause();
+
+					// Disable inventory and equipment panels.
 					inventoryPanel.SetActive(false);
+					equipmentPanel.SetActive(false);
+
 					IsActive = false;
 				}
 				else
 				{
+					// Pause the game.
 					Extensions.Pause();
+
+					// Enable inventory and equipment, disable tooltip.
 					inventoryPanel.SetActive(true);
+					equipmentPanel.SetActive(true);
 					tooltip.SetActive(false);
+
 					IsActive = true;
+
+					// If the inventory has not been initialized before, initialize it.
 					if (!isSetup) Initialize();
 				}
 		}
@@ -184,6 +198,9 @@ namespace Gameplay.Items.Inventory
 
 		[SerializeField]
 		private GameObject inventoryPanel;
+
+		[SerializeField]
+		private GameObject equipmentPanel;
 
 		[SerializeField]
 		private GameObject tooltip;

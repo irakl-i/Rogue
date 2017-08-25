@@ -42,6 +42,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
+  - name: Background
+    uniqueID: 769239573
+    locked: 0
+  - name: Grounds
+    uniqueID: 2343083553
+    locked: 0
+  - name: Walls
+    uniqueID: 2041962803
+    locked: 0
+  - name: Props
+    uniqueID: 3456346963
+    locked: 0
+  - name: Edges
+    uniqueID: 2859578365
+    locked: 0
+  - name: Entities
     uniqueID: 635929381
+    locked: 0
+  - name: Items
+    uniqueID: 1350264757
     locked: 0

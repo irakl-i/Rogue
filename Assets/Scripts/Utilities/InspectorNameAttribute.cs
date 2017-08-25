@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 
-public class InspectorNameAttribute : PropertyAttribute
+namespace Utilities
 {
-	public string name;
-
-	public InspectorNameAttribute(string name)
+	public class InspectorNameAttribute : PropertyAttribute
 	{
-		this.name = name;
+		public string name;
+
+		public InspectorNameAttribute(string name)
+		{
+			this.name = name;
+		}
 	}
 }

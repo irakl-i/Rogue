@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Utilities;
 
 namespace Gameplay.Actors
 {
+	[RequireComponent(typeof(Rigidbody2D))]
 	public abstract class Entity : MonoBehaviour
 	{
 		private const float FlashDelay = 0.1f;
 
-		[Header("Stats")]
-		[SerializeField]
+		[Header("Stats"), SerializeField]
 		protected int health;
 
-		[SerializeField]
-		[Range(0, 100)]
+		[SerializeField, Range(0, 100)]
 		protected int speed;
 
 		[SerializeField]
@@ -27,11 +27,16 @@ namespace Gameplay.Actors
 
 		public Vector2 Facing => facing;
 
-		protected void Awake()
+		private void Awake()
 		{
 			body = GetComponent<Rigidbody2D>();
 			renderer = GetComponent<SpriteRenderer>();
 			original = renderer.color;
+		}
+
+		private void Update()
+		{
+			Debug.Log(body.velocity);
 		}
 
 		public void TakeDamage(int damage)

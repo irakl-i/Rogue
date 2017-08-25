@@ -21,7 +21,7 @@ namespace Gameplay.Actors
 
 		public void Start()
 		{
-			weapon = transform.GetChild(0).gameObject;
+			weapon = transform.Find("Weapon").gameObject;
 			animator = weapon.GetComponent<Animator>();
 		}
 
@@ -43,7 +43,14 @@ namespace Gameplay.Actors
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
 			if (collision.CompareTag(Constants.Tag.Enemy))
-				Debug.Log("What's up my dudes.");
+			{
+				var enemy = collision.gameObject.GetComponent<Enemy>();
+				enemy.TakeDamage(10);
+			}
+			else
+			{
+				body.velocity = Vector2.zero;
+			}
 		}
 
 		/// <summary>

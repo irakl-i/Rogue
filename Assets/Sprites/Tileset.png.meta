@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 67532e1ca2853ac46b605efa853399e4
-timeCreated: 1503582157
+timeCreated: 1503657860
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -2870,9 +2870,9 @@ TextureImporter:
       name: demon_horns
       rect:
         serializedVersion: 2
-        x: 34
+        x: 33
         y: 64
-        width: 11
+        width: 12
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -2902,8 +2902,8 @@ TextureImporter:
         y: 64
         width: 13
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3014,8 +3014,8 @@ TextureImporter:
         y: 48
         width: 16
         height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

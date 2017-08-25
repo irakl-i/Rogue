@@ -74,4 +74,6 @@ MonoBehaviour:
   slot: {fileID: 1770559570827402, guid: ab90a728347eaf7438347f7e81f7477e, type: 2}
   item: {fileID: 1950286080273044, guid: d00862f9666979f4d908b23f679c3693, type: 2}
   inventoryPanel: {fileID: 0}
-  tooltip: {fileID: 1611704759424084, guid: 1d97980fe98b3c643a17aa86a90c8e40, type: 2}
+  equipmentPanel: {fileID: 1511612456426054, guid: cec911256a708a7419257dcfe68ad321,
+    type: 2}
+  tooltip: {fileID: 0}

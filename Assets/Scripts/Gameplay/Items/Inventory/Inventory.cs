@@ -3,6 +3,7 @@
  *	Project Rogue by Irakli Chkuaseli
  */
 
+using System;
 using System.Collections.Generic;
 using Gamelogic.Extensions;
 using UI;
@@ -14,11 +15,21 @@ namespace Gameplay.Items.Inventory
 {
 	public class Inventory : Singleton<Inventory>
 	{
+		public enum Equipments
+		{
+			Weapon,
+			Helmet,
+			Breastplate,
+			Leggings,
+			Boots
+		}
+
 		// TODO: Fix items getting stuck in-between the slots.
 
-		public Inventory()
+		private void Start()
 		{
-			Slots = new List<GameObject>();
+			InventorySlots = new List<GameObject>();
+			EquipmentSlots = new List<GameObject>(Enum.GetValues(typeof(Equipments)).Length);
 		}
 
 		private void Update()
@@ -31,9 +42,6 @@ namespace Gameplay.Items.Inventory
 			if (Input.GetButtonDown(Constants.Input.Tab))
 				if (inventoryPanel.activeSelf)
 				{
-					// Check the slots for correctness.
-					CheckSlots();
-
 					// Unpause the game.
 					Extensions.Unpause();
 
@@ -60,20 +68,6 @@ namespace Gameplay.Items.Inventory
 				}
 		}
 
-		/// <summary>
-		///     Checks slot panel and detects items left out of their slots, puts them back.
-		/// </summary>
-		private void CheckSlots()
-		{
-			foreach (Transform child in slotPanel.transform.GetChildren())
-				if (!child.name.Contains("Slot"))
-				{
-					child.SetParent(Slots[child.GetComponent<ItemData>().Index].transform);
-					child.GetComponent<CanvasGroup>().blocksRaycasts = true;
-					child.ResetLocal();
-				}
-		}
-
 		private void Initialize()
 		{
 			// Find the slot panel.
@@ -88,12 +82,15 @@ namespace Gameplay.Items.Inventory
 				// Add empty items to the list.
 				Items.Add(null);
 
-				// Instantiate Slots.
-				Slots.Add(Instantiate(slot));
-				Slots[i].transform.SetParent(slotPanel.transform, false);
-				Slots[i].name = "Slot " + i;
-				Slots[i].GetComponent<Slot>().Index = i;
+				// Instantiate InventorySlots.
+				InventorySlots.Add(Instantiate(slot));
+				InventorySlots[i].transform.SetParent(slotPanel.transform, false);
+				InventorySlots[i].name = "Slot " + i;
+				InventorySlots[i].GetComponent<Slot>().Index = i;
 			}
+
+			for (var i = 0; i < Enum.GetValues(typeof(Equipments)).Length; i++)
+				EquipmentSlots.Add(null);
 
 			for (var i = 0; i < 3; i++)
 			{
@@ -126,7 +123,7 @@ namespace Gameplay.Items.Inventory
 			if (item.Stackable && Items.Contains(item))
 			{
 				// Get its associated data.
-				var data = Slots[Items.IndexOf(item)].transform.GetComponentInChildren<ItemData>();
+				var data = InventorySlots[Items.IndexOf(item)].transform.GetComponentInChildren<ItemData>();
 
 				// Increase the amount.
 				data.Amount++;
@@ -147,7 +144,7 @@ namespace Gameplay.Items.Inventory
 					var data = itemObject.GetComponent<ItemData>();
 
 					// Set correct values.
-					itemObject.transform.SetParent(Slots[i].transform, false);
+					itemObject.transform.SetParent(InventorySlots[i].transform, false);
 					itemObject.GetComponent<Image>().sprite = item.Sprite;
 
 					// Set item name.
@@ -162,14 +159,11 @@ namespace Gameplay.Items.Inventory
 				}
 		}
 
-		// Collections
-
 		#region Public properties
 
 		public ItemList Items => items;
-
-		public List<GameObject> Slots { get; set; }
-
+		public List<GameObject> InventorySlots { get; set; }
+		public List<GameObject> EquipmentSlots { get; set; }
 		public bool IsActive { get; set; }
 
 		#endregion

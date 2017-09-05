@@ -15,7 +15,6 @@ namespace UI
 
 		public int Index { get; set; }
 
-		/// <inheritdoc />
 		public void OnDrop(PointerEventData eventData)
 		{
 			var data = eventData.pointerDrag.GetComponent<ItemData>();
@@ -32,8 +31,8 @@ namespace UI
 				// If it's not empty move current item to the dragged item's slot.
 				Transform item = transform.GetChild(0);
 				item.GetComponent<ItemData>().Index = data.Index;
-				item.transform.SetParent(inventory.Slots[data.Index].transform);
-				item.transform.position = inventory.Slots[data.Index].transform.position;
+				item.transform.SetParent(inventory.InventorySlots[data.Index].transform);
+				item.transform.position = inventory.InventorySlots[data.Index].transform.position;
 			}
 
 			// Assign dragged item to this slot.
@@ -44,7 +43,7 @@ namespace UI
 
 		private void Start()
 		{
-			inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+			inventory = Inventory.Instance;
 		}
 	}
 }

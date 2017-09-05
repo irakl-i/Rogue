@@ -3,6 +3,7 @@
  *	Project Rogue by Irakli Chkuaseli
  */
 
+using Gamelogic.Extensions;
 using Gameplay.Items;
 using Gameplay.Items.Inventory;
 using UnityEngine;
@@ -11,16 +12,16 @@ using UnityEngine.EventSystems;
 namespace UI
 {
 	public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler,
-		IPointerExitHandler
+		IPointerExitHandler, IPointerClickHandler
 	{
 		private Vector2 offset;
 		private Inventory inventory;
 		private Tooltip tooltip;
 
-
 		public int Amount { get; set; }
-		public Item Item { get; set; }
 		public int Index { get; set; }
+		public bool IsEquipped { get; set; }
+		public Item Item { get; set; }
 
 		public void OnBeginDrag(PointerEventData eventData)
 		{
@@ -29,7 +30,8 @@ namespace UI
 				offset = eventData.position - (Vector2) transform.position;
 
 				transform.hasChanged = true;
-				transform.SetParent(transform.parent.parent);
+				// (Root = UI) -> Canvas -> Dragged Items
+				transform.SetParent(transform.root.GetChild(0).Find("Dragged Items").transform);
 				transform.position = eventData.position;
 
 				GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -44,10 +46,24 @@ namespace UI
 
 		public void OnEndDrag(PointerEventData eventData)
 		{
-			transform.SetParent(inventory.Slots[Index].transform);
-			transform.position = inventory.Slots[Index].transform.position;
+			transform.SetParent(inventory.InventorySlots[Index].transform);
+			transform.position = inventory.InventorySlots[Index].transform.position;
 
 			GetComponent<CanvasGroup>().blocksRaycasts = true;
+		}
+
+		public void OnPointerClick(PointerEventData eventData)
+		{
+			if (eventData.button == PointerEventData.InputButton.Right)
+				if (!IsEquipped && inventory.EquipmentSlots[(int) Inventory.Equipments.Weapon] == null)
+				{
+					IsEquipped = true;
+					inventory.EquipmentSlots[(int) Inventory.Equipments.Weapon] = gameObject;
+
+					transform.SetParent(transform.root.GetChild(0).Find("Equipment Panel").GetChild(0).GetChild(0).transform);
+					transform.ResetLocal();
+					GetComponent<CanvasGroup>().blocksRaycasts = true;
+				}
 		}
 
 		public void OnPointerEnter(PointerEventData eventData)
@@ -62,8 +78,9 @@ namespace UI
 
 		public void Start()
 		{
-			inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+			inventory = Inventory.Instance;
 			tooltip = inventory.GetComponent<Tooltip>();
+			IsEquipped = false;
 		}
 	}
 }

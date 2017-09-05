@@ -42,14 +42,11 @@ namespace Gameplay.Actors
 
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
+			// TODO: Fix the sword touching damage issue.
 			if (collision.CompareTag(Constants.Tag.Enemy))
 			{
 				var enemy = collision.gameObject.GetComponent<Enemy>();
-				enemy.TakeDamage(10);
-			}
-			else
-			{
-				body.velocity = Vector2.zero;
+				enemy.TakeDamage(1, facing);
 			}
 		}
 

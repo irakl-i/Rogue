@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using Utilities;
 
 namespace Gameplay.Actors
 {
@@ -8,6 +7,7 @@ namespace Gameplay.Actors
 	public abstract class Entity : MonoBehaviour
 	{
 		private const float FlashDelay = 0.1f;
+		private const float KnockbackSpeed = 0.3f;
 
 		[Header("Stats"), SerializeField]
 		protected int health;
@@ -34,14 +34,30 @@ namespace Gameplay.Actors
 			original = renderer.color;
 		}
 
-		public void TakeDamage(int damage)
+		public void TakeDamage(int damage, Vector2 direction)
 		{
 			health -= damage;
 			Debug.LogFormat("Took {0} damage, {1} health remaining", damage, health);
 
 			StartCoroutine(Flash());
+			StartCoroutine(
+				Knockback(transform, transform.position + Vector3.Scale(new Vector3(2, 2), direction), KnockbackSpeed));
+
 			if (health <= 0)
 				Destroy(gameObject);
+		}
+
+		private IEnumerator Knockback(Transform transform, Vector3 position, float time)
+		{
+			var count = 0f;
+			Vector3 currentPosition = transform.position;
+
+			while (count < 1)
+			{
+				count += Time.deltaTime / time;
+				transform.position = Vector3.Lerp(currentPosition, position, count);
+				yield return null;
+			}
 		}
 
 		private IEnumerator Flash()

@@ -1,9 +1,10 @@
 using System.Linq;
+using Gamelogic.Extensions;
 using Gameplay.Items;
 using UnityEditor;
 using UnityEngine;
 
-public class InventoryFactory
+public class ItemFactory
 {
 	[MenuItem("GameObject/Inventory/Item/Swords", false, 0)]
 	private static void InitializeSwords()
@@ -52,12 +53,17 @@ public class InventoryWindow : EditorWindow
 		if (GUILayout.Button("Create"))
 		{
 			var item = new GameObject(items[index].Name);
-			item.transform.position = new Vector3(0, 0, 0);
 
 			item.AddComponent<SpriteRenderer>().sprite = items[index].Sprite;
 			item.AddComponent<BoxCollider2D>().isTrigger = true;
 			item.AddComponent<Droppable>().Data = items[index];
 
+			item.GetComponent<SpriteRenderer>().sortingLayerName = "Items";
+
+			if (Selection.activeTransform != null)
+				item.transform.parent = Selection.activeTransform;
+
+			item.transform.ResetLocal();
 			Close();
 		}
 	}

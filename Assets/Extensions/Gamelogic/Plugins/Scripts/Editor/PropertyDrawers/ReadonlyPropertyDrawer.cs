@@ -5,11 +5,10 @@ using UnityEngine;
 namespace Gamelogic.Extensions.Editor
 {
 	/// <summary>
-	/// A property drawer that can be used for read-only fields in the inspector. 
+	///     A property drawer that can be used for read-only fields in the inspector.
 	/// </summary>
 	/// <seealso cref="UnityEditor.PropertyDrawer" />
-	[Version(2, 5)]
-	[CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
+	[Version(2, 5), CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
 	public class ReadOnlyPropertyDrawer : PropertyDrawer
 	{
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)

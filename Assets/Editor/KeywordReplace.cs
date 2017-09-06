@@ -26,8 +26,6 @@ public class KeywordReplace : UnityEditor.AssetModificationProcessor
 		var folder = splitPath[splitPath.Length - 2];
 
 		file = file.Replace("#NAMESPACE#", folder);
-		file = file.Replace("#CREATIONDATE#", DateTime.Now + "");
-		file = file.Replace("#PROJECTNAME#", PlayerSettings.productName);
 		file = file.Replace("#DEVELOPERS#", PlayerSettings.companyName);
 
 		File.WriteAllText(path, file);

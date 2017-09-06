@@ -1,12 +1,12 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace Gamelogic.Extensions.Menu.Editor.Internal
 {
 	/// <summary>
-	/// Class with static functions for menu options.
+	///     Class with static functions for menu options.
 	/// </summary>
-	public partial class GLMenu
+	public class GLMenu
 	{
 		public static void OpenUrl(string url)
 		{
@@ -20,7 +20,6 @@ namespace Gamelogic.Extensions.Menu.Editor.Internal
 		}
 
 		[MenuItem("Help/Gamelogic/Online KnowledgeBase")]
-
 		public static void OpenKnowledgeBase()
 		{
 			OpenUrl("https://gamelogic.quandora.com/");

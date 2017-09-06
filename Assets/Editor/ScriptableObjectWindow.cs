@@ -6,7 +6,7 @@ using UnityEngine;
 
 internal class EndNameEdit : EndNameEditAction
 {
-	#region implemented abstract members of EndNameEditAction
+	#region Implemented abstract members of EndNameEditAction
 
 	public override void Action(int instanceId, string pathName, string resourceFile)
 	{
@@ -17,6 +17,7 @@ internal class EndNameEdit : EndNameEditAction
 	#endregion
 }
 
+/// <inheritdoc />
 /// <summary>
 ///     Scriptable object window.
 /// </summary>
@@ -26,6 +27,11 @@ public class ScriptableObjectWindow : EditorWindow
 	private string[] names;
 
 	private Type[] types;
+
+	public ScriptableObjectWindow()
+	{
+		minSize = new Vector2(200, 10);
+	}
 
 	public Type[] Types
 	{

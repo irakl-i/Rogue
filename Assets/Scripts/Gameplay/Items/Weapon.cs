@@ -11,8 +11,7 @@ namespace Gameplay.Items
 	[Serializable]
 	public abstract class Weapon : Item
 	{
-		[Header("Stats")]
-		[SerializeField]
+		[Header("Stats"), SerializeField]
 		private int damage;
 
 		public int Damage

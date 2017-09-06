@@ -26,11 +26,11 @@ namespace Gameplay.Items.Inventory
 		/// <summary>
 		///     Gets the item with given ID from the database.
 		/// </summary>
-		/// <param name="id">Item ID</param>
+		/// <param name="slug">Item Slug</param>
 		/// <returns>Item</returns>
-		public Item GetItem(int id)
+		public Item GetItem(string slug)
 		{
-			return Items.FirstOrDefault(sword => sword.ID == id);
+			return Items.FirstOrDefault(sword => sword.Slug == slug);
 		}
 	}
 }

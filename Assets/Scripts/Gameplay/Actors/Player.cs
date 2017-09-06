@@ -42,7 +42,7 @@ namespace Gameplay.Actors
 
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
-			// TODO: Fix the sword touching damage issue.
+			// TODO: Fix the sword touching damage issue, OnTriggerStay2D w/ cooldown.
 			if (collision.CompareTag(Constants.Tag.Enemy))
 			{
 				var enemy = collision.gameObject.GetComponent<Enemy>();

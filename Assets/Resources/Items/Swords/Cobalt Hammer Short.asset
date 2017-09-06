@@ -11,11 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09cd4170ac301a49bd4cb963d95aada, type: 3}
   m_Name: Cobalt Hammer Short
   m_EditorClassIdentifier: 
-  id: 4
   name: Cobalt Hammer Short
   description: Short hammer made out of cobalt
   slug: cobalt_hammer_short
-  stackable: 0
+  stackable: 1
   sprite: {fileID: 21300584, guid: 67532e1ca2853ac46b605efa853399e4, type: 3}
   value: 0
   damage: 0

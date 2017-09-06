@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+ *	Created on 8/6/2017 7:13:29 PM
+ *	Project Rogue by Irakli Chkuaseli
+ */
+
+using System.Collections;
 using UnityEngine;
 
 namespace Gameplay.Actors
@@ -7,7 +12,7 @@ namespace Gameplay.Actors
 	public abstract class Entity : MonoBehaviour
 	{
 		private const float FlashDelay = 0.1f;
-		private const float KnockbackSpeed = 0.3f;
+		private const float KnockbackSpeed = 0.2f;
 
 		[Header("Stats"), SerializeField]
 		protected int health;
@@ -41,7 +46,7 @@ namespace Gameplay.Actors
 
 			StartCoroutine(Flash());
 			StartCoroutine(
-				Knockback(transform, transform.position + Vector3.Scale(new Vector3(2, 2), direction), KnockbackSpeed));
+				Knockback(transform, transform.position + Vector3.Scale(new Vector3(4, 4), direction), KnockbackSpeed));
 
 			if (health <= 0)
 				Destroy(gameObject);

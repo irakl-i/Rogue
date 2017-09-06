@@ -5,10 +5,9 @@ using UnityEngine;
 namespace Gamelogic.Extensions.Editor
 {
 	/// <summary>
-	/// A property drawer for fields marked with the InspectorFlags Attribute.
+	///     A property drawer for fields marked with the InspectorFlags Attribute.
 	/// </summary>
-	[Version(1, 4, 3)]
-	[CustomPropertyDrawer(typeof(InspectorFlagsAttribute))]
+	[Version(1, 4, 3), CustomPropertyDrawer(typeof(InspectorFlagsAttribute))]
 	public class InspectorFlagsPropertyDrawer : PropertyDrawer
 	{
 		public override void OnGUI(Rect position,
@@ -21,9 +20,7 @@ namespace Gamelogic.Extensions.Editor
 			var newValue = EditorGUI.MaskField(position, label, prop.intValue, prop.enumNames);
 
 			if (EditorGUI.EndChangeCheck())
-			{
 				prop.intValue = newValue;
-			}
 		}
 	}
 }

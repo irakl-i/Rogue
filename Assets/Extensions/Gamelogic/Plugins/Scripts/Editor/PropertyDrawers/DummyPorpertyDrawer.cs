@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Gamelogic.Extensions.Editor
 {
 	/// <summary>
-	/// Draws a property marked with the Dummy attribute (that is, does not draw it).
+	///     Draws a property marked with the Dummy attribute (that is, does not draw it).
 	/// </summary>
 	[CustomPropertyDrawer(typeof(DummyAttribute))]
 	public class DummyPorpertyDrawer : PropertyDrawer

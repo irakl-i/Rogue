@@ -6,23 +6,16 @@
 using System;
 using UI;
 using UnityEngine;
-using Utilities;
 
 namespace Gameplay.Items
 {
 	[Serializable]
 	public abstract class Item : ScriptableObject, IHTMLSerializable
 	{
-		[Header("Properties")]
-		[SerializeField]
-		[InspectorName("ID")]
-		private int id;
-
-		[SerializeField]
+		[Header("Properties"), SerializeField]
 		private new string name;
 
-		[TextArea]
-		[SerializeField]
+		[TextArea, SerializeField]
 		private string description;
 
 		[SerializeField]
@@ -36,12 +29,6 @@ namespace Gameplay.Items
 
 		[SerializeField]
 		private int value;
-
-		public int ID
-		{
-			get { return id; }
-			set { id = value; }
-		}
 
 		public int Value
 		{
@@ -82,17 +69,15 @@ namespace Gameplay.Items
 		/// <inheritdoc />
 		public abstract string ToHTML(Color nameColor, Color descriptionColor, Color valueColor);
 
-		/// <inheritdoc />
 		public abstract void Drop();
 
-		/// <inheritdoc />
 		public abstract void PickUp();
 
 		/// <inheritdoc />
 		public override string ToString()
 		{
 			return
-				$"{nameof(ID)}: {ID}, {nameof(Name)}: {Name}, {nameof(Description)}: {Description}, {nameof(Slug)}: {Slug}, {nameof(Value)}: {Value}";
+				$"{nameof(Name)}: {Name}, {nameof(Description)}: {Description}, {nameof(Slug)}: {Slug}, {nameof(Value)}: {Value}";
 		}
 	}
 }

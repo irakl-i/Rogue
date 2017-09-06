@@ -36,6 +36,11 @@ public class InventoryWindow : EditorWindow
 
 	private Item[] items;
 
+	public InventoryWindow()
+	{
+		minSize = new Vector2(200, 10);
+	}
+
 	public Item[] Items
 	{
 		get { return items; }

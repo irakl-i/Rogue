@@ -1,19 +1,16 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace Gamelogic.Extensions.Editor
 {
 	/// <summary>
-	/// A property drawer for fields marked with the CommentAttribute. Similar to Header, but useful
-	/// for longer descriptions.
+	///     A property drawer for fields marked with the CommentAttribute. Similar to Header, but useful
+	///     for longer descriptions.
 	/// </summary>
-	[CustomPropertyDrawer(typeof(CommentAttribute), useForChildren: true)]
+	[CustomPropertyDrawer(typeof(CommentAttribute), true)]
 	public class CommentPropertyDrawer : DecoratorDrawer
 	{
-		CommentAttribute CommentAttribute
-		{
-			get { return (CommentAttribute)attribute; }
-		}
+		private CommentAttribute CommentAttribute => (CommentAttribute) attribute;
 
 		public override float GetHeight()
 		{

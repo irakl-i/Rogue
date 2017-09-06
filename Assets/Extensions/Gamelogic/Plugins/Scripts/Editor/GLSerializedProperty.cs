@@ -6,8 +6,8 @@ using Object = UnityEngine.Object;
 namespace Gamelogic.Extensions.Editor
 {
 	/// <summary>
-	/// Wraps a SerializedProperty, and provides additional functions, such as
-	/// tooltips and a more powerful Find method.
+	///     Wraps a SerializedProperty, and provides additional functions, such as
+	///     tooltips and a more powerful Find method.
 	/// </summary>
 	[Version(1, 2)]
 	public class GLSerializedProperty
@@ -17,15 +17,9 @@ namespace Gamelogic.Extensions.Editor
 		public string CustomTooltip { get; set; }
 
 		[Obsolete("Use PropertyType instead")]
-		public SerializedPropertyType propertyType
-		{
-			get { return PropertyType; }
-		}
+		public SerializedPropertyType propertyType => PropertyType;
 
-		public SerializedPropertyType PropertyType
-		{
-			get { return SerializedProperty.propertyType; }
-		}
+		public SerializedPropertyType PropertyType => SerializedProperty.propertyType;
 
 		[Obsolete("Use ObjectReferenceValue instead")]
 		public Object objectReferenceValue
@@ -53,10 +47,7 @@ namespace Gamelogic.Extensions.Editor
 			set { SerializedProperty.enumValueIndex = value; }
 		}
 
-		public string[] EnumNames
-		{
-			get { return SerializedProperty.enumNames; }
-		}
+		public string[] EnumNames => SerializedProperty.enumNames;
 
 		[Obsolete("Use BoolValue instead")]
 		public bool boolValue

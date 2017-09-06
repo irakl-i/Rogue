@@ -14,8 +14,7 @@ namespace Cameras
 		[SerializeField]
 		private Transform target;
 
-		[SerializeField]
-		[Range(0, 3)]
+		[SerializeField, Range(0, 3)]
 		private float time;
 
 		private Vector3 velocity;

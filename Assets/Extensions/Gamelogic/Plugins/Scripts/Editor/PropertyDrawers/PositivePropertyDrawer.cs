@@ -5,10 +5,9 @@ using UnityEngine;
 namespace Gamelogic.Extensions.Editor
 {
 	/// <summary>
-	/// A property drawer for fields marked with the Positive Attribute.
+	///     A property drawer for fields marked with the Positive Attribute.
 	/// </summary>
-	[Version(1, 2)]
-	[CustomPropertyDrawer(typeof(PositiveAttribute))]
+	[Version(1, 2), CustomPropertyDrawer(typeof(PositiveAttribute))]
 	public class PositiveDrawer : PropertyDrawer
 	{
 		public override void OnGUI(Rect position,
@@ -18,26 +17,25 @@ namespace Gamelogic.Extensions.Editor
 			switch (prop.propertyType)
 			{
 				case SerializedPropertyType.Integer:
-					{
-						EditorGUI.BeginChangeCheck();
+				{
+					EditorGUI.BeginChangeCheck();
 
-						int n = EditorGUI.IntField(position, label, prop.intValue);
+					var n = EditorGUI.IntField(position, label, prop.intValue);
 
-						if (EditorGUI.EndChangeCheck() && n > 0)
-							prop.intValue = n;
-					}
+					if (EditorGUI.EndChangeCheck() && n > 0)
+						prop.intValue = n;
+				}
 					break;
 
 				case SerializedPropertyType.Float:
-					{
-						EditorGUI.BeginChangeCheck();
+				{
+					EditorGUI.BeginChangeCheck();
 
-						float x = EditorGUI.FloatField(position, label, prop.floatValue);
+					var x = EditorGUI.FloatField(position, label, prop.floatValue);
 
-						if (EditorGUI.EndChangeCheck() && x > 0)
-							prop.floatValue = x;
-
-					}
+					if (EditorGUI.EndChangeCheck() && x > 0)
+						prop.floatValue = x;
+				}
 					break;
 
 				default:

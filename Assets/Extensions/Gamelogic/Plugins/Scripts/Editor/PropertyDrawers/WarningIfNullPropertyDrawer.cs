@@ -4,23 +4,18 @@ using UnityEngine;
 namespace Gamelogic.Extensions.Editor
 {
 	/// <summary>
-	/// Property drawer for fields marked with the WarnIfNull.
+	///     Property drawer for fields marked with the WarnIfNull.
 	/// </summary>
 	/// <seealso cref="UnityEditor.PropertyDrawer" />
 	[CustomPropertyDrawer(typeof(WarningIfNullAttribute))]
 	public class WarningIfNullPropertyDrawer : PropertyDrawer
 	{
-		WarningIfNullAttribute CommentAttribute
-		{
-			get { return (WarningIfNullAttribute)attribute; }
-		}
+		private WarningIfNullAttribute CommentAttribute => (WarningIfNullAttribute) attribute;
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
 			if (property.objectReferenceValue != null)
-			{
 				return base.GetPropertyHeight(property, label);
-			}
 
 			var guiContent = new GUIContent(CommentAttribute.WarningMessage);
 			var oldWordWrap = EditorStyles.miniLabel.wordWrap;
@@ -33,7 +28,6 @@ namespace Gamelogic.Extensions.Editor
 			EditorStyles.miniLabel.wordWrap = oldWordWrap;
 
 			return height;
-
 		}
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -46,14 +40,14 @@ namespace Gamelogic.Extensions.Editor
 
 			var guiContent = new GUIContent(CommentAttribute.WarningMessage);
 			var oldWordWrap = EditorStyles.miniLabel.wordWrap;
-			EditorStyles.miniLabel.wordWrap = true;		
+			EditorStyles.miniLabel.wordWrap = true;
 
 			Color color = GUI.color;
 			Color contentColor = GUI.contentColor;
 			Color backgroundColor = GUI.backgroundColor;
 
 			if (EditorGUIUtility.isProSkin)
-			{			
+			{
 				GUI.color = Color.yellow;
 			}
 			else
@@ -63,11 +57,12 @@ namespace Gamelogic.Extensions.Editor
 				GUI.backgroundColor = Color.yellow;
 			}
 
-			float graphHeight = EditorGUI.GetPropertyHeight(property, label, true); ;
-			float labelHeight = EditorStyles.miniLabel.CalcHeight(guiContent, Screen.width - 19);
+			var graphHeight = EditorGUI.GetPropertyHeight(property, label, true);
+			;
+			var labelHeight = EditorStyles.miniLabel.CalcHeight(guiContent, Screen.width - 19);
 			position.height = labelHeight;
-			EditorGUI.LabelField(position, CommentAttribute.WarningMessage, EditorStyles.miniLabel	);
-					
+			EditorGUI.LabelField(position, CommentAttribute.WarningMessage, EditorStyles.miniLabel);
+
 			position.y += labelHeight;
 			position.height = graphHeight;
 

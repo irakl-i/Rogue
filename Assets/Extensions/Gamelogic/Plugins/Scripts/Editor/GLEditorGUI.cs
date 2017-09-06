@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Gamelogic.Extensions.Editor
 {
 	/// <summary>
-	/// Functions to supplement Unity EditorGUI functions.
+	///     Functions to supplement Unity EditorGUI functions.
 	/// </summary>
 	[Version(1, 2)]
 	public static class GLEditorGUI
@@ -13,7 +13,9 @@ namespace Gamelogic.Extensions.Editor
 		public static readonly GUIStyle SplitterStyle;
 		public static readonly GUIStyle LineStyle;
 
-		private static readonly Color SplitterColor = EditorGUIUtility.isProSkin ? new Color(0.157f, 0.157f, 0.157f) : new Color(0.5f, 0.5f, 0.5f);
+		private static readonly Color SplitterColor =
+			EditorGUIUtility.isProSkin ? new Color(0.157f, 0.157f, 0.157f) : new Color(0.5f, 0.5f, 0.5f);
+
 		static GLEditorGUI()
 		{
 			SplitterStyle = new GUIStyle
@@ -25,13 +27,12 @@ namespace Gamelogic.Extensions.Editor
 
 			LineStyle = new GUIStyle
 			{
-				normal = { background = EditorGUIUtility.whiteTexture },
+				normal = {background = EditorGUIUtility.whiteTexture},
 				stretchWidth = true,
 				margin = new RectOffset(0, 0, 0, 0)
 			};
 		}
 
-		
 
 		// GUILayout Style
 		public static void Splitter(Color rgb, float thickness = 1)
@@ -69,7 +70,7 @@ namespace Gamelogic.Extensions.Editor
 		{
 			Rect position = GUILayoutUtility.GetRect(
 				GUIContent.none,
-				LineStyle, 
+				LineStyle,
 				GUILayout.Width(thickness),
 				GUILayout.ExpandHeight(true));
 

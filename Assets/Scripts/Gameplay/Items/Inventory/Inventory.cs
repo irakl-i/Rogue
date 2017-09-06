@@ -94,10 +94,11 @@ namespace Gameplay.Items.Inventory
 
 			for (var i = 0; i < 3; i++)
 			{
-				AddItem(2);
-				AddItem(2);
-				AddItem(2);
-				AddItem(1);
+				AddItem("cobalt_karambit");
+				AddItem("cobalt_hammer_short");
+				AddItem("cobalt_hammer_short");
+				AddItem("cobalt_hammer_short");
+				AddItem("cobalt_hammer_short");
 			}
 
 			isSetup = true;
@@ -106,11 +107,11 @@ namespace Gameplay.Items.Inventory
 		/// <summary>
 		///     Add the item to the player inventory.
 		/// </summary>
-		/// <param name="id">ID of the item in the database</param>
-		public void AddItem(int id)
+		/// <param name="slug">Slug of the item in the database</param>
+		public void AddItem(string slug)
 		{
 			// Get the item from the database.
-			AddItem(database.GetItem(id));
+			AddItem(database.GetItem(slug));
 		}
 
 		/// <summary>

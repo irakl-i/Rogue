@@ -1,16 +1,15 @@
 ﻿using System;
 using Gamelogic.Extensions.Internal;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace Gamelogic.Extensions.Editor
 {
 	/// <summary>
-	/// Property drawer for the label field attribute.
+	///     Property drawer for the label field attribute.
 	/// </summary>
 	/// <seealso cref="UnityEditor.PropertyDrawer" />
-	[Version(2, 5)]
-	[CustomPropertyDrawer(typeof (LabelFieldAttribute))]
+	[Version(2, 5), CustomPropertyDrawer(typeof(LabelFieldAttribute))]
 	public class LabelFieldPropertyDrawer : PropertyDrawer
 	{
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
@@ -21,7 +20,7 @@ namespace Gamelogic.Extensions.Editor
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
 			var nameFieldAttribute = (LabelFieldAttribute) attribute;
-			var nameProperty = property.FindPropertyRelative(nameFieldAttribute.LabelField);
+			SerializedProperty nameProperty = property.FindPropertyRelative(nameFieldAttribute.LabelField);
 
 			if (nameProperty != null)
 			{

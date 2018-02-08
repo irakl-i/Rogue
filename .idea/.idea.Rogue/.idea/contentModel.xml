@@ -14,6 +14,7 @@
           <e p="KeywordReplace.cs" t="Include" />
           <e p="ScriptableObjectFactory.cs" t="Include" />
           <e p="ScriptableObjectWindow.cs" t="Include" />
+          <e p="SliceRenamer.cs" t="Include" />
         </e>
         <e p="Extensions" t="Include">
           <e p="Gamelogic" t="Include">

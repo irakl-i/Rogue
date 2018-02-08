@@ -22,7 +22,7 @@ namespace Utilities
 		public static class Animation
 		{
 			public const string Attacking = "Attacking";
-			public const string Left = "Left";
+			public const string Running = "Running";
 		}
 
 		public static class Layer

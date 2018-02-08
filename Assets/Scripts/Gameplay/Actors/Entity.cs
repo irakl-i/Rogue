@@ -27,6 +27,7 @@ namespace Gameplay.Actors
 		protected int damage;
 
 		protected new SpriteRenderer renderer;
+		protected Animator animator;
 		protected Rigidbody2D body;
 		protected bool facing;
 		protected Color original;
@@ -39,6 +40,7 @@ namespace Gameplay.Actors
 		{
 			body = GetComponent<Rigidbody2D>();
 			renderer = GetComponent<SpriteRenderer>();
+			animator = GetComponent<Animator>();
 			original = renderer.color;
 		}
 

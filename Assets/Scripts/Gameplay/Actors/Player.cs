@@ -3,6 +3,7 @@
  *	Project Rogue by Irakli Chkuaseli
  */
 
+using System;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using Utilities;
@@ -20,7 +21,9 @@ namespace Gameplay.Actors
 		// Movement variables
 		private float horizontal;
 		private bool jump;
-		public bool grounded;
+
+		[SerializeField]
+		private LayerMask groundLayer;
 		
 		public void Start()
 		{
@@ -32,7 +35,6 @@ namespace Gameplay.Actors
 			Hit();
 			GetInput();
 			SetState();
-//			Move();
 		}
 
 		private void FixedUpdate()
@@ -50,7 +52,7 @@ namespace Gameplay.Actors
 		/// </summary>
 		private void SetState()
 		{
-			grounded = Physics2D.OverlapArea(new Vector2(transform.position.x - 0.5f, transform.position.y - 0.5f), new Vector2(transform.position.x + 0.5f, transform.position.y - 0.5f));
+//			grounded = IsGrounded();
 		}
 		
 		/// <summary>
@@ -67,7 +69,7 @@ namespace Gameplay.Actors
 		/// </summary>
 		private void Move()
 		{
-			if (jump && grounded)
+			if (jump && IsGrounded())
 				body.AddForce(new Vector2(0, jumpForce));
 
 			var movement = new Vector2(horizontal * speed * Time.fixedDeltaTime * Constants.TimeMultiplier, body.velocity.y);
@@ -78,6 +80,20 @@ namespace Gameplay.Actors
 				ChangeDirection();
 			
 			body.velocity = movement;
+			animator.SetBool(Constants.Animation.Running, Math.Abs(horizontal) > 0);
+		}
+
+		private bool IsGrounded()
+		{
+			var position = transform.position;
+			var direction = Vector2.down;
+			const float distance = 10.0f;
+    
+			var hit = Physics2D.Raycast(position, direction, distance, groundLayer);
+			Debug.Log(hit.transform.name);
+			Debug.DrawLine(position, position + new Vector3(0, -distance), Color.red); 
+			
+			return hit.collider != null;
 		}
 
 		/// <summary>
@@ -94,7 +110,7 @@ namespace Gameplay.Actors
 		/// </summary>
 		private void SnapToGrid()
 		{
-			if (body.velocity == Vector2.zero && grounded)
+			if (body.velocity == Vector2.zero && IsGrounded())
 				transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y),
 					transform.position.z);
 		}

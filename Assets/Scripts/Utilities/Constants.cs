@@ -24,5 +24,10 @@ namespace Utilities
 			public const string Attacking = "Attacking";
 			public const string Left = "Left";
 		}
+
+		public static class Layer
+		{
+			public const string Ground = "Ground";
+		}
 	}
 }

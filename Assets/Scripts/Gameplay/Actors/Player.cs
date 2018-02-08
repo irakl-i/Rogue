@@ -3,6 +3,7 @@
  *	Project Rogue by Irakli Chkuaseli
  */
 
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using Utilities;
 
@@ -10,24 +11,28 @@ namespace Gameplay.Actors
 {
 	public class Player : Entity
 	{
+		// Attack variables
 		[SerializeField, Range(0, 1)]
 		private float attackTime;
-
 		private bool attacking;
 		private float attackTimeCounter;
-
-		private Animator animator;
-		private GameObject weapon;
-
+		
+		// Movement variables
+		private float horizontal;
+		private bool jump;
+		public bool grounded;
+		
 		public void Start()
 		{
-			weapon = transform.Find("Weapon").gameObject;
-			animator = weapon.GetComponent<Animator>();
+			body = GetComponent<Rigidbody2D>();
 		}
 
 		private void Update()
 		{
 			Hit();
+			GetInput();
+			SetState();
+//			Move();
 		}
 
 		private void FixedUpdate()
@@ -39,31 +44,40 @@ namespace Gameplay.Actors
 		{
 			SnapToGrid();
 		}
-
-		private void OnTriggerEnter2D(Collider2D collision)
-		{
-			// TODO: Fix the sword touching damage issue, OnTriggerStay2D w/ cooldown.
-			if (collision.CompareTag(Constants.Tag.Enemy))
-			{
-				var enemy = collision.gameObject.GetComponent<Enemy>();
-				enemy.TakeDamage(1, facing);
-			}
-		}
-
+		
 		/// <summary>
-		///     Moves player left, right, up and down.
+		/// 	Updates player state.
+		/// </summary>
+		private void SetState()
+		{
+			grounded = Physics2D.OverlapArea(new Vector2(transform.position.x - 0.5f, transform.position.y - 0.5f), new Vector2(transform.position.x + 0.5f, transform.position.y - 0.5f));
+		}
+		
+		/// <summary>
+		/// 	Reads and stores player input.
+		/// </summary>
+		private void GetInput()
+		{
+			horizontal = Input.GetAxisRaw(Constants.Input.Horizontal);
+			jump = Input.GetButtonDown(Constants.Input.Jump);
+		}
+		
+		/// <summary>
+		///     Moves player left, right and up.
 		/// </summary>
 		private void Move()
 		{
-			var horizontal = Input.GetAxisRaw(Constants.Input.Horizontal);
-			var vertical = Input.GetAxisRaw(Constants.Input.Vertical);
+			if (jump && grounded)
+				body.AddForce(new Vector2(0, jumpForce));
 
-			var movement = new Vector2(horizontal, vertical);
-			facing = movement != Vector2.zero ? movement : facing;
+			var movement = new Vector2(horizontal * speed * Time.fixedDeltaTime * Constants.TimeMultiplier, body.velocity.y);
 
-			ChangeDirection();
-
-			body.velocity = movement.normalized * speed * Time.fixedDeltaTime * Constants.TimeMultiplier;
+			if (horizontal < 0f && !facing)
+				ChangeDirection();
+			else if (horizontal > 0f && facing)
+				ChangeDirection();
+			
+			body.velocity = movement;
 		}
 
 		/// <summary>
@@ -71,18 +85,8 @@ namespace Gameplay.Actors
 		/// </summary>
 		private void ChangeDirection()
 		{
-			if (facing == Vector2.left && !attacking)
-			{
-				renderer.flipX = true;
-				weapon.GetComponentInChildren<SpriteRenderer>().flipX = true;
-				animator.SetBool(Constants.Animation.Left, true);
-			}
-			else if (facing == Vector2.right && !attacking)
-			{
-				renderer.flipX = false;
-				weapon.GetComponentInChildren<SpriteRenderer>().flipX = false;
-				animator.SetBool(Constants.Animation.Left, false);
-			}
+			facing = !facing;
+			transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 		}
 
 		/// <summary>
@@ -90,8 +94,7 @@ namespace Gameplay.Actors
 		/// </summary>
 		private void SnapToGrid()
 		{
-			// if (!colliding)
-			if (body.velocity == Vector2.zero)
+			if (body.velocity == Vector2.zero && grounded)
 				transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y),
 					transform.position.z);
 		}
@@ -105,7 +108,6 @@ namespace Gameplay.Actors
 			{
 				attacking = true;
 				attackTimeCounter = attackTime;
-				animator.SetBool(Constants.Animation.Attacking, true);
 			}
 
 			if (attackTimeCounter > 0)
@@ -114,7 +116,6 @@ namespace Gameplay.Actors
 			if (attackTimeCounter <= 0 && attacking)
 			{
 				attacking = false;
-				animator.SetBool(Constants.Animation.Attacking, false);
 			}
 		}
 	}

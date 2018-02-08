@@ -23,23 +23,23 @@ namespace Gameplay.Abilities
 
 		public void Use()
 		{
-			var canWarp = lastWarp == 0 || Time.time - lastWarp >= delay;
-
-			if (Input.GetButtonDown(Constants.Input.Jump) && canWarp)
-			{
-				RaycastHit2D hit = Physics2D.Raycast(body.position, entity.Facing, distance);
-				if (hit.collider == null)
-				{
-					// Warp forward.
-					body.position += entity.Facing * distance;
-
-					// Play particle effect.
-					particle.transform.up = -entity.Facing.normalized;
-					particle.Play();
-
-					lastWarp = Time.time;
-				}
-			}
+//			var canWarp = lastWarp == 0 || Time.time - lastWarp >= delay;
+//
+//			if (Input.GetButtonDown(Constants.Input.Jump) && canWarp)
+//			{
+//				RaycastHit2D hit = Physics2D.Raycast(body.position, entity.Facing, distance);
+//				if (hit.collider == null)
+//				{
+//					// Warp forward.
+//					body.position += entity.Facing * distance;
+//
+////					 Play particle effect.
+//					particle.transform.up = -entity.Facing.normalized;
+//					particle.Play();
+//
+//					lastWarp = Time.time;
+//				}
+//			}
 		}
 
 		private void Start()

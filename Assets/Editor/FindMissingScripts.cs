@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class FindMissingScripts : EditorWindow
 {
-	[MenuItem("Window/FindMissingScripts")]
+	[MenuItem("Window/Find Missing Scripts")]
 	public static void ShowWindow()
 	{
 		GetWindow(typeof(FindMissingScripts));

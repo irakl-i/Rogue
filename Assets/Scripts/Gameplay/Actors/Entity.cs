@@ -20,17 +20,20 @@ namespace Gameplay.Actors
 		[SerializeField, Range(0, 100)]
 		protected int speed;
 
+		[SerializeField] 
+		protected float jumpForce;
+
 		[SerializeField]
 		protected int damage;
 
 		protected new SpriteRenderer renderer;
 		protected Rigidbody2D body;
-		protected Vector2 facing;
+		protected bool facing;
 		protected Color original;
 
 		public int Health => health;
 
-		public Vector2 Facing => facing;
+		public bool Facing => facing;
 
 		private void Awake()
 		{

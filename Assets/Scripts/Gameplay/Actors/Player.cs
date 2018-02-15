@@ -90,8 +90,6 @@ namespace Gameplay.Actors
 			const float distance = 10.0f;
     
 			var hit = Physics2D.Raycast(position, direction, distance, groundLayer);
-			Debug.Log(hit.transform.name);
-			Debug.DrawLine(position, position + new Vector3(0, -distance), Color.red); 
 			
 			return hit.collider != null;
 		}

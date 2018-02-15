@@ -19,7 +19,7 @@ namespace Gameplay.Items.Inventory
 			Items = new List<Item>();
 			var items = Resources.LoadAll<Item>("Items");
 
-			foreach (Item item in items)
+			foreach (var item in items)
 				Items.Add(item);
 		}
 
@@ -30,7 +30,7 @@ namespace Gameplay.Items.Inventory
 		/// <returns>Item</returns>
 		public Item GetItem(string slug)
 		{
-			return Items.FirstOrDefault(sword => sword.Slug == slug);
+			return Items.FirstOrDefault(item => item.Slug == slug);
 		}
 	}
 }

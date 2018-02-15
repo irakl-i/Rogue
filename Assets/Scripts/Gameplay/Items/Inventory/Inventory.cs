@@ -47,7 +47,7 @@ namespace Gameplay.Items.Inventory
 
 					// Disable inventory and equipment panels.
 					inventoryPanel.SetActive(false);
-					equipmentPanel.SetActive(false);
+//					equipmentPanel.SetActive(false);
 
 					IsActive = false;
 				}
@@ -58,7 +58,7 @@ namespace Gameplay.Items.Inventory
 
 					// Enable inventory and equipment, disable tooltip.
 					inventoryPanel.SetActive(true);
-					equipmentPanel.SetActive(true);
+//					equipmentPanel.SetActive(true);
 					tooltip.SetActive(false);
 
 					IsActive = true;
@@ -92,15 +92,6 @@ namespace Gameplay.Items.Inventory
 			for (var i = 0; i < Enum.GetValues(typeof(Equipments)).Length; i++)
 				EquipmentSlots.Add(null);
 
-			for (var i = 0; i < 3; i++)
-			{
-				AddItem("cobalt_karambit");
-				AddItem("cobalt_hammer_short");
-				AddItem("cobalt_hammer_short");
-				AddItem("cobalt_hammer_short");
-				AddItem("cobalt_hammer_short");
-			}
-
 			isSetup = true;
 		}
 
@@ -110,7 +101,6 @@ namespace Gameplay.Items.Inventory
 		/// <param name="slug">Slug of the item in the database</param>
 		public void AddItem(string slug)
 		{
-			// Get the item from the database.
 			AddItem(database.GetItem(slug));
 		}
 
@@ -141,7 +131,7 @@ namespace Gameplay.Items.Inventory
 					Items[i] = item;
 
 					// Instantiate the item in inventory panel.
-					GameObject itemObject = Instantiate(this.item);
+					var itemObject = Instantiate(this.item);
 					var data = itemObject.GetComponent<ItemData>();
 
 					// Set correct values.
@@ -160,11 +150,43 @@ namespace Gameplay.Items.Inventory
 				}
 		}
 
+		public void ConsumeItem(Item item)
+		{
+			// Check if the item is stackable and present in the inventory.
+			if (item.Stackable && Items.Contains(item))
+			{
+				// Get its associated data.
+				var data = InventorySlots[Items.IndexOf(item)].transform.GetComponentInChildren<ItemData>();
+
+				// Increase the amount.
+				data.Amount--;
+
+				if (data.Amount <= 0)
+				{
+					var index = items.IndexOf(item);
+					items.Remove(item);
+					Destroy(InventorySlots[index].transform.GetChild(0).gameObject);
+					return;
+				}
+
+				// Update the amount text.
+				data.transform.GetComponentInChildren<Text>().text = data.Amount.ToString();
+				return;
+			}
+		}
+
 		#region Public properties
 
 		public ItemList Items => items;
 		public List<GameObject> InventorySlots { get; set; }
 		public List<GameObject> EquipmentSlots { get; set; }
+
+		public GameObject Player
+		{
+			get { return player; }
+			private set { player = value; }
+		}
+
 		public bool IsActive { get; set; }
 
 		#endregion
@@ -199,6 +221,9 @@ namespace Gameplay.Items.Inventory
 
 		[SerializeField]
 		private GameObject tooltip;
+
+		[SerializeField] 
+		private GameObject player;
 
 		#endregion
 	}

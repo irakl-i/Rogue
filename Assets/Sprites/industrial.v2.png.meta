@@ -232,8 +232,8 @@ TextureImporter:
     21300450: industrial.v2_225
     21300452: industrial.v2_226
     21300454: industrial.v2_227
-    21300456: industrial.v2_228
-    21300458: industrial.v2_229
+    21300456: circle_black
+    21300458: healing_potion
     21300460: industrial.v2_230
     21300462: industrial.v2_231
     21300464: industrial.v2_232
@@ -3695,7 +3695,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: industrial.v2_228
+      name: circle_black
       rect:
         serializedVersion: 2
         x: 128
@@ -3709,7 +3709,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: industrial.v2_229
+      name: healing_potion
       rect:
         serializedVersion: 2
         x: 144

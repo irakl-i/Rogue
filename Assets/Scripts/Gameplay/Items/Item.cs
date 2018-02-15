@@ -73,6 +73,8 @@ namespace Gameplay.Items
 
 		public abstract void PickUp();
 
+		public abstract void Use(GameObject target);
+
 		/// <inheritdoc />
 		public override string ToString()
 		{

@@ -32,7 +32,12 @@ namespace Gameplay.Items
 			Range = range;
 			Stackable = stackable;
 
-			Sprite = Resources.Load<Sprite>("Sprites/Items/" + Slug);
+			Sprite = Resources.Load<Sprite>($"Sprites/Items/{Slug}");
+		}
+
+		public override void Use(GameObject target)
+		{
+			throw new NotImplementedException();
 		}
 
 		/// <inheritdoc />

@@ -78,5 +78,14 @@ namespace Gameplay.Actors
 			renderer.color = original;
 			yield return new WaitForSeconds(FlashDelay);
 		}
+
+		public void UpdateStats(int health, int speed, float jumpForce, int damage)
+		{
+			print(health);
+			this.health += health;
+			this.speed += speed;
+			this.jumpForce += jumpForce;
+			this.damage += damage;
+		}
 	}
 }

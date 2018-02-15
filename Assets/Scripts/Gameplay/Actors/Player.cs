@@ -128,9 +128,7 @@ namespace Gameplay.Actors
 				attackTimeCounter -= Time.deltaTime;
 
 			if (attackTimeCounter <= 0 && attacking)
-			{
 				attacking = false;
-			}
 		}
 	}
 }

@@ -4,6 +4,7 @@
  */
 
 using Gamelogic.Extensions;
+using Gameplay.Actors;
 using Gameplay.Items;
 using Gameplay.Items.Inventory;
 using UnityEngine;
@@ -55,15 +56,10 @@ namespace UI
 		public void OnPointerClick(PointerEventData eventData)
 		{
 			if (eventData.button == PointerEventData.InputButton.Right)
-				if (!IsEquipped && inventory.EquipmentSlots[(int) Inventory.Equipments.Weapon] == null)
-				{
-					IsEquipped = true;
-					inventory.EquipmentSlots[(int) Inventory.Equipments.Weapon] = gameObject;
-
-					transform.SetParent(transform.root.GetChild(0).Find("Equipment Panel").GetChild(0).GetChild(0).transform);
-					transform.ResetLocal();
-					GetComponent<CanvasGroup>().blocksRaycasts = true;
-				}
+			{
+				Item.Use(Inventory.Instance.Player);
+				Inventory.Instance.ConsumeItem(Item);
+			}
 		}
 
 		public void OnPointerEnter(PointerEventData eventData)

@@ -30,7 +30,7 @@ namespace Gameplay.Items
 
 		private void PickUp()
 		{
-			Inventory.Inventory.Instance.AddItem(data);
+			Inventory.Inventory.Instance.AddItem(data.Slug);
 		}
 	}
 }

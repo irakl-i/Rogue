@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 namespace Gameplay.Actors
 {
-	[RequireComponent(typeof(Rigidbody2D))]
 	public abstract class Entity : MonoBehaviour
 	{
 		private const float FlashDelay = 0.1f;

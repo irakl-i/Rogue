@@ -367,9 +367,9 @@ TextureImporter:
     21300720: industrial.v2_360
     21300722: industrial.v2_361
     21300724: industrial.v2_362
-    21300726: industrial.v2_363
-    21300728: industrial.v2_364
-    21300730: industrial.v2_365
+    21300726: gunner_1
+    21300728: gunner_2
+    21300730: gunner_3
     21300732: industrial.v2_366
     21300734: industrial.v2_367
     21300736: industrial.v2_368
@@ -5585,7 +5585,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: industrial.v2_363
+      name: gunner_1
       rect:
         serializedVersion: 2
         x: 0
@@ -5599,7 +5599,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: industrial.v2_364
+      name: gunner_2
       rect:
         serializedVersion: 2
         x: 16
@@ -5613,7 +5613,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
     - serializedVersion: 2
-      name: industrial.v2_365
+      name: gunner_3
       rect:
         serializedVersion: 2
         x: 32

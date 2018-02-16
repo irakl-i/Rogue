@@ -26,12 +26,6 @@ namespace Gameplay.Items.Inventory
 
 		// TODO: Fix items getting stuck in-between the slots.
 
-		private void Start()
-		{
-			InventorySlots = new List<GameObject>();
-			EquipmentSlots = new List<GameObject>(Enum.GetValues(typeof(Equipments)).Length);
-		}
-
 		private void Update()
 		{
 			Toggle();
@@ -68,8 +62,11 @@ namespace Gameplay.Items.Inventory
 				}
 		}
 
-		private void Initialize()
+		public void Initialize()
 		{
+			InventorySlots = new List<GameObject>();
+//			EquipmentSlots = new List<GameObject>(Enum.GetValues(typeof(Equipments)).Length);
+			
 			// Find the slot panel.
 			slotPanel = inventoryPanel.transform.Find("Slot Panel").gameObject;
 
@@ -89,8 +86,8 @@ namespace Gameplay.Items.Inventory
 				InventorySlots[i].GetComponent<Slot>().Index = i;
 			}
 
-			for (var i = 0; i < Enum.GetValues(typeof(Equipments)).Length; i++)
-				EquipmentSlots.Add(null);
+//			for (var i = 0; i < Enum.GetValues(typeof(Equipments)).Length; i++)
+//				EquipmentSlots.Add(null);
 
 			isSetup = true;
 		}
@@ -166,6 +163,7 @@ namespace Gameplay.Items.Inventory
 					var index = items.IndexOf(item);
 					items.Remove(item);
 					Destroy(InventorySlots[index].transform.GetChild(0).gameObject);
+					tooltip.SetActive(false);
 					return;
 				}
 
@@ -179,7 +177,7 @@ namespace Gameplay.Items.Inventory
 
 		public ItemList Items => items;
 		public List<GameObject> InventorySlots { get; set; }
-		public List<GameObject> EquipmentSlots { get; set; }
+//		public List<GameObject> EquipmentSlots { get; set; }
 
 		public GameObject Player
 		{

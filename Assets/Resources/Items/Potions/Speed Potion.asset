@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc32d44455a34d1890775719272d52f5, type: 3}
+  m_Name: Speed Potion
+  m_EditorClassIdentifier: 
+  name: Speed Potion
+  description: Speeds up the player.
+  slug: speed_potion
+  stackable: 1
+  sprite: {fileID: 21300004, guid: e0414a5c93a0b5240be1016d4d76b178, type: 3}
+  value: 0
+  duration: 0
+  health: 0
+  speed: 20
+  jumpForce: 0
+  damage: 0

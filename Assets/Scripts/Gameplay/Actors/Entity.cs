@@ -5,6 +5,7 @@
 
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Gameplay.Actors
 {
@@ -26,6 +27,9 @@ namespace Gameplay.Actors
 		[SerializeField]
 		protected int damage;
 
+		[SerializeField]
+		protected Text text;
+		
 		protected new SpriteRenderer renderer;
 		protected Animator animator;
 		protected Rigidbody2D body;
@@ -79,13 +83,31 @@ namespace Gameplay.Actors
 			yield return new WaitForSeconds(FlashDelay);
 		}
 
-		public void UpdateStats(int health, int speed, float jumpForce, int damage)
+		public void UpdateStats(int health, int speed, float jumpForce, int damage, float duration, string slug)
 		{
-			print(health);
 			this.health += health;
 			this.speed += speed;
 			this.jumpForce += jumpForce;
 			this.damage += damage;
+
+			if (duration > 0) 
+				StartCoroutine(Unuse(health, speed, jumpForce, damage, duration));
+		}
+
+		private IEnumerator Unuse(int health, int speed, float jumpForce, int damage, float duration)
+		{
+			var currentTime = duration;
+			while (currentTime >= 0)
+			{
+				text.text = currentTime.ToString();
+				yield return new WaitForSeconds(1.0f);
+				currentTime--;
+			}
+			
+			this.health -= health;
+	        this.speed -= speed;
+	        this.jumpForce -= jumpForce;
+	        this.damage -= damage;
 		}
 	}
 }

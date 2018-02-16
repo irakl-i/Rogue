@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Collections;
 using Gameplay.Actors;
 using UnityEngine;
 using Utilities;
@@ -94,7 +95,7 @@ namespace Gameplay.Items
 
 		public override void Use(GameObject target)
 		{
-			target.GetComponent<Player>().UpdateStats(health, speed, jumpForce, damage);
+			target.GetComponent<Player>().UpdateStats(health, speed, jumpForce, damage, duration, Slug);
 		}
 	}
 }

@@ -9,13 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc32d44455a34d1890775719272d52f5, type: 3}
-  m_Name: Healing Potion
+  m_Name: Health Potion
   m_EditorClassIdentifier: 
-  name: Healing Potion
+  name: Health Potion
   description: Heals the player.
-  slug: healing_potion
+  slug: health_potion
   stackable: 1
-  sprite: {fileID: 21300458, guid: e5746d124693ced47be2fd33b964ee0b, type: 3}
+  sprite: {fileID: 21300002, guid: e0414a5c93a0b5240be1016d4d76b178, type: 3}
   value: 0
   duration: 0
   health: 50

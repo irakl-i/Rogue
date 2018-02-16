@@ -184,6 +184,9 @@
               <e p="Sword.cs" t="Include" />
               <e p="Weapon.cs" t="Include" />
             </e>
+            <e p="Managers" t="Include">
+              <e p="GameManager.cs" t="Include" />
+            </e>
             <e p="World" t="Include">
               <e p="Jumper.cs" t="Include" />
             </e>
